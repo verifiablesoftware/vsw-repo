@@ -13,3 +13,7 @@ or run from the shell script
 
 chmod +x start.sh
 ./start.sh
+
+for use AWS cloud ledger run ./start.sh remote
+for use local ledger run ./start.sh local
+for connect to publich ledger run ./start.sh --LEDGER_URL  ${LEDGER_URL}

@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const app = express()
 const port = process.env.PORT || 3000
-const LEDGER_URL = `http://${process.env.DOCKERHOST}:9000`
+const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`
 
 app.get('/register', (request, response) => {
   let data = {"alias": 'Repo.Agent', "seed": "my_seed_00000000000000000000" + getRandomInt(9999), "role": "TRUST_ANCHOR"};

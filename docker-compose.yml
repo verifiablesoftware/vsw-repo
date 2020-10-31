@@ -7,6 +7,7 @@ services:
     tty: true
     environment:
       - DOCKERHOST=${DOCKERHOST}
+      - LEDGER_URL=${LEDGER_URL}
     ports:
       - "8000:8000"
       - "8060:8060"
