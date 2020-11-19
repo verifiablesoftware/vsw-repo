@@ -28,7 +28,9 @@ class Storage {
     }
 
     store_did(did) {
-        console.log(Buffer.from(JSON.stringify(did)));
+        if (!did) {
+            throw new Error("no did found!");
+        }
         let params = {
             Body: Buffer.from(JSON.stringify(did)), 
             Bucket: "vsw-repo", 

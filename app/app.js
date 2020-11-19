@@ -54,7 +54,9 @@ app.post("/schema_definition", (request, response) => {
     });
 });
 
-agent.start_agent();
+(async () => {
+  await agent.start_agent();
+})();
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)

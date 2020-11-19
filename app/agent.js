@@ -28,12 +28,19 @@ let did = ''
  * 3. create schema
  * 4. register schema
  */
-function start_agent() {
-    console.log('start agent');
+async function start() {
     seed = "my_seed_00000000000000000000" + getRandomInt(9999);
     load_schema_definiation();
+    const public_did = await get_did();
+    did = public_did.did;
+    seed = public_did.seed;
+    await start_agent();
+    create_invitation();
 
-    issue_credential(); 
+    //if the did is from aws, no need register schema again
+    if (!public_did.stored_did) {
+        register_schema_and_creddef();
+    }
 }
 
 function load_schema_definiation() {
@@ -46,23 +53,32 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  /**
-   * issue credential from local agent
-   */
-async function issue_credential() {
-    let data = {"alias": 'Repo.Agent', "seed": seed, "role": "TRUST_ANCHOR"};
+/**
+ * get did
+ * if no public did found in aws, create one and store it
+ */
+async function get_did() {
     let public_did = await storage.get_did();
     let stored_did = false;
     if (public_did) {
         console.log("get public did from aws: " + public_did.did);
         stored_did = true;
-        seed = public_did.seed;
     } else {
         public_did = await register_public_did();
         storage.store_did(public_did);
         console.log("register public did: " + public_did.did);
     }
-    did = public_did.did;
+    public_did.stored_did = stored_did;
+
+    return public_did;
+}
+
+/**
+ * start the arise agent
+ * wait for 10s to let agent startup.
+ */
+async function start_agent() {
+    console.log('start agent');
     let agent = exec('python3 /home/indy/bin/aca-py start ' + get_agent_args(), function (error, stdout, stderr) {
         if (error) {
         console.log(error.stack);
@@ -70,15 +86,15 @@ async function issue_credential() {
         console.log('Signal received: '+error.signal);
         }
     });
-    //TODO:Eric for now wait 5s to allow agent startup, needs figure out how to get signal from the child process
-    new Promise((resolve, reject) => {
-        setTimeout(resolve, 10000);    
-    }).then(() => {
-        create_invitation();
-        if (!stored_did) {
-            register_schema_and_creddef();
-        }
-    })
+
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve(agent), 10000)
+    });
+    
+    let result = await promise;
+
+    console.log('start agent completed');
+    return result;
 }
 
 //register public did
@@ -162,6 +178,6 @@ function register_schema_and_creddef() {
 }
 
 export default {
-    start_agent: start_agent,
+    start_agent: start,
     create_invitation: create_invitation
 }
