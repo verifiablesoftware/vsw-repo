@@ -9,6 +9,8 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./app/ ./
+
+RUN touch logs/agent.logs
 RUN npm i
 
 HEALTHCHECK --interval=1m --timeout=3s \

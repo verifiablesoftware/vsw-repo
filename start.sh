@@ -14,6 +14,9 @@ elif [ $1 = "remote" ]; then
     export LEDGER_URL="http://3.235.31.203:9000" ## use default AWS cloud ledger
 fi
 
+myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+echo "My WAN/Public IP address: ${myip}"
+
 
 echo "your local docker host ip address is: ${DOCKERHOST}"
 

@@ -2,8 +2,8 @@ import {exec} from 'child_process';
 import axios from 'axios';
 import fs from "fs";
 
-const DEFAULT_INTERNAL_HOST = "127.0.0.1";
-const DEFAULT_EXTERNAL_HOST = "localhost";
+const DEFAULT_INTERNAL_HOST = process.env.DOCKERHOST || "localhost";
+const DEFAULT_EXTERNAL_HOST = process.env.DOCKERHOST || "localhost";
 const HTTP_PORT = 8060;
 const ADMIN_PORT = 8061;
 const WEBHOOK_PORT = 8062;
@@ -92,9 +92,10 @@ function get_agent_args() {
         '--inbound-transport': 'http 0.0.0.0 8060',
         '--outbound-transport': 'http ',
         '--admin': '0.0.0.0 8061',
+        '--log-file': 'logs/agent.logs',
         '--log-level': 'debug',
         '--genesis-url': `${LEDGER_URL}/genesis`,
-        '--webhook-url': `http://${DEFAULT_EXTERNAL_HOST}:${WEBHOOK_PORT}/webhooks`,
+        '--webhook-url': `http://${DEFAULT_EXTERNAL_HOST}:8000/webhooks`,
         '--wallet-type': 'indy', //use indy wallet for now
         '--wallet-name': wallet_name,
         '--wallet-key': wallet_name,
