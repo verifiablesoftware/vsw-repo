@@ -11,7 +11,7 @@ if [ $1 = "--LEDGER_URL" ]; then
 elif [ $1 = "local" ]; then
     export LEDGER_URL="http://${DOCKERHOST}:9000"
 elif [ $1 = "remote" ]; then
-    export LEDGER_URL="http://3.83.112.107:9000" ## use default AWS cloud ledger
+    export LEDGER_URL="http://3.235.31.203:9000" ## use default AWS cloud ledger
 fi
 
 
