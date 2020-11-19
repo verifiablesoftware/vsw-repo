@@ -1,13 +1,15 @@
 import {exec} from 'child_process';
 import axios from 'axios';
 import fs from "fs";
+import Storage from './storage.js';
 
-const DEFAULT_INTERNAL_HOST = process.env.DOCKERHOST || "localhost";
-const DEFAULT_EXTERNAL_HOST = process.env.DOCKERHOST || "localhost";
+const DEFAULT_INTERNAL_HOST = "localhost";
+const DEFAULT_EXTERNAL_HOST = "localhost";
 const HTTP_PORT = 8060;
 const ADMIN_PORT = 8061;
 const WEBHOOK_PORT = 8062;
-const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`
+const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
+const storage = new Storage();
 
 //TODO: will need move variable into class
 let schema_id = 0;
@@ -49,30 +51,42 @@ function getRandomInt(max) {
    */
 async function issue_credential() {
     let data = {"alias": 'Repo.Agent', "seed": seed, "role": "TRUST_ANCHOR"};
-    axios
-    // .post(`http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/wallet/did/create?public=true`)
-    .post(`${LEDGER_URL}/register`, data)
-    .then(res => {
-        did = res.data.did
-        console.log("get did: " + did);
-        let agent = exec('python3 /home/indy/bin/aca-py start ' + get_agent_args(), function (error, stdout, stderr) {
-            if (error) {
-            console.log(error.stack);
-            console.log('Error code: '+error.code);
-            console.log('Signal received: '+error.signal);
-            }
-        });
-        //TODO:Eric for now wait 5s to allow agent startup, needs figure out how to get signal from the child process
-        new Promise((resolve, reject) => {
-            setTimeout(resolve, 10000);    
-        }).then(() => {
-            create_invitation();
+    let public_did = await storage.get_did();
+    let stored_did = false;
+    if (public_did) {
+        console.log("get public did from aws: " + public_did.did);
+        stored_did = true;
+        seed = public_did.seed;
+    } else {
+        public_did = await register_public_did();
+        storage.store_did(public_did);
+        console.log("register public did: " + public_did.did);
+    }
+    did = public_did.did;
+    let agent = exec('python3 /home/indy/bin/aca-py start ' + get_agent_args(), function (error, stdout, stderr) {
+        if (error) {
+        console.log(error.stack);
+        console.log('Error code: '+error.code);
+        console.log('Signal received: '+error.signal);
+        }
+    });
+    //TODO:Eric for now wait 5s to allow agent startup, needs figure out how to get signal from the child process
+    new Promise((resolve, reject) => {
+        setTimeout(resolve, 10000);    
+    }).then(() => {
+        create_invitation();
+        if (!stored_did) {
             register_schema_and_creddef();
-        })
+        }
     })
-    .catch(error => {
-        console.error(error);
-    })
+}
+
+//register public did
+async function register_public_did() {
+    let data = {"alias": 'Repo.Agent', "seed": seed, "role": "TRUST_ANCHOR"};
+    let res = await axios.post(`${LEDGER_URL}/register`, data);
+
+    return res.data;
 }
 
 /**
