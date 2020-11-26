@@ -1,9 +1,0 @@
-{
-    "schema_body": {
-        "schema_name": "vsw schema",
-        "schema_version": "0.2",
-        "attributes": ["name", "url", "digest", "timestamp"]
-    },
-    "revocation_registry_size": 100,
-    "support_revocation": false
-}

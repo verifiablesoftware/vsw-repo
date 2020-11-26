@@ -10,7 +10,7 @@ services:
       - LEDGER_URL=${LEDGER_URL}
       - IP=${IP}
     ports:
-      - "8000:8000"
+      - "8062:8062"
       - "8060:8060"
       - "8061:8061"
     restart: always

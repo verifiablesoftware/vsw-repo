@@ -14,7 +14,7 @@ const storage = new Storage();
 //TODO: will need move variable into class
 let schema_id = 0;
 let credential_definition_id = 0;
-let schema_definiation;
+let schema_definition;
 let seed = 0
 let did = ''
 
@@ -28,25 +28,25 @@ let did = ''
  * 3. create schema
  * 4. register schema
  */
+
 async function start() {
     seed = "my_seed_00000000000000000000" + getRandomInt(9999);
-    load_schema_definiation();
+    load_schema_definition();
     const public_did = await get_did();
     did = public_did.did;
     seed = public_did.seed;
     await start_agent();
-    create_invitation();
-
+   
     //if the did is from aws, no need register schema again
     if (!public_did.stored_did) {
         register_schema_and_creddef();
     }
 }
 
-function load_schema_definiation() {
-    let rawdata = fs.readFileSync('resources/schema.defination.json');
-    schema_definiation = JSON.parse(rawdata);
-    console.log(schema_definiation);
+function load_schema_definition() {
+    let rawdata = fs.readFileSync('resources/schema.definition.json');
+    schema_definition = JSON.parse(rawdata);
+    console.log(schema_definition);
 }
 
 function getRandomInt(max) {
@@ -144,17 +144,8 @@ function get_agent_args() {
     return str_arg;
 }
 
-async function create_invitation() {
-    axios.post(`http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/connections/create-invitation?auto_accept=true&multi_use=true`)
-        .then(res => {
-            console.log(res.data)
-        }).catch(error => {
-            console.error(error);
-        })
-}
-
 function register_schema_and_creddef() {
-    let schema_body = schema_definiation.schema_body;
+    let schema_body = schema_definition.schema_body;
 
     axios.post(`http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/schemas`, schema_body)
         .then(res => {
@@ -162,8 +153,8 @@ function register_schema_and_creddef() {
             console.log("schema created id is {" + schema_id + "}");
             let credential_definition_body = {
                 "schema_id": schema_id,
-                "support_revocation": schema_definiation.support_revocation,
-                "revocation_registry_size": schema_definiation.revocation_registry_size,
+                "support_revocation": schema_definition.support_revocation,
+                "revocation_registry_size": schema_definition.revocation_registry_size,
             };
             axios.post(
                 `http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/credential-definitions`, credential_definition_body
@@ -178,6 +169,5 @@ function register_schema_and_creddef() {
 }
 
 export default {
-    start_agent: start,
-    create_invitation: create_invitation
+    start_agent: start
 }

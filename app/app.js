@@ -1,52 +1,85 @@
 import agent from './agent.js'
 import express from 'express'
 import axios from 'axios'
+import bodyParser from "body-parser";
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8062
 
-app.get('/register', (request, response) => {
-  let data = {"alias": 'Repo.Agent', "seed": "my_seed_00000000000000000000" + getRandomInt(9999), "role": "TRUST_ANCHOR"};
-  axios
-  .post(`${LEDGER_URL}/register`, data)
-  .then(res => {
-    console.log(res);
-    response.json(res.data);
+const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
+const REPO_AGENT = process.env.REPO_AGENT || "http://localhost:8060";
+const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
 
-  })
-  .catch(error => {
-    console.error(error.response);
-    response.status(500).send(error).end();
-  })
-});
+var REPO_DID = ""; 
+var credential_exchange_id = "";
+let schema_id = 0;
+let schema_definition;
 
-app.get('/health_check', (req, res) => {
-  res.send("up");
-});
 
-//
-// schema fix
-//
-app.post("/schema_definition", (request, response) => {
-  console.log('schemas')
-  var data = {
-    schema_name: "vsw schema",
-    schema_version: "0.2",
-    attributes: ["name", "url", "digest", "timestamp"],
-  };
+//------------------------------------------------------
+// Controller endpoints
+//------------------------------------------------------
+app.get("/health", async  (req, response) => {
+  var data = " ";
   var config = {
-    method: "post",
-    url: `${REPO_AGENT}/schemas`,
+    method: "get",
+    url: `${ADMIN_URL}/status`,
+    headers: { 'Content-Type': 'application/json'},
+    data: data,
+  }
+  axios(config)
+    .then(function(res) {
+      console.log("controller - /health")
+      //console.log(res)
+      var results = res.data
+      console.log(results)
+      response.json(results)
+    })
+    .catch((error) => {
+      console.error(error.response)
+      response.status(500).send(error).end()
+    })
+})
+
+app.get("/get_invitation", async (req, response) => {
+  var data = " ";
+  var config = {
+    method: "get",
+    url: `${ADMIN_URL}/wallet/did`,
     headers: {},
     data: data,
   };
   axios(config)
-    .then(function (res) {
-      console.log("respose received");
-      console.log(res);
-      var schema_id = res.data.schema_id;
-      console.log(res.data);
-      response.json(res.data);
+    .then((res) => {
+      console.log("DID respose received")
+      //console.log(res)
+      var results = res.data.results
+      REPO_DID = results[0].did
+      console.log(results)
+      if (REPO_DID = ''){
+        console.log('controller - get invitation - NO DID')
+        response.status(500).send(error).end()
+      }
+    })
+    .catch((error) => {
+      console.error(error.response);
+      response.status(500).send(error).end();
+    });
+  var inv_config = {
+    method: "post",
+    url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
+    headers: {},
+    data: data,
+  };
+  axios(inv_config)
+    .then((res) => {
+      console.log("create_invitation - respose received");
+      //changing annoying localhost in the invitation to the dockerhost
+      var invitation = res.data.invitation;
+      invitation.serviceEndpoint = "http://192.168.65.3:8060"
+      var config = { repo: REPO_DID, invitation };
+      //console.log(config)
+      response.json(config);
     })
     .catch((error) => {
       console.error(error.response);
@@ -54,12 +87,159 @@ app.post("/schema_definition", (request, response) => {
     });
 });
 
+app.get("/get_public_did", async (req, response) => {
+  var data = " ";
+  var config = {
+    method: "get",
+    url: `${ADMIN_URL}/wallet/did`,
+    headers: {},
+    data: data,
+  };
+  axios(config)
+    .then(function (res) {
+      console.log("controller - get_public_did - respose received");
+      //console.log(res)
+      var results = res.data.results;
+      REPO_DID = results[0].did;
+      //console.log(results)
+      response.json(results);
+    })
+    .catch((error) => {
+      console.error(error.response);
+      response.status(500).send(error).end();
+    });
+});
+
+//
+// create invitation using repo agent directly
+// output can be used as .config.json for client
+//
+app.get("/create_invitation", async (req, response) => {
+  var data = " ";
+  var config = {
+    method: "post",
+    url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
+    headers: {},
+    data: data,
+  };
+  axios(config)
+    .then(function (res) {
+      console.log("create_invitation - respose received");
+      //console.log(res)
+      //var invitation = res.data.invitation;
+      //console.log(`invitation ${invitation.serviceEndpoint}`)
+      var inv = JSON.parse(res.data.invitation)
+      console.log(`invitation ${inv}`)
+      inv.serviceEndpoint = "http://192.168.65.3:8060"
+      invitation = JSON.stringify(inv)
+      var config = { repo: REPO_DID, invitation};
+
+      //console.log(config)
+      response.json(config);
+    })
+    .catch((error) => {
+      console.error(error.response);
+      response.status(500).send(error).end();
+    });
+});
+
+//-----------------------------------------------------------------
+//
+//-----------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// webhook routes - start
+// ----------------------------------------------------------------------------
+
+// webhooks
+app.post("/webhooks/topic/:topicid", async (req, res) => {
+  var topicId = req.params.topicid;
+  console.log(`/webhooks/topic handler  ${topicId}`);
+  //console.log(`/webhooks/topic body  ${req.body}`)
+
+  // handle register use case
+  if (topicId == "connections") {
+    await handle_connections(req.body, res);
+  }
+
+  // this should handle publish
+  else if (topicId == "issue_credential") {
+    await handle_issue_credential(req.body, res);
+  } 
+  else {
+    console.log(`/webhooks/topic handler - no handler  ${topicId}`);
+    res.status(200).end();
+  }
+});
+
+// handle connections
+async function handle_connections(message, response) {
+  // here repo should check connection_ids with the incoming connection_id
+  // in this phase only one connection_id
+  // from repo agent /connections/{conn_id}
+  console.log(`webhook - handle_connections - connections respose received`)
+  console.log(`connection_id ${message.connection_id} connection state - ${message.state}`)
+  if ((message.state == "active") || (message.state == "response")){
+    console.log('webhook - handle_connections - connected')
+  }
+  response.status(200).end()
+}
+
+// handle issue credentials
+async function handle_issue_credential(message, response) {
+  var state = message.state;
+  console.log("webhook - handle issue credential");
+  credential_exchange_id = message.credential_exchange_id;
+
+  if (state == "offer_received") {
+    console.log("webhook - handle_issue_credential - After receiving credential offer, send credential request");
+    axios
+      .post(
+        `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
+      )
+      .then((res) => {
+        console.log(res);
+        axios
+          .get(`${ADMIN_URL}/issue-credential/records/${cred_id}/send-request`)
+          .then((res) => {
+            console.log(`webhook - handle_issue_credential - ${res}`);
+            response.json(res.data);
+          })
+          .catch((error) => {
+            console.error(error.response);
+            response.status(500).send(error).end();
+          });
+      })
+      .catch((error) => {
+        console.error(error.response);
+        response.status(500).send(error).end();
+      });
+  } else if (state == "credential_acked") {
+    cred_id = message.credential_id;
+    console.log("Stored credential " + cred_id + " in wallet");
+
+    axios
+      .get(`${ADMIN_URL}/credential/{cred_id}`)
+      .then((res) => {
+        console.log(res);
+        response.json(res.data);
+      })
+      .catch((error) => {
+        console.error(error.response);
+        response.status(500).send(error).end();
+      });
+  }
+}
+// ------------------------------------------------------------------
+// webhook
+// -----------------------------------------------------------------
+
 (async () => {
   await agent.start_agent();
 })();
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`VSW repo listening on port ${port}!`)
 });
 
 

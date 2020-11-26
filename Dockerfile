@@ -1,6 +1,6 @@
 FROM verifiablesoftware/aries-cloudagent-python:latest
 
-ENV PORT=8000
+ENV PORT=8062
 EXPOSE $PORT
 USER root
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
@@ -16,7 +16,7 @@ RUN npm i
 HEALTHCHECK --interval=1m --timeout=3s \
   CMD curl \
       --fail \
-      http://localhost:$PORT/health_check || \
+      http://localhost:$PORT/health || \
       exit 1
 
 CMD node app.js
