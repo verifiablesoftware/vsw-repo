@@ -1,7 +1,8 @@
 import agent from './agent.js'
 import express from 'express'
 import axios from 'axios'
-import bodyParser from "body-parser";
+import bodyParser from "body-parser"
+import JSON from "json"
 
 const app = express()
 const port = process.env.PORT || 8062
@@ -10,11 +11,13 @@ const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9
 const REPO_AGENT = process.env.REPO_AGENT || "http://localhost:8060";
 const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
 
-var REPO_DID = ""; 
-var credential_exchange_id = "";
+let REPO_DID = ""; 
+let credential_exchange_id = "";
 let schema_id = 0;
 let schema_definition;
 
+// Tell express to use body-parser's JSON parsing
+app.use(bodyParser.json());
 
 //------------------------------------------------------
 // Controller endpoints
@@ -41,51 +44,54 @@ app.get("/health", async  (req, response) => {
     })
 })
 
-app.get("/get_invitation", async (req, response) => {
-  var data = " ";
+app.get("/invitation", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/wallet/did`,
     headers: {},
-    data: data,
+    data: "",
   };
+  // get DID
   axios(config)
     .then((res) => {
       console.log("DID respose received")
       //console.log(res)
-      var results = res.data.results
-      REPO_DID = results[0].did
-      console.log(results)
+      var results = res.data.results[0].did
+      REPO_DID = results
+      console.log(REPO_DID)
       if (REPO_DID = ''){
         console.log('controller - get invitation - NO DID')
         response.status(500).send(error).end()
       }
+
+      // invitation
+      var inv_config = {
+        method: "post",
+        url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
+        headers: { 'Content-Type': 'application/json'},
+        data: "",
+      }
+      axios(inv_config)
+        .then((res) => {
+          //changing annoying localhost in the invitation to the dockerhost
+          var invitation = res.data.invitation
+          console.log(invitation)
+          console.log(REPO_DID)
+          //invitation.serviceEndpoint = "192.168.65.3:8060"
+          var invitation_config = { repo: REPO_DID, invitation }
+          //console.log(config)
+          response.json(invitation_config)
+        })
+        .catch((error) => {
+          console.error(error.response)
+          response.status(500).send(error).end()
+        })
     })
     .catch((error) => {
       console.error(error.response);
       response.status(500).send(error).end();
     });
-  var inv_config = {
-    method: "post",
-    url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
-    headers: {},
-    data: data,
-  };
-  axios(inv_config)
-    .then((res) => {
-      console.log("create_invitation - respose received");
-      //changing annoying localhost in the invitation to the dockerhost
-      var invitation = res.data.invitation;
-      invitation.serviceEndpoint = "http://192.168.65.3:8060"
-      var config = { repo: REPO_DID, invitation };
-      //console.log(config)
-      response.json(config);
-    })
-    .catch((error) => {
-      console.error(error.response);
-      response.status(500).send(error).end();
-    });
-});
+})
 
 app.get("/get_public_did", async (req, response) => {
   var data = " ";
@@ -130,7 +136,7 @@ app.get("/create_invitation", async (req, response) => {
       //console.log(`invitation ${invitation.serviceEndpoint}`)
       var inv = JSON.parse(res.data.invitation)
       console.log(`invitation ${inv}`)
-      inv.serviceEndpoint = "http://192.168.65.3:8060"
+      //inv.serviceEndpoint = "http://192.168.65.3:8060"
       invitation = JSON.stringify(inv)
       var config = { repo: REPO_DID, invitation};
 
