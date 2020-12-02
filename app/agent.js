@@ -25,12 +25,14 @@ let did = "";
  * steps
  * 1. issue credential - call ledger register endpoint
  * 2. start agent with the correct seed
- * 2. create invitation
+ * 2. create invitation - NOTE: it is not a good idea to create invitation here, separate end point in 
  * 3. create schema
  * 4. register schema
  */
 
 async function start() {
+
+
   seed = "my_seed_00000000000000000000" + getRandomInt(9999);
   load_schema_definition();
   const public_did = await get_did();
@@ -59,7 +61,8 @@ function getRandomInt(max) {
  * if no public did found in aws, create one and store it
  */
 async function get_did() {
-  let public_did// = await storage.get_did();
+  // this should be checked. e.g. how to remove the DID 
+  let public_did = await storage.get_did();
   let stored_did = false;
   if (public_did) {
     console.log("get public did from aws: " + public_did.did);
