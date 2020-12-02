@@ -5,7 +5,7 @@ import Storage from "./storage.js";
 import { hostname } from "os";
 
 // agent.py 
-const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_INTERNAL_HOST = `${process.env.IP}` || `${process.env.DOCKERHOST}` || hostname.docker.internal;
 const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
 const HTTP_PORT = 8060;
 const ADMIN_PORT = 8061;
