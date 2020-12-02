@@ -39,6 +39,7 @@ async function start() {
   did = public_did.did;
   seed = public_did.seed;
   await start_agent();
+  create_invitation();
 
   //if the did is from aws, no need register schema again
   if (!public_did.stored_did) {
@@ -177,6 +178,15 @@ function register_schema_and_creddef() {
     .catch((error) => {
       console.error(error);
     });
+}
+
+async function create_invitation() {
+  axios.post(`http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/connections/create-invitation?auto_accept=true&multi_use=true`)
+      .then(res => {
+          console.log(res.data)
+      }).catch(error => {
+          console.error(error);
+      })
 }
 
 export default {
