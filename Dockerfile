@@ -16,7 +16,7 @@ RUN npm i
 HEALTHCHECK --interval=1m --timeout=3s \
   CMD curl \
       --fail \
-      http://localhost:$PORT/health || \
+      http://localhost:$PORT/utilsRoutes/health || \
       exit 1
 
 CMD node app.js
