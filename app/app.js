@@ -5,9 +5,8 @@ const app = express()
 import { Router } from 'express'
 const port = process.env.PORT || 8062
 
-//const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
-//const REPO_AGENT = process.env.REPO_AGENT || "http://localhost:8060";
-//const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
+import keys from './config/keys.js'
+
 
 
 //--------------------------------------------------------------------------
@@ -30,6 +29,7 @@ app.use('/webhooks', webhooks);
 
 
 app.get("/", (req, res) => {
+  console.log(`keys : ${keys.WEBHOOK_2}`)
   res.status(200).end();
 });
 
