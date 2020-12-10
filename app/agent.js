@@ -30,8 +30,13 @@ let did = "";
  * 4. register schema
  */
 
-var storage_config = '{"url":"localhost:5432","wallet_scheme":"MultiWalletSingleTable"}'
-var postgres_config = '{"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"}'
+//var storage_config = `"url":"0.0.0.0:5432","wallet_scheme":"MultiWalletSingleTable"`
+var storage_config = `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`
+//var storage_config = {"url":"127.0.0.1:5432","wallet_scheme":"MultiWalletSingleTable"};
+
+//var postgres_config = '"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"'
+var postgres_config = "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
+//var postgres_config = {"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"};
 
 async function start() {
 
@@ -139,6 +144,8 @@ function get_agent_args() {
     "--wallet-name": wallet_name,
     "--wallet-key": wallet_name,
     "--wallet-storage-type": "postgres_storage",
+    //"--wallet-storage-config": `"${JSON.stringify(storage_config)}"`,
+    //"--wallet-storage-creds": `"${JSON.stringify(postgres_config)}"`,
     "--wallet-storage-config": storage_config,
     "--wallet-storage-creds": postgres_config,
     "--seed": seed,
