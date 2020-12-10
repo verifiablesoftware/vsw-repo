@@ -30,6 +30,9 @@ let did = "";
  * 4. register schema
  */
 
+var storage_config = '{"url":"localhost:5432","wallet_scheme":"MultiWalletSingleTable"}'
+var postgres_config = '{"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"}'
+
 async function start() {
 
 
@@ -83,7 +86,7 @@ async function get_did() {
 async function start_agent() {
   console.log("start agent");
   let agent = exec(
-    "python3 /home/indy/bin/aca-py start " + get_agent_args(),
+    "/home/indy/bin/aca-py start " + get_agent_args(),
     function (error, stdout, stderr) {
       if (error) {
         console.log(error.stack);
@@ -135,6 +138,9 @@ function get_agent_args() {
     "--wallet-type": "indy", //use indy wallet for now
     "--wallet-name": wallet_name,
     "--wallet-key": wallet_name,
+    "--wallet-storage-type": "postgres_storage",
+    "--wallet-storage-config": storage_config,
+    "--wallet-storage-creds": postgres_config,
     "--seed": seed,
     "--trace-target": "log",
     "--trace-tag": "acapy.events",

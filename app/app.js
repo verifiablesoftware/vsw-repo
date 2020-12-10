@@ -7,7 +7,7 @@ const port = process.env.PORT || 8062
 
 import keys from './config/keys.js'
 
-
+app.get('env');
 
 //--------------------------------------------------------------------------
 // utils routes
