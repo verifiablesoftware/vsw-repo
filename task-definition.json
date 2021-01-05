@@ -1,0 +1,29 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "inferenceAccelerators": [],
+    "containerDefinitions": [
+        {
+            "name": "vsw-repo",
+            "image": "vsw-repo-repository:00000",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "8080",
+                    "protocol": "tcp"
+                }
+                
+            ]
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "512",
+    "cpu": "256",
+    "executionRoleArn": "",
+    "family": "vsw-repo-task-definition",
+    "taskRoleArn": "",
+    "placementConstraints": []
+}
