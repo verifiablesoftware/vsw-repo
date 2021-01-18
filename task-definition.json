@@ -6,7 +6,7 @@
     "containerDefinitions": [
         {
             "name": "vsw-repo",
-            "image": "vsw-repo-repository:00000",
+            "image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
             "resourceRequirements": null,
             "essential": true,
             "portMappings": [
