@@ -11,12 +11,12 @@ COPY package-lock.json ./
 COPY ./app/ ./
 
 RUN touch logs/agent.logs
-RUN npm i
+RUN npm install && npm cache clean --force
 
 HEALTHCHECK --interval=1m --timeout=3s \
   CMD curl \
       --fail \
-      http://localhost:$PORT/utilsRoutes/health || \
+      http://localhost:$PORT/adminRoutes/health || \
       exit 1
 
 CMD node app.js

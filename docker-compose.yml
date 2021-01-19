@@ -7,8 +7,8 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: 'postgres'
-    volumes:
-      - database_data:/var/lib/postgresql/data
+  #  volumes:
+  #    - database_data:/var/lib/postgresql/data
   vsw-repo:
     container_name: vsw-repo
     image: vsw-repo:latest
@@ -17,6 +17,7 @@ services:
     environment:
       - DOCKERHOST=${DOCKERHOST}
       - LEDGER_URL=${LEDGER_URL}
+      - GENESIS_FILE=${LEDGER_FILE} 
       - IP=${IP}
       - PGHOST= 'postgres'
       - PGDATABASE= 'postgres'

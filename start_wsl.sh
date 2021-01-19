@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TODO - file or url genesis 
+# if separate docker container for agent not needed that many configs here
+
 NAME=vsw-repo
 echo "start ${NAME}" 
 export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host eclipse/che-ip)}
@@ -15,6 +18,8 @@ elif [ $1 = "local" ]; then
     export LEDGER_URL="http://${DOCKERHOST}:9000"
 elif [ $1 = "remote" ]; then
     export LEDGER_URL="http://dev.greenlight.bcovrin.vonx.io" ## use default AWS cloud ledger
+elif [ $1 = "file"]; then
+    export GENESIS_FILE=$2
 fi
 
 myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
@@ -23,6 +28,8 @@ export IP=${myip}
 
 
 echo "your local docker host ip address is: ${DOCKERHOST}"
+echo "ledger ip address is: ${LEDGER_URL}"
+echo "ledger file: ${GENESIS_FILE}"
 
 if [ !"$(docker ps -qq -f name=${NAME})" ]; then
     echo "container ${NAME} is running, delete it first"

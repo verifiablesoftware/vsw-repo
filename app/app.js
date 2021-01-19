@@ -1,5 +1,6 @@
 import agent from './agent.js'
 import express from 'express'
+import bodyParser from 'body-parser'
 
 const app = express()
 import { Router } from 'express'
@@ -8,12 +9,20 @@ const port = process.env.PORT || 8062
 import keys from './config/keys.js'
 
 app.get('env');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+//--------------------------------------------------------------------------
+// postgres routes
+//---------------------------------------------------------------------------
+import dbRouter from './queries.js';
+app.use('/dbRoutes', dbRouter);
 
 //--------------------------------------------------------------------------
 // utils routes
 //---------------------------------------------------------------------------
-import utilsRouter from './routes/utilsRoutes.js'
-app.use('/utilsRoutes', utilsRouter);
+import adminRouter from './routes/adminRoutes.js'
+app.use('/adminRoutes', adminRouter);
 
 //----------------------------------------------------------------------------
 // Controller endpoints
@@ -43,5 +52,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`VSW repo listening on port ${port}!`)
 });
-
-

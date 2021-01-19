@@ -9,7 +9,10 @@ if (process.env.NODE_ENV === 'production') {
         LEDGER_URL_2: `http://${process.env.DOCKERHOST}:9000`,
         REPO_AGENT_2: "http://localhost:8060",
         ADMIN_URL_2: "http://localhost:8061",
-        WEBHOOK_2: "8062"
+        WEBHOOK_2: "8062",
+        storage_config : `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`,
+        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
+
       };
   } else {
     // we are in development - return the dev keys!!!
@@ -17,7 +20,9 @@ if (process.env.NODE_ENV === 'production') {
         LEDGER_URL_2: `http://${process.env.DOCKERHOST}:9000`,
         REPO_AGENT_2: "http://localhost:8060",
         ADMIN_URL_2: "http://localhost:8061",
-        WEBHOOK_2: "8062_DEV"
+        WEBHOOK_2: "8062_DEV",
+        storage_config : `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`,
+        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
       };
   }
 

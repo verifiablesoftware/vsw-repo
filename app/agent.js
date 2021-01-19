@@ -4,6 +4,9 @@ import fs from "fs";
 import Storage from "./storage.js";
 import { hostname } from "os";
 
+import keys from './config/keys.js'
+import variables from './variables.js'
+
 // agent.py 
 const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
 const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
@@ -11,47 +14,54 @@ const HTTP_PORT = 8060;
 const ADMIN_PORT = 8061;
 const WEBHOOK_PORT = 8062;
 const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
+const GENESIS_FILE = process.env.GENESIS_FILE || `\"/home/indy/resources/genesis_own.txt\"`;
 const storage = new Storage();
 
 //TODO: will need move variable into class
 let schema_id = 0;
 let credential_definition_id = 0;
 let schema_definition;
-let seed = 0;
-let did = "";
+
+let did = variables.did;
+let seed; // = variables.seed;
+
+var genesis_file =  "home/indy/resources/genesis_own.txt";
+var storage_config = keys.storage_config;
+var postgres_config = keys.postgres_config;
+
 
 /**
- * start the agent in child process
- * steps
- * 1. issue credential - call ledger register endpoint
- * 2. start agent with the correct seed
- * 2. create invitation - NOTE: it is not a good idea to create invitation here, separate end point in 
- * 3. create schema
- * 4. register schema
- */
+ * start the agent options 1,2 or 3 
+ *  credential
+ *   1. registered to ledger or do it have public DID
+ *      ledger registration ?
+ *      get DID, seed from db and other info from the database
+ *      load schema
+ *   2. not registered - first time 
+ *      reset database content if exists from previous starts 
+ *      
+ *      1. start repo agent
+ *      2. check if there is public DID
+ *      3. create seed, get the registration did from ledger with seed - if there is no public DID
+ *      
+ *      load schema
+ * 
+ *   3. reset all and restart
+ *      same as 2 but intentionally
+ *      
+ **/
 
-//var storage_config = `"url":"0.0.0.0:5432","wallet_scheme":"MultiWalletSingleTable"`
-var storage_config = `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`
-//var storage_config = {"url":"127.0.0.1:5432","wallet_scheme":"MultiWalletSingleTable"};
-
-//var postgres_config = '"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"'
-var postgres_config = "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
-//var postgres_config = {"account":"postgres","password":"postgres","admin_account":"postgres","admin_password":"postgres"};
-
+/* starting agent from scratch */
 async function start() {
-
-
   seed = "my_seed_00000000000000000000" + getRandomInt(9999);
-  load_schema_definition();
-  const public_did = await get_did();
-  did = public_did.did;
-  seed = public_did.seed;
-  await start_agent();
-
-  //if the did is from aws, no need register schema again
-  if (!public_did.stored_did) {
-    register_schema_and_creddef();
+  if (GENESIS_FILE != null) {
+    genesis_file = GENESIS_FILE;
   }
+  else {
+    genesis_file = "/home/indy/resources/genesis_own.txt";
+  }
+  await register_public_did();
+  await start_agent();
 }
 
 function load_schema_definition() {
@@ -64,9 +74,8 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-/**
- * get did
- * if no public did found in aws, create one and store it
+/*
+ * get did - if no 
  */
 async function get_did() {
   // this should be checked. e.g. how to remove the DID 
@@ -75,7 +84,8 @@ async function get_did() {
   if (public_did) {
     console.log("get public did from aws: " + public_did.did);
     stored_did = true;
-  } else {
+  } 
+  else {
     public_did = await register_public_did();
     storage.store_did(public_did);
     console.log("register public did: " + public_did.did);
@@ -84,12 +94,21 @@ async function get_did() {
   return public_did;
 }
 
+/*
+ * agent provision - not used currently
+ */
+async function provision_agent() {
+  console.log("provision agent");
+  let agent = exec("/home/indy/bin/aca-py provision ")
+}
+
 /**
  * start the arise agent
  * wait for 10s to let agent startup.
  */
 async function start_agent() {
   console.log("start agent");
+  console.log(get_agent_args());
   let agent = exec(
     "/home/indy/bin/aca-py start " + get_agent_args(),
     function (error, stdout, stderr) {
@@ -100,13 +119,14 @@ async function start_agent() {
       }
     }
   );
-
   let promise = new Promise((resolve, reject) => {
     setTimeout(() => resolve(agent), 10000);
   });
 
   let result = await promise;
 
+  //load_schema_definition();
+  //register_schema_and_creddef();
   console.log("start agent completed");
   return result;
 }
@@ -115,7 +135,6 @@ async function start_agent() {
 async function register_public_did() {
   let data = { alias: "Repo.Agent", seed: seed, role: "TRUST_ANCHOR" };
   let res = await axios.post(`${LEDGER_URL}/register`, data);
-
   return res.data;
 }
 
@@ -123,9 +142,11 @@ async function register_public_did() {
  * get agent arguments
  */
 function get_agent_args() {
-  console.log(`${LEDGER_URL}/genesis`);
+  //console.log(`${LEDGER_URL}/genesis`);
+  //-> should check the wallet from postgres database
   let wallet_name = "Repo.Agent" + Math.random();
   console.log(seed);
+
   let args = {
     "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
     "--label": "Repo.Agent",
@@ -136,18 +157,17 @@ function get_agent_args() {
     "--inbound-transport": "http 0.0.0.0 8060",
     "--outbound-transport": "http ",
     "--admin": "0.0.0.0 8061",
-    "--log-file": "logs/agent.logs",
+    //"--log-file": "logs/agent.logs",
     "--log-level": "debug",
-    "--genesis-url": `${LEDGER_URL}/genesis`,
-    "--webhook-url": `http://${DEFAULT_EXTERNAL_HOST}:8062/webhooks`,
+    "--genesis-file": genesis_file,
+    //"--genesis-url": `${LEDGER_URL}/genesis`,
+    "--webhook-url": `http://${DEFAULT_EXTERNAL_HOST}:${WEBHOOK_PORT}/webhooks`,
     "--wallet-type": "indy", //use indy wallet for now
     "--wallet-name": wallet_name,
     "--wallet-key": wallet_name,
-    "--wallet-storage-type": "postgres_storage",
-    //"--wallet-storage-config": `"${JSON.stringify(storage_config)}"`,
-    //"--wallet-storage-creds": `"${JSON.stringify(postgres_config)}"`,
-    "--wallet-storage-config": storage_config,
-    "--wallet-storage-creds": postgres_config,
+    //"--wallet-storage-type": "postgres_storage",
+    //"--wallet-storage-config": storage_config,
+    //"--wallet-storage-creds": postgres_config,
     "--seed": seed,
     "--trace-target": "log",
     "--trace-tag": "acapy.events",
@@ -155,6 +175,7 @@ function get_agent_args() {
     "--auto-accept-invites": "",
     "--auto-accept-requests": "",
     "--auto-store-credential": "",
+    //"--plugin": "acapy_plugin_toolbox"
   };
   let str_arg = "";
   for (let key in args) {
@@ -165,7 +186,6 @@ function get_agent_args() {
 
 function register_schema_and_creddef() {
   let schema_body = schema_definition.schema_body;
-
   axios
     .post(`http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/schemas`, schema_body)
     .then((res) => {

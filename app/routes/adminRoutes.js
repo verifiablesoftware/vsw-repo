@@ -7,7 +7,7 @@ const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
 // healts
 // check did
 // reset DID?
-let utilsRoutes = Router()
+let adminRoutes = Router()
 
   //utilsRoutes(app)
   .get("/health", async (req, response) => {
@@ -32,5 +32,5 @@ let utilsRoutes = Router()
       });
   });
 
-export default  utilsRoutes ;
+export default  adminRoutes ;
 
