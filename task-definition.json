@@ -1,29 +1,61 @@
 {
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "inferenceAccelerators": [],
-    "containerDefinitions": [
-        {
-            "name": "vsw-repo",
-            "image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
-            "resourceRequirements": null,
-            "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": "8080",
-                    "protocol": "tcp"
-                }
-                
-            ]
-        }
-    ],
-    "volumes": [],
-    "networkMode": "awsvpc",
-    "memory": "512",
-    "cpu": "256",
-    "executionRoleArn": "arn:aws:iam::865098096924:role/ecsTaskExecutionRole",
-    "family": "vsw-repo-task-definition",
-    "taskRoleArn": "",
-    "placementConstraints": []
+	"requiresCompatibilities": [
+		"EC2"
+	],
+	"inferenceAccelerators": [],
+	"containerDefinitions": [
+		{
+			"name": "vsw-repo",
+			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
+			"resourceRequirements": null,
+			"essential": true,
+ 			"portMappings": [
+				{
+					"containerPort": "8080",
+					"protocol": "tcp"
+				}
+			]
+		}
+	],
+	"volumes": [],
+	"networkMode": "awsvpc",
+	"memory": "512",
+	"cpu": "256",
+	"executionRoleArn": "arn:aws:iam::865098096924:role/ecsTaskExecutionRole",
+	"family": "vsw-repo-task-definition",
+	"taskRoleArn": "",
+	"placementConstraints": [],
+	"requiresAttributes": [
+		{
+			"targetId": null,
+			"targetType": null,
+			"value": null,
+			"name": "com.amazonaws.ecs.capability.ecr-auth"
+		},
+		{
+			"targetId": null,
+			"targetType": null,
+			"value": null,
+			"name": "com.amazonaws.ecs.capability.task-iam-role"
+		},
+		{
+			"targetId": null,
+			"targetType": null,
+			"value": null,
+			"name": "ecs.capability.execution-role-ecr-pull"
+		},
+		{
+			"targetId": null,
+			"targetType": null,
+			"value": null,
+			"name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+		},
+		{
+			"targetId": null,
+			"targetType": null,
+			"value": null,
+			"name": "ecs.capability.task-eni"
+		}
+	],
+	"pidMode": null
 }
