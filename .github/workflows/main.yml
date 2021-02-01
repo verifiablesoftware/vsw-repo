@@ -1,11 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+---
+name: Deploy master branch
 on:
   push:
     branches:
-      - ci-initial
-    pull_request:
       - master
 
   workflow_dispatch:
@@ -14,7 +11,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
 
