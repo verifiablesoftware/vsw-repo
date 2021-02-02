@@ -1,0 +1,12 @@
+node_modules/**
+.vscode
+dist
+build
+.idea
+vsw_repo.egg-info
+.eggs
+**/*.log
+.pytest_cache
+**/**/_pycache_/*
+logs/
+.github
