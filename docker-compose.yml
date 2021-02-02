@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+  #  volumes:
+  #    - database_data:/var/lib/postgresql/data
+  vsw-repo:
+    container_name: vsw-repo
+    image: vsw-repo:latest
+    stdin_open: true
+    tty: true
+    environment:
+      - DOCKERHOST=${DOCKERHOST}
+      - LEDGER_URL=${LEDGER_URL}
+      - GENESIS_FILE=${LEDGER_FILE} 
+      - IP=${IP}
+      - PGHOST= 'postgres'
+      - PGDATABASE= 'postgres'
+      - PGUSER= 'postgres'
+      - PGPASSWORD= 'postgres'
+    ports:
+      - "8062:8062"
+      - "8060:8060"
+      - "8061:8061"
+    restart: always
+    cap_drop:
+      - ALL
+    links:
+      - postgres
+volumes:
+  database_data:
+     driver: local
