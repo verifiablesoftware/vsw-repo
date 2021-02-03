@@ -1,6 +1,24 @@
 // keys.js - figure out what set of credentials to return
 // placeholder for different keys - to used yet
 // 
+
+ /*
+Wallet type: indy
+Wallet name: Repo.Agent
+Created new public DID: Uydd2JEPUD63btdQAHJ25g
+Verkey: GFPaV71sU4qm6S1b4u4JCad8MM7FSSyJAFu8THnW9fB9
+seed my_seed_100000000000000000007777
+
+{"statusCode":200,
+"headers":{"Access-Control-Allow-Origin":"*"},
+"body":"{\"statusCode\": 200, \"Uydd2JEPUD63btdQAHJ25g\": 
+{\"status\": \"Success\", 
+\"statusCode\": 200, 
+\"reason\": 
+\"Successfully wrote NYM identified by Uydd2JEPUD63btdQAHJ25g to the ledger with role ENDORSER\"}}"
+}
+*/
+
 let keys;
 
 if (process.env.NODE_ENV === 'production') {
@@ -11,8 +29,8 @@ if (process.env.NODE_ENV === 'production') {
         ADMIN_URL_2: "http://localhost:8061",
         WEBHOOK_2: "8062",
         storage_config : `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`,
-        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
-
+        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\"",
+        seed : "my_seed_100000000000000000007777"
       };
   } else {
     // we are in development - return the dev keys!!!
@@ -22,7 +40,9 @@ if (process.env.NODE_ENV === 'production') {
         ADMIN_URL_2: "http://localhost:8061",
         WEBHOOK_2: "8062_DEV",
         storage_config : `\"{\\\"url\\\":\\\"${process.env.DOCKERHOST}:5432\\\",\\\"wallet_scheme\\\":\\\"MultiWalletSingleTable\\\"}\"`,
-        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\""
+        postgres_config : "\"{\\\"account\\\":\\\"postgres\\\",\\\"password\\\":\\\"postgres\\\",\\\"admin_account\\\":\\\"postgres\\\",\\\"admin_password\\\":\\\"postgres\\\"}\"",
+        seed : "my_seed_100000000000000000007777"
+
       };
   }
 

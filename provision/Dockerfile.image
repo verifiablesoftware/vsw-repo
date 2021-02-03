@@ -1,0 +1,27 @@
+FROM verifiablesoftware/aries-cloudagent-python:latest
+RUN mkdir /home/indy/resources/
+COPY ./resources/* /home/indy/resources/
+
+#RUN mkdir logs
+RUN touch ./logs/agent.logs
+
+# attributes
+# 1) endpoint depended on local or running in AWS
+# 2) genesis_file depends on LEDGER used
+# 3) webhooks-url depended on local or running in AWS
+# 4) wallet - database should run in AWS (there is other attributes to this)
+# 5) seed
+ENV SEED_VAL = ""
+ENV ENDPOINT = ""
+ENV WALLET_NAME = ""
+ENV WALLET_KEY = ""
+
+ENTRYPOINT aca-py provision \
+--endpoint http://192.168.65.3:8060 \
+--genesis-file "/home/indy/resources/genesis.txt" \
+--wallet-type indy \
+--wallet-name Repo.Agent \
+--wallet-key Repo.Agent \
+# here the possible additional wallet/storage parameters
+# here the possible additional wallet/storage parameters
+--seed ${SEED_VAL}

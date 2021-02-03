@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  repo-agent:
+    container_name: repo-agent
+    image: repo-agent
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - DOCKERHOST=${DOCKERHOST}
+      - IP=${IP}
+      - SEED=${SEED}
+    ports:
+      - "8061:8061"
+      - "8060:8060"
+    restart: always
+    cap_drop:
+      - ALL

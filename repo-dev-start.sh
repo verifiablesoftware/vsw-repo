@@ -1,6 +1,8 @@
 #!/bin/sh
 
-NAME=vsw-repo
+#original repo start
+
+NAME=vsw-repo-dev
 echo "start ${NAME}" 
 export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host eclipse/che-ip)}
 
@@ -20,7 +22,6 @@ fi
 myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 echo "My WAN/Public IP address: ${myip}"
 export IP=${myip}
-
 
 echo "your local docker host ip address is: ${DOCKERHOST}"
 

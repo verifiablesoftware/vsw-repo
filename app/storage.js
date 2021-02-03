@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 
+// currently not needed
 class Storage {
     constructor() {
         this.__init__();

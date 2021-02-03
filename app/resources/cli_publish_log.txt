@@ -1,0 +1,1147 @@
+jte@ITSD-83771:~/vsw/aries-cloudagent-python/demo$ ./run_demo vsw --events --trace-log Screen1
+dockernet
+Preparing agent image...
+sha256:f419e353d7602046329783c050678755a1214a128fcad1c1aaa9f82acf0a2f01
+Trying to detect ngrok service endpoint
+ngrok not detected for agent endpoint
+192.168.65.3
+docker-opts
+network bridge
+Starting [vsw] agent with args [--port 8050 Screen1]
+URL: https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.
+png
+Digest: 80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e
+------------>  default_genesis_txns
+
+#1 Provision an agent and wallet, get back configuration details
+VSW        | Registering VSW.Agent with seed d_000000000000000000000000619059
+VSW        | Got DID: AYiFytkWzEk26AKYtesZeP
+VSW        |
+VSW        | ::::::::::::::::::::::::::::::::::::::::::::::
+VSW        | :: VSW.Agent                                ::
+VSW        | ::                                          ::
+VSW        | ::                                          ::
+VSW        | :: Inbound Transports:                      ::
+VSW        | ::                                          ::
+VSW        | ::   - http://0.0.0.0:8050                  ::
+VSW        | ::                                          ::
+VSW        | :: Outbound Transports:                     ::
+VSW        | ::                                          ::
+VSW        | ::   - http                                 ::
+VSW        | ::   - https                                ::
+VSW        | ::                                          ::
+VSW        | :: Public DID Information:                  ::
+VSW        | ::                                          ::
+VSW        | ::   - DID: AYiFytkWzEk26AKYtesZeP          ::
+VSW        | ::                                          ::
+VSW        | :: Administration API:                      ::
+VSW        | ::                                          ::
+VSW        | ::   - http://0.0.0.0:8051                  ::
+VSW        | ::                                          ::
+VSW        | ::                               ver: 0.5.3 ::
+VSW        | ::::::::::::::::::::::::::::::::::::::::::::::
+VSW        |
+VSW        | Listening...
+VSW        |
+Startup duration: 4.02s
+Admin URL is at: http://192.168.65.3:8051
+Endpoint URL is at: http://192.168.65.3:8050
+
+#9 Connect to repo
+
+EVENT: Controller POST /connections/receive-invitation request to Agent with data:
+{
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+    "@id": "c4b6ed58-7b96-48ac-8295-b566dcbbfed5",
+    "label": "Repo.Agent",
+    "recipientKeys": [
+        "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK"
+    ],
+    "serviceEndpoint": "http://192.168.65.3:8060"
+}
+VSW        | 2021-01-21 14:49:00,628 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.6284745, "str_time": "2021-01-21 14:49:00.628474", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/connections/"}
+VSW        | 2021-01-21 14:49:00,628 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.628907, "str_time": "2021-01-21 14:49:00.628907", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/connections/"}
+
+EVENT: Agent called controller webhook: handle_connections with payload:
+{
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.606252Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "invitation",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+}
+VSW        | 2021-01-21 14:49:00,681 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.6817913, "str_time": "2021-01-21 14:49:00.681791", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/connections/"}
+
+EVENT: Agent called controller webhook: handle_connections with payload:
+{
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.655215Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "request_id": "45f25311-4e2f-4466-b015-a8b90168fedb",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "request",
+    "my_did": "HjjTx7xvwM5LPf8ubBvSEV",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+}VSW        | 2021-01-21 14:49:00,682 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.6820166, "str_time": "2021-01-21 14:49:00.682017", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/connections/"}
+
+VSW        | 2021-01-21 14:49:00,689 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request", "timestamp": 1611240540.6892877, "str_time": "2021-01-21 14:49:00.689288", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.START"}
+VSW        | 2021-01-21 14:49:00,689 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request", "timestamp": 1611240540.6895082, "str_time": "2021-01-21 14:49:00.689508", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.END"}
+VSW        | 2021-01-21 14:49:00,693 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request", "timestamp": 1611240540.6930547, "str_time": "2021-01-21 14:49:00.693055", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8060"}
+VSW        | 2021-01-21 14:49:00,693 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request", "timestamp": 1611240540.6932795, "str_time": "2021-01-21 14:49:00.693280", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8060"}
+
+EVENT: Response from POST /connections/receive-invitation received:
+{
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.655215Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "request_id": "45f25311-4e2f-4466-b015-a8b90168fedb",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "request",
+    "my_did": "HjjTx7xvwM5LPf8ubBvSEV",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+}
+Invitation response:
+  {
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.655215Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "request_id": "45f25311-4e2f-4466-b015-a8b90168fedb",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "request",
+    "my_did": "HjjTx7xvwM5LPf8ubBvSEV",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+  }
+
+VSW        | 2021-01-21 14:49:00,832 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "534e417c-9a4e-4175-893a-dfc7d823d10b", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response", "timestamp": 1611240540.8325536, "str_time": "2021-01-21 14:49:00.832554", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "Dispatcher.handle_message.START"}
+VSW        | 2021-01-21 14:49:00,874 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.8745096, "str_time": "2021-01-21 14:49:00.874510", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/connections/"}
+VSW        | 2021-01-21 14:49:00,874 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.874726, "str_time": "2021-01-21 14:49:00.874726", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/connections/"}
+
+EVENT: Agent called controller webhook: handle_connections with payload:
+{
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.857371Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "request_id": "45f25311-4e2f-4466-b015-a8b90168fedb",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "response",
+    "my_did": "HjjTx7xvwM5LPf8ubBvSEV",
+    "their_did": "7NsT7423Wkw9XJwaWe4t9S",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+}VSW        | 2021-01-21 14:49:00,881 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "534e417c-9a4e-4175-893a-dfc7d823d10b", "thread_id": "45f25311-4e2f-4466-b015-a8b90168fedb", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response", "timestamp": 1611240540.881481, "str_time": "2021-01-21 14:49:00.881481", "handler": "VSW.Agent.trace", "ellapsed_milli": 54, "outcome": "Dispatcher.handle_message.END"}
+
+VSW        | 2021-01-21 14:49:00,881 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping", "timestamp": 1611240540.8818705, "str_time": "2021-01-21 14:49:00.881871", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.START"}
+VSW        | 2021-01-21 14:49:00,882 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping", "timestamp": 1611240540.8820798, "str_time": "2021-01-21 14:49:00.882080", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.END"}
+VSW        | 2021-01-21 14:49:00,884 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping", "timestamp": 1611240540.884266, "str_time": "2021-01-21 14:49:00.884266", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8060"}
+VSW        | 2021-01-21 14:49:00,884 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping", "timestamp": 1611240540.8845704, "str_time": "2021-01-21 14:49:00.884570", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8060"}
+VSW        | 2021-01-21 14:49:00,953 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "8aa8624f-0b75-4e7e-a06b-0416bc14f8e3", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping_response", "timestamp": 1611240540.9531488, "str_time": "2021-01-21 14:49:00.953149", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "Dispatcher.handle_message.START"}
+VSW        | 2021-01-21 14:49:00,955 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "8aa8624f-0b75-4e7e-a06b-0416bc14f8e3", "thread_id": "64e41089-85d5-46bb-a01b-02ff98028bcc", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/trust_ping/1.0/ping_response", "timestamp": 1611240540.9549508, "str_time": "2021-01-21 14:49:00.954951", "handler": "VSW.Agent.trace", "ellapsed_milli": 24, "outcome": "Dispatcher.handle_message.END"}
+
+EVENT: Agent called controller webhook: handle_connections with payload:
+{
+    "invitation_mode": "once",
+    "routing_state": "none",
+    "updated_at": "2021-01-21 14:49:00.935213Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "request_id": "45f25311-4e2f-4466-b015-a8b90168fedb",
+    "initiator": "external",
+    "their_label": "Repo.Agent",
+    "invitation_key": "BdBjvUDoaA4KsMsU9uqhAg9eezHP1S8KaQ9dd9c6c7sK",
+    "accept": "auto",
+    "state": "active",
+    "my_did": "HjjTx7xvwM5LPf8ubBvSEV",
+    "their_did": "7NsT7423Wkw9XJwaWe4t9S",
+    "created_at": "2021-01-21 14:49:00.606252Z"
+}
+VSW        | 2021-01-21 14:49:00,955 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.9551418, "str_time": "2021-01-21 14:49:00.955142", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/connections/"}
+VSW        | Connected
+VSW        | 2021-01-21 14:49:00,955 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "N/A", "traced_type": "dict", "timestamp": 1611240540.955276, "str_time": "2021-01-21 14:49:00.955276", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/connections/"}
+
+#13 Issue credential offer to repo
+
+* Create a new cred def on the ledger
+
+EVENT: Controller POST /credential-definitions request to Agent with data:
+{
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "support_revocation": false,
+    "revocation_registry_size": 100
+}
+
+EVENT: Response from POST /credential-definitions received:
+{
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default"
+}
+Cred def ID: AYiFytkWzEk26AKYtesZeP:3:CL:203:default
+Publish cred def duration: 4.58s
+
+EVENT: Controller POST /issue-credential/send-offer request to Agent with data:
+{
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "auto_remove": false,
+    "credential_preview": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+        "attributes": [
+            {
+                "name": "name",
+                "value": "Screen1"
+            },
+            {
+                "name": "url",
+                "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+            },
+            {
+                "name": "digest",
+                "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+            },
+            {
+                "name": "timestamp",
+                "value": "1611240545"
+            }
+        ]
+    },
+    "trace": false
+}
+VSW        | 2021-01-21 14:49:05,598 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.5984302, "str_time": "2021-01-21 14:49:05.598430", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | 2021-01-21 14:49:05,598 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.5988176, "str_time": "2021-01-21 14:49:05.598818", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+
+EVENT: Agent called controller webhook: handle_issue_credential with payload:
+{
+    "updated_at": "2021-01-21 14:49:05.583593Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "offer_sent"
+}
+VSW        | 2021-01-21 14:49:05,606 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential", "timestamp": 1611240545.6059172, "str_time": "2021-01-21 14:49:05.605917", "handler": "VSW.Agent.trace", "ellapsed_milli": 32, "outcome": "credential_exchange_send_free_offer.END"}
+
+EVENT: Response from POST /issue-credential/send-offer received:
+{
+    "updated_at": "2021-01-21 14:49:05.583593Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "offer_sent"
+}VSW        | 2021-01-21 14:49:05,606 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential", "timestamp": 1611240545.6065118, "str_time": "2021-01-21 14:49:05.606512", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.START"}
+
+VSW        | 2021-01-21 14:49:05,606 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential", "timestamp": 1611240545.606791, "str_time": "2021-01-21 14:49:05.606791", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.END"}
+VSW        | Credential: state = offer_sent, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        | 2021-01-21 14:49:05,612 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential", "timestamp": 1611240545.6121368, "str_time": "2021-01-21 14:49:05.612137", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8060"}
+VSW        | 2021-01-21 14:49:05,612 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential", "timestamp": 1611240545.6124468, "str_time": "2021-01-21 14:49:05.612447", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8060"}
+VSW        | Credential: state = offer_sent, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        | 2021-01-21 14:49:05,789 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "2f30a5e8-a6d1-49af-a83d-669294c6f12e", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential", "timestamp": 1611240545.789345, "str_time": "2021-01-21 14:49:05.789345", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "Dispatcher.handle_message.START"}
+VSW        | 2021-01-21 14:49:05,817 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "2f30a5e8-a6d1-49af-a83d-669294c6f12e", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential", "timestamp": 1611240545.8176377, "str_time": "2021-01-21 14:49:05.817638", "handler": "VSW.Agent.trace", "ellapsed_milli": 25, "outcome": "CredentialRequestHandler.handle.END"}
+VSW        | 2021-01-21 14:49:05,817 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "2f30a5e8-a6d1-49af-a83d-669294c6f12e", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/request-credential", "timestamp": 1611240545.817839, "str_time": "2021-01-21 14:49:05.817839", "handler": "VSW.Agent.trace", "ellapsed_milli": 30, "outcome": "Dispatcher.handle_message.END"}
+VSW        | 2021-01-21 14:49:05,818 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.8180404, "str_time": "2021-01-21 14:49:05.818040", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | 2021-01-21 14:49:05,818 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.818218, "str_time": "2021-01-21 14:49:05.818218", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+
+EVENT: Agent called controller webhook: handle_issue_credential with payload:
+{
+    "credential_request": {
+        "prover_did": "7NsT7423Wkw9XJwaWe4t9S",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "blinded_ms": {
+            "u": "164038960712729944934904059304514263629686170750823932034657871563239449310602898936105495557825722606895231625924408413578749803272622297507080316637505596521912734942403768385889621141034261416155864044621041210746754565019152207396093161437845150198487923491008617374897451475140229697588993609378662038048822194794850986736349110217370106853896905291888324633782531020748924276589974537702306044591703960907834612598156287150707469221931422693620202148463766050770945301479497961567346229686067562854688598585981290741574345074528224853064738612666629623169276372500220821524708217186481500785312104705906263322",
+            "ur": null,
+            "hidden_attributes": [
+                "master_secret"
+            ],
+            "committed_attributes": {}
+        },
+        "blinded_ms_correctness_proof": {
+            "c": "1431469804994105721575873424061025086246353231689867419015852822353203259605",
+            "v_dash_cap": "48654833631737239534636011269887289728828210337491895024736269927151523321090248891020416757651701981236745646054539743809152288080131152099586693517362168004846447973161981047594825367848496858762497169902290468981888465280876427881405155040817725987463010222897349989435211152741249174236895841348777546961333390776381781513283649064779991883858723464041520109205567529845847884698364294293597369986478796977741249072883824026899204103349202499936018859296871284949952503012057799806461789480414559195985010003088980779285380967966555469411452884252810885525832147256912161311835344266517721360433418224081074824386219725827380562209222465942133199058731602676992249040144571282997404452686415252752320469859948353",
+            "m_caps": {
+                "master_secret": "30884001143640600961677065038353166855194513466933471122481502425493615964282819507617999459106441727986234746837415864758001336418009293170578716319272026890423228072761651049921"
+            },
+            "r_caps": {}
+        },
+        "nonce": "911844480860950903820452"
+    },
+    "updated_at": "2021-01-21 14:49:05.800086Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "request_received"
+}
+VSW        | Credential: state = request_received, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        | Credential: state = request_received, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+
+#17 Issue credential to X
+
+EVENT: Controller POST /issue-credential/records/4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca/issue request to Agent with data:
+{
+    "comment": "Issuing credential, exchange 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "credential_preview": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+        "attributes": [
+            {
+                "name": "name",
+                "value": "Screen1"
+            },
+            {
+                "name": "url",
+                "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+            },
+            {
+                "name": "digest",
+                "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+            },
+            {
+                "name": "timestamp",
+                "value": "1611240545"
+            }
+        ]
+    }
+}
+VSW        | 2021-01-21 14:49:05,928 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.9281979, "str_time": "2021-01-21 14:49:05.928198", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | 2021-01-21 14:49:05,928 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240545.9287746, "str_time": "2021-01-21 14:49:05.928775", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | 2021-01-21 14:49:05,930 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "b58a8f2f-a848-49ca-b371-8add5ca525af", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential", "timestamp": 1611240545.930087, "str_time": "2021-01-21 14:49:05.930087", "handler": "VSW.Agent.trace", "ellapsed_milli": 81, "outcome": "credential_exchange_issue.END"}
+VSW        | 2021-01-21 14:49:05,930 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "b58a8f2f-a848-49ca-b371-8add5ca525af", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential", "timestamp": 1611240545.9306266, "str_time": "2021-01-21 14:49:05.930627", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.START"}
+VSW        | 2021-01-21 14:49:05,930 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "b58a8f2f-a848-49ca-b371-8add5ca525af", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential", "timestamp": 1611240545.93089, "str_time": "2021-01-21 14:49:05.930890", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.ENCODE.END"}
+
+EVENT: Agent called controller webhook: handle_issue_credential with payload:
+{
+    "credential_request": {
+        "prover_did": "7NsT7423Wkw9XJwaWe4t9S",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "blinded_ms": {
+            "u": "164038960712729944934904059304514263629686170750823932034657871563239449310602898936105495557825722606895231625924408413578749803272622297507080316637505596521912734942403768385889621141034261416155864044621041210746754565019152207396093161437845150198487923491008617374897451475140229697588993609378662038048822194794850986736349110217370106853896905291888324633782531020748924276589974537702306044591703960907834612598156287150707469221931422693620202148463766050770945301479497961567346229686067562854688598585981290741574345074528224853064738612666629623169276372500220821524708217186481500785312104705906263322",
+            "ur": null,
+            "hidden_attributes": [
+                "master_secret"
+            ],
+            "committed_attributes": {}
+        },
+        "blinded_ms_correctness_proof": {
+            "c": "1431469804994105721575873424061025086246353231689867419015852822353203259605",
+            "v_dash_cap": "48654833631737239534636011269887289728828210337491895024736269927151523321090248891020416757651701981236745646054539743809152288080131152099586693517362168004846447973161981047594825367848496858762497169902290468981888465280876427881405155040817725987463010222897349989435211152741249174236895841348777546961333390776381781513283649064779991883858723464041520109205567529845847884698364294293597369986478796977741249072883824026899204103349202499936018859296871284949952503012057799806461789480414559195985010003088980779285380967966555469411452884252810885525832147256912161311835344266517721360433418224081074824386219725827380562209222465942133199058731602676992249040144571282997404452686415252752320469859948353",
+            "m_caps": {
+                "master_secret": "30884001143640600961677065038353166855194513466933471122481502425493615964282819507617999459106441727986234746837415864758001336418009293170578716319272026890423228072761651049921"
+            },
+            "r_caps": {}
+        },
+        "nonce": "911844480860950903820452"
+    },
+    "updated_at": "2021-01-21 14:49:05.907360Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "rev_reg_id": null,
+        "values": {
+            "timestamp": {
+                "raw": "1611240545",
+                "encoded": "1611240545"
+            },
+            "url": {
+                "raw": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png",
+                "encoded": "80266367934021922790235330181395862854409235086652740727588367096343177129556"
+            },
+            "digest": {
+                "raw": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e",
+                "encoded": "26444733873813735397987191115257659776514687365466967823438940165591221190797"
+            },
+            "name": {
+                "raw": "Screen1",
+                "encoded": "38496313829955651671273261799518983374218011273141241744676365638509980735450"
+            }
+        },
+        "signature": {
+            "p_credential": {
+                "m_2": "28697891326330176213071707770464915608612226378596566098990770661293974524914",
+                "a": "54856376850820181105197585809634652024750263446154695019054467306565393282711596721603961501018611211936987830856782338418758138582160257351528266852923282475911642756153231079088001552203389595198099604227964472110292670072733447314024551703365132658740924458690744892064801544007589232105664393775620046733875826459073716646109084898209246521715355413940918297483474047043820541682812060128144380252646669234381859781370118078583928295645770309147872195596252321375169795780934318251441517738358868146400524116994555684030485406825143656208984955338440039361751608097925904520100523304800082349778550305200311484140",
+                "e": "259344723055062059907025491480697571938277889515152306249728583105665800713306759149981690559193987143012367913206299323899696942213235956742930138008969932791303221959302686560991",
+                "v": "6212994959821799846176466042383853164888897146915629838629220476051764777864752587621552271605705314383780413782598666155729112447485333336771211968806166305790050105437617571863085390308881769199671175703508691818214904794195977383938582417382034942386367897093437063588907990099152516274512188083226005128358244149334677261055909309914458863889734965530109785207067898893741860310963707421377881179784516238244016799719916696161004157287509577965333080792027348424242922758504167238503730413355946783045883255386049785754295845570066459021574820041306505146485310646138525374039145107896727494736351044677416265690942109353181631716166424760971536245957717478795283361030317809217281948685320658864853794011084831757181327755694816183032547293983482784736155455030557510075031180201800623515723225578479635740494346300"
+            },
+            "r_credential": null
+        },
+        "signature_correctness_proof": {
+            "se": "18289456982215441858880987546062742545927697748792431955902203606053131831756792839272453344594141882821106075345716588132224995695400150914504216951517054174116538292472370571670391675122386549418483009120631130447137159592995492040203250560066352275206231024328652751906875263997942521413037756456270622486965975520559336855385310535345822168199255809867386584531397688797292603041662961446401836400824847286873999841981487677628620792365703115561976619419720071593890381069358146760960377977828813503982343464729251159781255379832414457996639672010432314067465383548894534259942011950982075387684219088747701195336",
+            "c": "90874120303322471941225731507047059008698348504808634626582462592912014206853"
+        },
+        "rev_reg": null,
+        "witness": null
+    },
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "credential_issued"
+}VSW        | 2021-01-21 14:49:05,934 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "b58a8f2f-a848-49ca-b371-8add5ca525af", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential", "timestamp": 1611240545.934083, "str_time": "2021-01-21 14:49:05.934083", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8060"}
+
+VSW        | 2021-01-21 14:49:05,934 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "b58a8f2f-a848-49ca-b371-8add5ca525af", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/issue-credential", "timestamp": 1611240545.9343364, "str_time": "2021-01-21 14:49:05.934336", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8060"}
+VSW        | Credential: state = credential_issued, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        | Credential: state = credential_issued, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+
+EVENT: Response from POST /issue-credential/records/4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca/issue received:
+{
+    "credential_request": {
+        "prover_did": "7NsT7423Wkw9XJwaWe4t9S",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "blinded_ms": {
+            "u": "164038960712729944934904059304514263629686170750823932034657871563239449310602898936105495557825722606895231625924408413578749803272622297507080316637505596521912734942403768385889621141034261416155864044621041210746754565019152207396093161437845150198487923491008617374897451475140229697588993609378662038048822194794850986736349110217370106853896905291888324633782531020748924276589974537702306044591703960907834612598156287150707469221931422693620202148463766050770945301479497961567346229686067562854688598585981290741574345074528224853064738612666629623169276372500220821524708217186481500785312104705906263322",
+            "ur": null,
+            "hidden_attributes": [
+                "master_secret"
+            ],
+            "committed_attributes": {}
+        },
+        "blinded_ms_correctness_proof": {
+            "c": "1431469804994105721575873424061025086246353231689867419015852822353203259605",
+            "v_dash_cap": "48654833631737239534636011269887289728828210337491895024736269927151523321090248891020416757651701981236745646054539743809152288080131152099586693517362168004846447973161981047594825367848496858762497169902290468981888465280876427881405155040817725987463010222897349989435211152741249174236895841348777546961333390776381781513283649064779991883858723464041520109205567529845847884698364294293597369986478796977741249072883824026899204103349202499936018859296871284949952503012057799806461789480414559195985010003088980779285380967966555469411452884252810885525832147256912161311835344266517721360433418224081074824386219725827380562209222465942133199058731602676992249040144571282997404452686415252752320469859948353",
+            "m_caps": {
+                "master_secret": "30884001143640600961677065038353166855194513466933471122481502425493615964282819507617999459106441727986234746837415864758001336418009293170578716319272026890423228072761651049921"
+            },
+            "r_caps": {}
+        },
+        "nonce": "911844480860950903820452"
+    },
+    "updated_at": "2021-01-21 14:49:05.907360Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "rev_reg_id": null,
+        "values": {
+            "timestamp": {
+                "raw": "1611240545",
+                "encoded": "1611240545"
+            },
+            "url": {
+                "raw": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png",
+                "encoded": "80266367934021922790235330181395862854409235086652740727588367096343177129556"
+            },
+            "digest": {
+                "raw": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e",
+                "encoded": "26444733873813735397987191115257659776514687365466967823438940165591221190797"
+            },
+            "name": {
+                "raw": "Screen1",
+                "encoded": "38496313829955651671273261799518983374218011273141241744676365638509980735450"
+            }
+        },
+        "signature": {
+            "p_credential": {
+                "m_2": "28697891326330176213071707770464915608612226378596566098990770661293974524914",
+                "a": "54856376850820181105197585809634652024750263446154695019054467306565393282711596721603961501018611211936987830856782338418758138582160257351528266852923282475911642756153231079088001552203389595198099604227964472110292670072733447314024551703365132658740924458690744892064801544007589232105664393775620046733875826459073716646109084898209246521715355413940918297483474047043820541682812060128144380252646669234381859781370118078583928295645770309147872195596252321375169795780934318251441517738358868146400524116994555684030485406825143656208984955338440039361751608097925904520100523304800082349778550305200311484140",
+                "e": "259344723055062059907025491480697571938277889515152306249728583105665800713306759149981690559193987143012367913206299323899696942213235956742930138008969932791303221959302686560991",
+                "v": "6212994959821799846176466042383853164888897146915629838629220476051764777864752587621552271605705314383780413782598666155729112447485333336771211968806166305790050105437617571863085390308881769199671175703508691818214904794195977383938582417382034942386367897093437063588907990099152516274512188083226005128358244149334677261055909309914458863889734965530109785207067898893741860310963707421377881179784516238244016799719916696161004157287509577965333080792027348424242922758504167238503730413355946783045883255386049785754295845570066459021574820041306505146485310646138525374039145107896727494736351044677416265690942109353181631716166424760971536245957717478795283361030317809217281948685320658864853794011084831757181327755694816183032547293983482784736155455030557510075031180201800623515723225578479635740494346300"
+            },
+            "r_credential": null
+        },
+        "signature_correctness_proof": {
+            "se": "18289456982215441858880987546062742545927697748792431955902203606053131831756792839272453344594141882821106075345716588132224995695400150914504216951517054174116538292472370571670391675122386549418483009120631130447137159592995492040203250560066352275206231024328652751906875263997942521413037756456270622486965975520559336855385310535345822168199255809867386584531397688797292603041662961446401836400824847286873999841981487677628620792365703115561976619419720071593890381069358146760960377977828813503982343464729251159781255379832414457996639672010432314067465383548894534259942011950982075387684219088747701195336",
+            "c": "90874120303322471941225731507047059008698348504808634626582462592912014206853"
+        },
+        "rev_reg": null,
+        "witness": null
+    },
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "credential_issued"
+}
+VSW        | 2021-01-21 14:49:06,043 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "71860daf-f9c8-44ca-bdc9-2b1af023a0b9", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/ack", "timestamp": 1611240546.043119, "str_time": "2021-01-21 14:49:06.043119", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "Dispatcher.handle_message.START"}
+VSW        | 2021-01-21 14:49:06,068 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "71860daf-f9c8-44ca-bdc9-2b1af023a0b9", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/ack", "timestamp": 1611240546.0686102, "str_time": "2021-01-21 14:49:06.068610", "handler": "VSW.Agent.trace", "ellapsed_milli": 23, "outcome": "CredentialAckHandler.handle.END"}
+
+EVENT: Agent called controller webhook: handle_issue_credential with payload:
+{
+    "credential_request": {
+        "prover_did": "7NsT7423Wkw9XJwaWe4t9S",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "blinded_ms": {
+            "u": "164038960712729944934904059304514263629686170750823932034657871563239449310602898936105495557825722606895231625924408413578749803272622297507080316637505596521912734942403768385889621141034261416155864044621041210746754565019152207396093161437845150198487923491008617374897451475140229697588993609378662038048822194794850986736349110217370106853896905291888324633782531020748924276589974537702306044591703960907834612598156287150707469221931422693620202148463766050770945301479497961567346229686067562854688598585981290741574345074528224853064738612666629623169276372500220821524708217186481500785312104705906263322",
+            "ur": null,
+            "hidden_attributes": [
+                "master_secret"
+            ],
+            "committed_attributes": {}
+        },
+        "blinded_ms_correctness_proof": {
+            "c": "1431469804994105721575873424061025086246353231689867419015852822353203259605",
+            "v_dash_cap": "48654833631737239534636011269887289728828210337491895024736269927151523321090248891020416757651701981236745646054539743809152288080131152099586693517362168004846447973161981047594825367848496858762497169902290468981888465280876427881405155040817725987463010222897349989435211152741249174236895841348777546961333390776381781513283649064779991883858723464041520109205567529845847884698364294293597369986478796977741249072883824026899204103349202499936018859296871284949952503012057799806461789480414559195985010003088980779285380967966555469411452884252810885525832147256912161311835344266517721360433418224081074824386219725827380562209222465942133199058731602676992249040144571282997404452686415252752320469859948353",
+            "m_caps": {
+                "master_secret": "30884001143640600961677065038353166855194513466933471122481502425493615964282819507617999459106441727986234746837415864758001336418009293170578716319272026890423228072761651049921"
+            },
+            "r_caps": {}
+        },
+        "nonce": "911844480860950903820452"
+    },
+    "updated_at": "2021-01-21 14:49:06.048111Z",
+    "initiator": "self",
+    "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+    "created_at": "2021-01-21 14:49:05.583593Z",
+    "connection_id": "56bf6d04-f542-4a74-b7fc-af4ec60abce3",
+    "credential": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "rev_reg_id": null,
+        "values": {
+            "timestamp": {
+                "raw": "1611240545",
+                "encoded": "1611240545"
+            },
+            "url": {
+                "raw": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png",
+                "encoded": "80266367934021922790235330181395862854409235086652740727588367096343177129556"
+            },
+            "digest": {
+                "raw": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e",
+                "encoded": "26444733873813735397987191115257659776514687365466967823438940165591221190797"
+            },
+            "name": {
+                "raw": "Screen1",
+                "encoded": "38496313829955651671273261799518983374218011273141241744676365638509980735450"
+            }
+        },
+        "signature": {
+            "p_credential": {
+                "m_2": "28697891326330176213071707770464915608612226378596566098990770661293974524914",
+                "a": "54856376850820181105197585809634652024750263446154695019054467306565393282711596721603961501018611211936987830856782338418758138582160257351528266852923282475911642756153231079088001552203389595198099604227964472110292670072733447314024551703365132658740924458690744892064801544007589232105664393775620046733875826459073716646109084898209246521715355413940918297483474047043820541682812060128144380252646669234381859781370118078583928295645770309147872195596252321375169795780934318251441517738358868146400524116994555684030485406825143656208984955338440039361751608097925904520100523304800082349778550305200311484140",
+                "e": "259344723055062059907025491480697571938277889515152306249728583105665800713306759149981690559193987143012367913206299323899696942213235956742930138008969932791303221959302686560991",
+                "v": "6212994959821799846176466042383853164888897146915629838629220476051764777864752587621552271605705314383780413782598666155729112447485333336771211968806166305790050105437617571863085390308881769199671175703508691818214904794195977383938582417382034942386367897093437063588907990099152516274512188083226005128358244149334677261055909309914458863889734965530109785207067898893741860310963707421377881179784516238244016799719916696161004157287509577965333080792027348424242922758504167238503730413355946783045883255386049785754295845570066459021574820041306505146485310646138525374039145107896727494736351044677416265690942109353181631716166424760971536245957717478795283361030317809217281948685320658864853794011084831757181327755694816183032547293983482784736155455030557510075031180201800623515723225578479635740494346300"
+            },
+            "r_credential": null
+        },
+        "signature_correctness_proof": {
+            "se": "18289456982215441858880987546062742545927697748792431955902203606053131831756792839272453344594141882821106075345716588132224995695400150914504216951517054174116538292472370571670391675122386549418483009120631130447137159592995492040203250560066352275206231024328652751906875263997942521413037756456270622486965975520559336855385310535345822168199255809867386584531397688797292603041662961446401836400824847286873999841981487677628620792365703115561976619419720071593890381069358146760960377977828813503982343464729251159781255379832414457996639672010432314067465383548894534259942011950982075387684219088747701195336",
+            "c": "90874120303322471941225731507047059008698348504808634626582462592912014206853"
+        },
+        "rev_reg": null,
+        "witness": null
+    },
+    "credential_exchange_id": "4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca",
+    "auto_remove": false,
+    "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "a58ff56f-ecd3-4784-99f0-f11cb274562c",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "credential_proposal": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        }
+    },
+    "trace": false,
+    "credential_definition_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+    "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+    "auto_offer": false,
+    "credential_offer": {
+        "schema_id": "D1SisLp186a5cwvoJHRNxk:2:vsw schema:0.2",
+        "cred_def_id": "AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "key_correctness_proof": {
+            "c": "11808547883472377854799968331266829499662272017598090114908738922672987487911",
+            "xz_cap": "171098528295190537262187127573710459392766091654174641920062487379777642582767653292722137693704862810653060460098347710885830577084454228738013929657927614026740511306385085684142341797916367174485224310967897502798592477434704350082480617740704457558547639573903875249751484829852808188994963551538072673225774519019603131061249572852183769663822090798858502741518520357895980581587461266423827732601023912636745206277878321725993914615794985100747476353033316660126407211806835338920398255780517347048588791797770599420657904025371418676586155390163170087369035215920903130511406662056008201093887069468035460881395223402300365933780701296747805131668790171744293010440457303191474345268077",
+            "xr_cap": [
+                [
+                    "url",
+                    "6956376124258387708324991490898170454194348291499640441061099421125033742202979625533201516803576963239021770244847619035314657259896244910754546136075239529148879468507616331265945480601710038515110529801728584810944548793426138438412169707948193957296255900851062818447967743826694231892164874130904753967294187738260218067226642925934870163955485420592851609872439585957565580546049685799574507059591181357825009658549388460446819859034192207066655686290008399001418982449617865936791494605973725893632157818413729020877759765987799305268891312942324179070920420187351345655669631367066913548222270543918476088745258192125736253526107929370625122417092901636337809913873562719799462260661"
+                ],
+                [
+                    "digest",
+                    "234131637670226786874422356782680053686414006802011481380805409886562094765717575216042958863484299570786297742457047377698455821532394926397340385757974136176186224336424536425605483500021823678882291081481066475252434108366966513675437471250509981415397609810578101642221811019378707756108933800163057769600323564602997368374962073771649031517773534077535470106582553217544308287935727299035251075376142026845479656168316879842126041565756104759483453402349605731416130671988838151302999167957322921675325712231361452032153804826764744484256776265092566310718323523847019005311384539973158183629028375503712722444736654944187932311191357029779038116787365337135632526912439402355795455397345"
+                ],
+                [
+                    "timestamp",
+                    "1136888793150756758820791716715565885886715212504847390326241389604331657904877485560931809982074494829621799631340074479742545802225112498802273400264349255968930874130439954754245319180591777342582206834225285202735099183076766542360292732244242878533331349097422390895685372049750263376427200843689143425878739765043000797543754041016942578254670286336405783045493344831272804074577539024579869850409846420768830248231549467679340783705053910613551375005861367806915720790298473586649544807928215556864631805027694845393153583952636932336603374006957288207979140392296618568522655712444349692448511941846877805092985231295476358740692763547382047271375144929897151732525529856422771016229"
+                ],
+                [
+                    "master_secret",
+                    "19289696346878705582502679478472161929603758116017277472822455064831781163065598556814786193035889080089594735740422520756112857542084085319705834869252873789525127879975807289977104282089098222433590150786784674797936265838651388431961932200095447530780703063217119466534069474920019957442895080328910277798377378083636631304165792770244795720942128927756070743176575351674087817861733463229065793383942242418108596844339425888626525611313904973328111721237796981317076132795446847470490117532506184715909107912163645114389870658612312567489397246549828247539602391011962626774837875716676344040244242452991838841427762201793434137624813389405505815890340938974077033015638615916445812835697"
+                ],
+                [
+                    "name",
+                    "155226170267632823923005052302343305834348721026695968009401923389036350855386673154059523066202285613373321916780547135328023952476331568129866059740259581349406413368775962136124858035107195829342447706831929591593931471549685964308969649035204135756732401392414896583615611455067506139686271591750527134324839966222545423759265638827141072056110297351667756001587848044280161217551835471215665436297559198958486288355759804890940089783298396995842688032843131406907413011208028998106741103485171374011972098629223164778019014119807432547206061636177128547904019601067936264056865381958070662485985168421260130233821476429554042985584552755201658503407437825592521678194067798811386976720309"
+                ]
+            ]
+        },
+        "nonce": "113747211821315549089758"
+    },
+    "credential_offer_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/offer-credential",
+        "@id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80",
+        "~thread": {},
+        "credential_preview": {
+            "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+            "attributes": [
+                {
+                    "name": "name",
+                    "value": "Screen1"
+                },
+                {
+                    "name": "url",
+                    "value": "https://raw.githubusercontent.com/tervoju/urobo_mapper/master/src/images/Screenshot%20from%202020-05-15%2013-44-06.png"
+                },
+                {
+                    "name": "digest",
+                    "value": "80da584735d94d5948bc5b450e6fdb837afae78d2a27682d095e9b9b576cf95e"
+                },
+                {
+                    "name": "timestamp",
+                    "value": "1611240545"
+                }
+            ]
+        },
+        "comment": "Offer on cred def id AYiFytkWzEk26AKYtesZeP:3:CL:203:default",
+        "offers~attach": [
+            {
+                "@id": "libindy-cred-offer-0",
+                "mime-type": "application/json",
+                "data": {
+                    "base64": "eyJzY2hlbWFfaWQiOiAiRDFTaXNMcDE4NmE1Y3d2b0pIUk54azoyOnZzdyBzY2hlbWE6MC4yIiwgImNyZWRfZGVmX2lkIjogIkFZaUZ5dGtXekVrMjZBS1l0ZXNaZVA6MzpDTDoyMDM6ZGVmYXVsdCIsICJrZXlfY29ycmVjdG5lc3NfcHJvb2YiOiB7ImMiOiAiMTE4MDg1NDc4ODM0NzIzNzc4NTQ3OTk5NjgzMzEyNjY4Mjk0OTk2NjIyNzIwMTc1OTgwOTAxMTQ5MDg3Mzg5MjI2NzI5ODc0ODc5MTEiLCAieHpfY2FwIjogIjE3MTA5ODUyODI5NTE5MDUzNzI2MjE4NzEyNzU3MzcxMDQ1OTM5Mjc2NjA5MTY1NDE3NDY0MTkyMDA2MjQ4NzM3OTc3NzY0MjU4Mjc2NzY1MzI5MjcyMjEzNzY5MzcwNDg2MjgxMDY1MzA2MDQ2MDA5ODM0NzcxMDg4NTgzMDU3NzA4NDQ1NDIyODczODAxMzkyOTY1NzkyNzYxNDAyNjc0MDUxMTMwNjM4NTA4NTY4NDE0MjM0MTc5NzkxNjM2NzE3NDQ4NTIyNDMxMDk2Nzg5NzUwMjc5ODU5MjQ3NzQzNDcwNDM1MDA4MjQ4MDYxNzc0MDcwNDQ1NzU1ODU0NzYzOTU3MzkwMzg3NTI0OTc1MTQ4NDgyOTg1MjgwODE4ODk5NDk2MzU1MTUzODA3MjY3MzIyNTc3NDUxOTAxOTYwMzEzMTA2MTI0OTU3Mjg1MjE4Mzc2OTY2MzgyMjA5MDc5ODg1ODUwMjc0MTUxODUyMDM1Nzg5NTk4MDU4MTU4NzQ2MTI2NjQyMzgyNzczMjYwMTAyMzkxMjYzNjc0NTIwNjI3Nzg3ODMyMTcyNTk5MzkxNDYxNTc5NDk4NTEwMDc0NzQ3NjM1MzAzMzMxNjY2MDEyNjQwNzIxMTgwNjgzNTMzODkyMDM5ODI1NTc4MDUxNzM0NzA0ODU4ODc5MTc5Nzc3MDU5OTQyMDY1NzkwNDAyNTM3MTQxODY3NjU4NjE1NTM5MDE2MzE3MDA4NzM2OTAzNTIxNTkyMDkwMzEzMDUxMTQwNjY2MjA1NjAwODIwMTA5Mzg4NzA2OTQ2ODAzNTQ2MDg4MTM5NTIyMzQwMjMwMDM2NTkzMzc4MDcwMTI5Njc0NzgwNTEzMTY2ODc5MDE3MTc0NDI5MzAxMDQ0MDQ1NzMwMzE5MTQ3NDM0NTI2ODA3NyIsICJ4cl9jYXAiOiBbWyJ1cmwiLCAiNjk1NjM3NjEyNDI1ODM4NzcwODMyNDk5MTQ5MDg5ODE3MDQ1NDE5NDM0ODI5MTQ5OTY0MDQ0MTA2MTA5OTQyMTEyNTAzMzc0MjIwMjk3OTYyNTUzMzIwMTUxNjgwMzU3Njk2MzIzOTAyMTc3MDI0NDg0NzYxOTAzNTMxNDY1NzI1OTg5NjI0NDkxMDc1NDU0NjEzNjA3NTIzOTUyOTE0ODg3OTQ2ODUwNzYxNjMzMTI2NTk0NTQ4MDYwMTcxMDAzODUxNTExMDUyOTgwMTcyODU4NDgxMDk0NDU0ODc5MzQyNjEzODQzODQxMjE2OTcwNzk0ODE5Mzk1NzI5NjI1NTkwMDg1MTA2MjgxODQ0Nzk2Nzc0MzgyNjY5NDIzMTg5MjE2NDg3NDEzMDkwNDc1Mzk2NzI5NDE4NzczODI2MDIxODA2NzIyNjY0MjkyNTkzNDg3MDE2Mzk1NTQ4NTQyMDU5Mjg1MTYwOTg3MjQzOTU4NTk1NzU2NTU4MDU0NjA0OTY4NTc5OTU3NDUwNzA1OTU5MTE4MTM1NzgyNTAwOTY1ODU0OTM4ODQ2MDQ0NjgxOTg1OTAzNDE5MjIwNzA2NjY1NTY4NjI5MDAwODM5OTAwMTQxODk4MjQ0OTYxNzg2NTkzNjc5MTQ5NDYwNTk3MzcyNTg5MzYzMjE1NzgxODQxMzcyOTAyMDg3Nzc1OTc2NTk4Nzc5OTMwNTI2ODg5MTMxMjk0MjMyNDE3OTA3MDkyMDQyMDE4NzM1MTM0NTY1NTY2OTYzMTM2NzA2NjkxMzU0ODIyMjI3MDU0MzkxODQ3NjA4ODc0NTI1ODE5MjEyNTczNjI1MzUyNjEwNzkyOTM3MDYyNTEyMjQxNzA5MjkwMTYzNjMzNzgwOTkxMzg3MzU2MjcxOTc5OTQ2MjI2MDY2MSJdLCBbImRpZ2VzdCIsICIyMzQxMzE2Mzc2NzAyMjY3ODY4NzQ0MjIzNTY3ODI2ODAwNTM2ODY0MTQwMDY4MDIwMTE0ODEzODA4MDU0MDk4ODY1NjIwOTQ3NjU3MTc1NzUyMTYwNDI5NTg4NjM0ODQyOTk1NzA3ODYyOTc3NDI0NTcwNDczNzc2OTg0NTU4MjE1MzIzOTQ5MjYzOTczNDAzODU3NTc5NzQxMzYxNzYxODYyMjQzMzY0MjQ1MzY0MjU2MDU0ODM1MDAwMjE4MjM2Nzg4ODIyOTEwODE0ODEwNjY0NzUyNTI0MzQxMDgzNjY5NjY1MTM2NzU0Mzc0NzEyNTA1MDk5ODE0MTUzOTc2MDk4MTA1NzgxMDE2NDIyMjE4MTEwMTkzNzg3MDc3NTYxMDg5MzM4MDAxNjMwNTc3Njk2MDAzMjM1NjQ2MDI5OTczNjgzNzQ5NjIwNzM3NzE2NDkwMzE1MTc3NzM1MzQwNzc1MzU0NzAxMDY1ODI1NTMyMTc1NDQzMDgyODc5MzU3MjcyOTkwMzUyNTEwNzUzNzYxNDIwMjY4NDU0Nzk2NTYxNjgzMTY4Nzk4NDIxMjYwNDE1NjU3NTYxMDQ3NTk0ODM0NTM0MDIzNDk2MDU3MzE0MTYxMzA2NzE5ODg4MzgxNTEzMDI5OTkxNjc5NTczMjI5MjE2NzUzMjU3MTIyMzEzNjE0NTIwMzIxNTM4MDQ4MjY3NjQ3NDQ0ODQyNTY3NzYyNjUwOTI1NjYzMTA3MTgzMjM1MjM4NDcwMTkwMDUzMTEzODQ1Mzk5NzMxNTgxODM2MjkwMjgzNzU1MDM3MTI3MjI0NDQ3MzY2NTQ5NDQxODc5MzIzMTExOTEzNTcwMjk3NzkwMzgxMTY3ODczNjUzMzcxMzU2MzI1MjY5MTI0Mzk0MDIzNTU3OTU0NTUzOTczNDUiXSwgWyJ0aW1lc3RhbXAiLCAiMTEzNjg4ODc5MzE1MDc1Njc1ODgyMDc5MTcxNjcxNTU2NTg4NTg4NjcxNTIxMjUwNDg0NzM5MDMyNjI0MTM4OTYwNDMzMTY1NzkwNDg3NzQ4NTU2MDkzMTgwOTk4MjA3NDQ5NDgyOTYyMTc5OTYzMTM0MDA3NDQ3OTc0MjU0NTgwMjIyNTExMjQ5ODgwMjI3MzQwMDI2NDM0OTI1NTk2ODkzMDg3NDEzMDQzOTk1NDc1NDI0NTMxOTE4MDU5MTc3NzM0MjU4MjIwNjgzNDIyNTI4NTIwMjczNTA5OTE4MzA3Njc2NjU0MjM2MDI5MjczMjI0NDI0Mjg3ODUzMzMzMTM0OTA5NzQyMjM5MDg5NTY4NTM3MjA0OTc1MDI2MzM3NjQyNzIwMDg0MzY4OTE0MzQyNTg3ODczOTc2NTA0MzAwMDc5NzU0Mzc1NDA0MTAxNjk0MjU3ODI1NDY3MDI4NjMzNjQwNTc4MzA0NTQ5MzM0NDgzMTI3MjgwNDA3NDU3NzUzOTAyNDU3OTg2OTg1MDQwOTg0NjQyMDc2ODgzMDI0ODIzMTU0OTQ2NzY3OTM0MDc4MzcwNTA1MzkxMDYxMzU1MTM3NTAwNTg2MTM2NzgwNjkxNTcyMDc5MDI5ODQ3MzU4NjY0OTU0NDgwNzkyODIxNTU1Njg2NDYzMTgwNTAyNzY5NDg0NTM5MzE1MzU4Mzk1MjYzNjkzMjMzNjYwMzM3NDAwNjk1NzI4ODIwNzk3OTE0MDM5MjI5NjYxODU2ODUyMjY1NTcxMjQ0NDM0OTY5MjQ0ODUxMTk0MTg0Njg3NzgwNTA5Mjk4NTIzMTI5NTQ3NjM1ODc0MDY5Mjc2MzU0NzM4MjA0NzI3MTM3NTE0NDkyOTg5NzE1MTczMjUyNTUyOTg1NjQyMjc3MTAxNjIyOSJdLCBbIm1hc3Rlcl9zZWNyZXQiLCAiMTkyODk2OTYzNDY4Nzg3MDU1ODI1MDI2Nzk0Nzg0NzIxNjE5Mjk2MDM3NTgxMTYwMTcyNzc0NzI4MjI0NTUwNjQ4MzE3ODExNjMwNjU1OTg1NTY4MTQ3ODYxOTMwMzU4ODkwODAwODk1OTQ3MzU3NDA0MjI1MjA3NTYxMTI4NTc1NDIwODQwODUzMTk3MDU4MzQ4NjkyNTI4NzM3ODk1MjUxMjc4Nzk5NzU4MDcyODk5NzcxMDQyODIwODkwOTgyMjI0MzM1OTAxNTA3ODY3ODQ2NzQ3OTc5MzYyNjU4Mzg2NTEzODg0MzE5NjE5MzIyMDAwOTU0NDc1MzA3ODA3MDMwNjMyMTcxMTk0NjY1MzQwNjk0NzQ5MjAwMTk5NTc0NDI4OTUwODAzMjg5MTAyNzc3OTgzNzczNzgwODM2MzY2MzEzMDQxNjU3OTI3NzAyNDQ3OTU3MjA5NDIxMjg5Mjc3NTYwNzA3NDMxNzY1NzUzNTE2NzQwODc4MTc4NjE3MzM0NjMyMjkwNjU3OTMzODM5NDIyNDI0MTgxMDg1OTY4NDQzMzk0MjU4ODg2MjY1MjU2MTEzMTM5MDQ5NzMzMjgxMTE3MjEyMzc3OTY5ODEzMTcwNzYxMzI3OTU0NDY4NDc0NzA0OTAxMTc1MzI1MDYxODQ3MTU5MDkxMDc5MTIxNjM2NDUxMTQzODk4NzA2NTg2MTIzMTI1Njc0ODkzOTcyNDY1NDk4MjgyNDc1Mzk2MDIzOTEwMTE5NjI2MjY3NzQ4Mzc4NzU3MTY2NzYzNDQwNDAyNDQyNDI0NTI5OTE4Mzg4NDE0Mjc3NjIyMDE3OTM0MzQxMzc2MjQ4MTMzODk0MDU1MDU4MTU4OTAzNDA5Mzg5NzQwNzcwMzMwMTU2Mzg2MTU5MTY0NDU4MTI4MzU2OTciXSwgWyJuYW1lIiwgIjE1NTIyNjE3MDI2NzYzMjgyMzkyMzAwNTA1MjMwMjM0MzMwNTgzNDM0ODcyMTAyNjY5NTk2ODAwOTQwMTkyMzM4OTAzNjM1MDg1NTM4NjY3MzE1NDA1OTUyMzA2NjIwMjI4NTYxMzM3MzMyMTkxNjc4MDU0NzEzNTMyODAyMzk1MjQ3NjMzMTU2ODEyOTg2NjA1OTc0MDI1OTU4MTM0OTQwNjQxMzM2ODc3NTk2MjEzNjEyNDg1ODAzNTEwNzE5NTgyOTM0MjQ0NzcwNjgzMTkyOTU5MTU5MzkzMTQ3MTU0OTY4NTk2NDMwODk2OTY0OTAzNTIwNDEzNTc1NjczMjQwMTM5MjQxNDg5NjU4MzYxNTYxMTQ1NTA2NzUwNjEzOTY4NjI3MTU5MTc1MDUyNzEzNDMyNDgzOTk2NjIyMjU0NTQyMzc1OTI2NTYzODgyNzE0MTA3MjA1NjExMDI5NzM1MTY2Nzc1NjAwMTU4Nzg0ODA0NDI4MDE2MTIxNzU1MTgzNTQ3MTIxNTY2NTQzNjI5NzU1OTE5ODk1ODQ4NjI4ODM1NTc1OTgwNDg5MDk0MDA4OTc4MzI5ODM5Njk5NTg0MjY4ODAzMjg0MzEzMTQwNjkwNzQxMzAxMTIwODAyODk5ODEwNjc0MTEwMzQ4NTE3MTM3NDAxMTk3MjA5ODYyOTIyMzE2NDc3ODAxOTAxNDExOTgwNzQzMjU0NzIwNjA2MTYzNjE3NzEyODU0NzkwNDAxOTYwMTA2NzkzNjI2NDA1Njg2NTM4MTk1ODA3MDY2MjQ4NTk4NTE2ODQyMTI2MDEzMDIzMzgyMTQ3NjQyOTU1NDA0Mjk4NTU4NDU1Mjc1NTIwMTY1ODUwMzQwNzQzNzgyNTU5MjUyMTY3ODE5NDA2Nzc5ODgxMTM4Njk3NjcyMDMwOSJdXX0sICJub25jZSI6ICIxMTM3NDcyMTE4MjEzMTU1NDkwODk3NTgifQ=="
+                }
+            }
+        ]
+    },
+    "state": "credential_acked"
+}VSW        | 2021-01-21 14:49:06,068 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "71860daf-f9c8-44ca-bdc9-2b1af023a0b9", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/ack", "timestamp": 1611240546.06881, "str_time": "2021-01-21 14:49:06.068810", "handler": "VSW.Agent.trace", "ellapsed_milli": 26, "outcome": "Dispatcher.handle_message.END"}
+
+VSW        | Credential: state = credential_acked, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        | Credential: state = credential_acked, credential_exchange_id = 4e79937c-2fd5-4cfb-9e38-3cca00c1d9ca
+VSW        |
+VSW        | 2021-01-21 14:49:06,069 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240546.069045, "str_time": "2021-01-21 14:49:06.069045", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.START.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | Shutting down
+VSW        | 2021-01-21 14:49:06,069 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "69ad107f-a7fb-40e2-9dd1-753ed4d58f80", "traced_type": "dict:Exchange", "timestamp": 1611240546.0692449, "str_time": "2021-01-21 14:49:06.069245", "handler": "VSW.Agent.trace", "ellapsed_milli": 0, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.3:8052/webhooks/topic/issue_credential/"}
+VSW        | Exited with return code 0

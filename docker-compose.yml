@@ -1,12 +1,13 @@
 version: '3'
 services:
-  postgres:
-    image: postgres:latest
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_PASSWORD: 'postgres'
+  # postgres off currently
+  #postgres:
+  #  image: postgres:latest
+  #  restart: always
+  #  ports:
+  #    - 5432:5432
+  #  environment:
+  #    POSTGRES_PASSWORD: 'postgres'
   #  volumes:
   #    - database_data:/var/lib/postgresql/data
   vsw-repo:
@@ -17,7 +18,7 @@ services:
     environment:
       - DOCKERHOST=${DOCKERHOST}
       - LEDGER_URL=${LEDGER_URL}
-      - GENESIS_FILE=${LEDGER_FILE} 
+      - GENESIS_FILE=${GENESIS_FILE} 
       - IP=${IP}
       - PGHOST= 'postgres'
       - PGDATABASE= 'postgres'
@@ -30,8 +31,8 @@ services:
     restart: always
     cap_drop:
       - ALL
-    links:
-      - postgres
+    #links:
+    #  - postgres
 volumes:
   database_data:
      driver: local

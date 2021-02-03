@@ -69,7 +69,7 @@ minimum steps to get vsw-repo ready for publish
 	other:
 	seed saving
 	public DID saving
-	schema saving
+	schema saving - id
 	restart with same seed -> DID registered -> schema 
 	aca-py provision usage should be studied 		
 	

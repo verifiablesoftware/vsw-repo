@@ -1,0 +1,9 @@
+{
+    "schema_body": {
+    "name": "software-certificate",
+    "version": "0.1",
+    "attributes": ["software-did", "software-name", "software-version", "developer-did"]
+    },
+    "revocation_registry_size": 100,
+    "support_revocation": false
+}
