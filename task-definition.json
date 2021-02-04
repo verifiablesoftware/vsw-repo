@@ -11,9 +11,9 @@
 			"essential": true,
  			"portMappings": [
 				{
-					"containerPort": "7062",
+					"containerPort": "8062",
 					"protocol": "tcp",
-					"hostPort": "8062"
+					"hostPort": "7062"
 				}
 			]
 		}
