@@ -3,8 +3,7 @@ import { Router } from "express";
 import axios from "axios";
 import fs from "fs";
 
-const DEFAULT_INTERNAL_HOST =
-  `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
 const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
 const HTTP_PORT = 8060;
 const ADMIN_PORT = 8061;
