@@ -54,7 +54,7 @@ def parse_args(args):
 
 
 def get_credential_definition(vsw_config):
-    local = f'http://{vsw_config.get("admin_host")}:{str(vsw_config.get("admin_port"))}/credential-definitions'
+    local = f'http://{vsw_config.get("admin_host")}:{str(vsw_config.get("admin_port"))}/credential-definitions/created'
     response = requests.get(local)
     res = json.loads(response.text)
     console.log(res)

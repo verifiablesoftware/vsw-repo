@@ -25,8 +25,6 @@ class ConfigReader:
 
 def get_vsw_repo():
     config_path = Path(__file__).parent.joinpath("conf/vsw.ini").resolve()
-    logger.info(config_path)
     config_reader = ConfigReader(config_path)
     config_dict = config_reader.to_dict('vsw-repo')
-    logger.info(config_dict)
     return config_dict
