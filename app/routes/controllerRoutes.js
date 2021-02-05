@@ -2,29 +2,16 @@ import express from "express";
 import { Router } from "express";
 import axios from "axios";
 import fs from "fs";
+import keys from '../config/keys.js'
 
-const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
-const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
-const HTTP_PORT = 8060;
-const ADMIN_PORT = 8061;
-const WEBHOOK_PORT = 8062;
-const ADMIN_URL = `http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}`;
-//  controller routes
+const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
+
+// should not be needed
 let REPO_DID = "";
-let seed = "my_seed_00000000000000000000" + getRandomInt(9999);
+let seed = keys.seed;
 let schema_definition;
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
-function load_schema_definition() {
-  let rawdata = fs.readFileSync("resources/schema.definition.json");
-  schema_definition = JSON.parse(rawdata);
-  console.log(schema_definition);
-  return schema_definition;
-}
-
+//  controller routes
 let controllerRoutes = Router()
   .get("/invitation", async (req, response) => {
     var config = {
@@ -159,7 +146,7 @@ let controllerRoutes = Router()
         response.status(500).send(error).end();
       });
   })
- 
+  // not needed 
   .get("/create_public_did", async (req, response) => {
     var data = " ";
     var config = {
@@ -188,7 +175,7 @@ let controllerRoutes = Router()
         response.status(500).send(error).end();
       });
   })
-
+  // not needed 
   .get("/create_invitation", async (req, response) => {
     var data = " ";
     var config = {
@@ -208,7 +195,6 @@ let controllerRoutes = Router()
         //inv.serviceEndpoint = "http://192.168.65.3:8060"
         invitation = JSON.stringify(inv);
         var config = { repo: REPO_DID, invitation };
-
         //console.log(config)
         response.json(config);
       })
@@ -218,7 +204,7 @@ let controllerRoutes = Router()
       });
   })
   
-
+  // not needed - schema is already created
   .get("/create_schema", async (req, response) => {
     schema_definition = load_schema_definition();
     let schema_body = schema_definition.schema_body;
@@ -253,5 +239,16 @@ let controllerRoutes = Router()
         console.error(error);
       });
   });
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  
+  function load_schema_definition() {
+    let rawdata = fs.readFileSync("resources/schema.definition.json");
+    schema_definition = JSON.parse(rawdata);
+    console.log(schema_definition);
+    return schema_definition;
+  }
 
 export default controllerRoutes;

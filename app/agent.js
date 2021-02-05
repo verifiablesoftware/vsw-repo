@@ -6,7 +6,8 @@ import { hostname } from "os";
 import keys from "./config/keys.js";
 import variables from "./variables.js";
 
-// agent.py
+// agent
+// http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
 const DEFAULT_INTERNAL_HOST =`${process.env.DOCKERHOST}` || hostname.docker.internal;
 const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
 
@@ -100,7 +101,7 @@ function get_agent_args() {
 
   if (process.env.GENESIS_FILE != "") {
     // uses wallet information - no seed needed
-    //  seed = keys.seed;
+    // fixed genesis file 
     genesis_file = "/home/indy/resources/genesis.txt";
     args = {
       "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
