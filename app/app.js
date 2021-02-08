@@ -38,8 +38,17 @@ app.use('/webhooks', webhooks);
 
 
 app.get("/", (req, res) => {
-  console.log(`keys : ${keys.WEBHOOK_2}`)
-  res.status(200).end();
+  console.log(`ADMIN_PORT : ${process.env.ADMIN_PORT}`)
+  console.log(`WEBHOOK_PORT : ${process.env.WEBHOOK_PORT}`)
+  console.log(`HTTP_PORT : ${process.env.HTTP_PORT}`)
+
+  var settings = {
+    "DOCKERHOST": `${process.env.DOCKERHOST}`,
+    "EXTERAL_HOST": `${process.env.EXTERNAL_HOST}`,
+    "ADMIN_PORT" : `${process.env.ADMIN_PORT}`,
+    "WEBHOOK_PORT" : `${process.env.WEBHOOK_PORT}`,
+    "HTTP_PORT" : `${process.env.HTTP_PORT}`}
+  res.json(settings);
 });
 
 

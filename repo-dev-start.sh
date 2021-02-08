@@ -9,7 +9,7 @@ export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host eclipse/che-ip)
 ## we will use aws could leger for now, 
 ##if you want use your local you can comment out below set LEDGER_URL code
 
-if [ -z $1 ]; then
+#if [ -z $1 ]; then
     export LEDGER_URL="http://3.235.31.203:9000"
 elif [ $1 = "--LEDGER_URL" ]; then
     export LEDGER_URL=$2  ## you can provide your own ledger url

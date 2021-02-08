@@ -9,7 +9,7 @@ requires AWS account and ECR and EC2
 
 ### 1 -- Build docker image
 
-create docker image e.g.
+create docker image e.g. in this case vsw-repo
 
 ```
 docker build -t vsw-repo .
@@ -76,6 +76,10 @@ use e.g. following command
 
 ```
 docker run -d --name vsw-repo-dev -p 8060:8060 -p 8061:8061 -p 8062:8062 971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev
+```
+or
+```
+docker run -d --name repo-dev-3 -e "EXTERNAL_HOST=ec2-3-138-121-46.us-east-2.compute.amazonaws.com"  -p 8060:8060 -p 8061:8061 -p 8062:8062 971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev:0.1
 ```
 
 #### aws web address for service

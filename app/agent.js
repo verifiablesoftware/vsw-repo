@@ -6,52 +6,31 @@ import { hostname } from "os";
 import keys from "./config/keys.js";
 import variables from "./variables.js";
 
-// agent
+// agent in AWS
 // http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
-const DEFAULT_INTERNAL_HOST =`${process.env.DOCKERHOST}` || hostname.docker.internal;
-const DEFAULT_EXTERNAL_HOST = DEFAULT_INTERNAL_HOST;
+// 
+const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
+
+const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
+const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
+const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
 
 const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
 const GENESIS_FILE = process.env.GENESIS_FILE;
 
-const HTTP_PORT = 8060;
-const ADMIN_PORT = 8061;
-const WEBHOOK_PORT = 8062;
-
-// TODO: probably not needed in this form. possibly for permanent storage
+// TODO: probably not needed 
 const storage = new Storage();
-
-//TODO: will need move variable into class
 let schema_id = 0;
 let credential_definition_id = 0;
 let schema_definition;
-
 let did = variables.did;
-let seed; // = variables.seed;
-
-var genesis_file = "home/indy/resources/genesis.txt";
+//TODO: for postgres if needed
 var storage_config = keys.storage_config;
 var postgres_config = keys.postgres_config;
 
-/**
- * start the agent options 1,2 or 3
- *  credential
- *   1. registered to ledger or do it have public DID
- *      ledger registration ?
- *      get DID, seed from db and other info from the database
- *      load schema
- *   2. not registered - first time
- *      reset database content if exists from previous starts
- *
- *      1. start repo agent
- *      2. check if there is public DID
- *      3. create seed, get the registration did from ledger with seed - if there is no public DID
- *
- *      load schema
- *
- *   3. reset all and restart
- *      same as 2 but intentionally
- **/
+let seed; // = variables.seed;
+var genesis_file = "home/indy/resources/genesis.txt";
 
 /* starting agent from scratch */
 async function start() {
@@ -101,7 +80,6 @@ function get_agent_args() {
 
   if (process.env.GENESIS_FILE != "") {
     // uses wallet information - no seed needed
-    // fixed genesis file 
     genesis_file = "/home/indy/resources/genesis.txt";
     args = {
       "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
@@ -110,9 +88,9 @@ function get_agent_args() {
       "--auto-respond-messages": "",
       "--preserve-exchange-records": "",
       "--admin-insecure-mode": "",
-      "--inbound-transport": "http 0.0.0.0 8060",
+      "--inbound-transport": `http 0.0.0.0 ${HTTP_PORT}`,
       "--outbound-transport": "http ",
-      "--admin": "0.0.0.0 8061",
+      "--admin": `0.0.0.0 ${ADMIN_PORT}`,
       "--log-level": "debug",
       "--genesis-file": genesis_file,
       "--webhook-url": `http://${DEFAULT_EXTERNAL_HOST}:${WEBHOOK_PORT}/webhooks`,
@@ -132,6 +110,7 @@ function get_agent_args() {
       //"--seed": seed,
     };
   } 
+  // only relevant for local development  
   else {
     args = {
       "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
@@ -145,7 +124,7 @@ function get_agent_args() {
       "--admin": "0.0.0.0 8061",
       "--log-level": "debug",
       "--genesis-url": `${LEDGER_URL}/genesis`,
-      "--webhook-url": `http://${DEFAULT_EXTERNAL_HOST}:${WEBHOOK_PORT}/webhooks`,
+      "--webhook-url": `http://${DEFAULT_INTERNAL_HOST}:${WEBHOOK_PORT}/webhooks`,
       "--wallet-type": "indy", //use indy wallet for now
       "--wallet-name": wallet_name,
       "--wallet-key": wallet_name,
