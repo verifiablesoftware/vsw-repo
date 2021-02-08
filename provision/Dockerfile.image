@@ -17,10 +17,12 @@ ENV WALLET_NAME = ""
 ENV WALLET_KEY = ""
 
 # endpoint if in AWS
-# // http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
+#   http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
+# local
+#   http://192.168.65.3:8060
 
 ENTRYPOINT aca-py provision \
---endpoint http://192.168.65.3:8060 \
+--endpoint ${ENDPOINT} \
 --genesis-file "/home/indy/resources/genesis.txt" \
 --wallet-type indy \
 --wallet-name Repo.Agent \

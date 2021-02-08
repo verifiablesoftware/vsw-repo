@@ -13,6 +13,7 @@ services:
       - DOCKERHOST=${DOCKERHOST}
       - IP=${IP}
       - SEED=${SEED}
+      - ENDPOINT=${ENDPOINT}
     ports:
       - "8061:8061"
       - "8060:8060"
