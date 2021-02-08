@@ -26,21 +26,6 @@ chmod +x start.sh
 ./start.sh
 ```
 
-### for use AWS cloud ledger run 
-```
-./start.sh remote
-```
-
-### for use local ledger run 
-```
-./start.sh local
-```
-
-### for connect to publish ledger run 
-```
-./start.sh --LEDGER_URL  ${LEDGER_URL}
-```
-
 
 # AWS
 
@@ -49,9 +34,13 @@ URL is something like this:
 
 http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
 
-this has to be given to aca-py when starting the acent 
+this has to be given to docker image when starting the vsw-repo docker image
 
 ## publish
+
+a separate AWS_README.md is available for how this image can be build, pushed to private registry and 
+run in AWS EC2.
+
 
 minimum steps to get vsw-repo ready for publish
 
