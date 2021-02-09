@@ -1,0 +1,30 @@
+{
+	"requiresCompatibilities": [
+		"EC2"
+	],
+	"inferenceAccelerators": [],
+	"containerDefinitions": [
+		{
+			"name": "vsw-repo",
+			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
+			"resourceRequirements": null,
+			"essential": true,
+ 			"portMappings": [
+				{
+					"containerPort": "8062",
+					"protocol": "tcp",
+					"hostPort": "7062"
+				}
+			]
+		}
+	],
+	"volumes": [],
+	"networkMode": "bridge",
+	"memory": "512",
+	"cpu": "256",
+	"executionRoleArn": "arn:aws:iam::865098096924:role/ecsTaskExecutionRole",
+	"family": "vsw-repo-task-definition",
+	"taskRoleArn": "",
+	"placementConstraints": [],
+	"pidMode": null
+}
