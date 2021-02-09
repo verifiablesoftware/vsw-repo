@@ -8,14 +8,7 @@
 			"name": "vsw-repo",
 			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
 			"resourceRequirements": null,
-			"essential": true,
- 			"portMappings": [
-				{
-					"containerPort": "8062",
-					"protocol": "tcp",
-					"hostPort": "7062"
-				}
-			]
+			"essential": true
 		}
 	],
 	"volumes": [],
