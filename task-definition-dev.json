@@ -1,0 +1,23 @@
+{
+	"requiresCompatibilities": [
+		"EC2"
+	],
+	"inferenceAccelerators": [],
+	"containerDefinitions": [
+		{
+			"name": "vsw-repo",
+			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev-repository/vsw-repo:latest",
+			"resourceRequirements": null,
+			"essential": true
+		}
+	],
+	"volumes": [],
+	"networkMode": "bridge",
+	"memory": "512",
+	"cpu": "256",
+	"executionRoleArn": "arn:aws:iam::865098096924:role/ecsTaskExecutionRole",
+	"family": "vsw-repo-task-definition-dev",
+	"taskRoleArn": "",
+	"placementConstraints": [],
+	"pidMode": null
+}
