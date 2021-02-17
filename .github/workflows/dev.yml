@@ -1,5 +1,5 @@
 ---
-name: Deploy master branch
+name: Deploy devel branch
 on:
   push:
     branches-ignore:
