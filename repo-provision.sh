@@ -12,7 +12,7 @@ echo "start ${PROVISION}"
 echo "SEED ${SEED}"
 echo "ENDPOINT ${ENDPOINT}"
 
-if [ !"$(docker ps -qq -f name=${PROISION})" ]; then
+if [ !"$(docker ps -qq -f name=${PROVISION})" ]; then
     echo "container ${PROVISION} is running, delete it first"
     docker rm ${PROVISION} -f
 fi

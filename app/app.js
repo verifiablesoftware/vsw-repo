@@ -12,27 +12,15 @@ app.get('env');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-//--------------------------------------------------------------------------
-// postgres routes
-//---------------------------------------------------------------------------
 import dbRouter from './queries.js';
 app.use('/dbRoutes', dbRouter);
 
-//--------------------------------------------------------------------------
-// utils routes
-//---------------------------------------------------------------------------
 import adminRouter from './routes/adminRoutes.js'
 app.use('/adminRoutes', adminRouter);
 
-//----------------------------------------------------------------------------
-// Controller endpoints
-//----------------------------------------------------------------------------
 import controllerRouter from './routes/controllerRoutes.js'
 app.use('/controllerRoutes', controllerRouter);
 
-// ----------------------------------------------------------------------------
-// webhook routes - start
-// ----------------------------------------------------------------------------
 import webhooks from './routes/webhookRoutes.js'
 app.use('/webhooks', webhooks);
 
@@ -47,7 +35,10 @@ app.get("/", (req, res) => {
     "EXTERAL_HOST": `${process.env.EXTERNAL_HOST}`,
     "ADMIN_PORT" : `${process.env.ADMIN_PORT}`,
     "WEBHOOK_PORT" : `${process.env.WEBHOOK_PORT}`,
-    "HTTP_PORT" : `${process.env.HTTP_PORT}`}
+    "HTTP_PORT" : `${process.env.HTTP_PORT}`,
+    "GENESIS_FILE": `${process.env.GENESIS_FILE}`,
+    "WALLET_NAME": `${process.env.WALLET_NAME}`,
+  }
   res.json(settings);
 });
 
