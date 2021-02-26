@@ -13,8 +13,7 @@ let webhooks = Router()
   .post("/topic/:topicid", async (req, res) => {
     var topicId = req.params.topicid;
     console.log(`/webhooks/topic handler  ${topicId}`);
-    console.log(`/webhooks/topic body  ${req.body}`);
-
+  
     // handle register use case
     if (topicId == "connections") {
       var message = req.body;
@@ -31,19 +30,18 @@ let webhooks = Router()
 
     // this should handle publish
     else if (topicId == "issue_credential") {
-      console.log(req);
+      //console.log(req);
       var message = req.body;
       var state = message.state;
       let credential_exchange_id = "";
-      console.log(`webhook - handle issue credential - state ${state}`);
+      
       if (message.credential_exchange_id) {
         credential_exchange_id = message.credential_exchange_id;
       }
 
       if (state == "offer_received") {
-        console.log(
-          "webhook - handle_issue_credential - After receiving credential offer, send credential request"
-        );
+        console.log("webhook - handle_issue_credential - After receiving credential offer, send credential request");
+        console.log(`webhook - handle issue credential - state ${state}`);
         if (message.credential_exchange_id) {
           credential_exchange_id = message.credential_exchange_id;
           axios
@@ -51,18 +49,29 @@ let webhooks = Router()
               `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
             )
             .then((response) => {
-              console.log(response);
+              console.log(`webhook - send credential request /issue-credential/records/${credential_exchange_id}/send-request - response received ${response.status}`)
+              res.status(200).end();
             })
             .catch((error) => {
               console.error(error.response);
-              response.status(500).send(error).end();
             });
-        } else {
+        } 
+        else {
           console.log("webhook - handle_issue_credential - missing credential_exchange_id");
-          response_issue.status(200).end();
+          res.status(200).end();
         }
-      } 
+      }
+      else if (state == "request_sent") {
+        console.log(`webhook - handle issue credential - state ${state}`);
+        res.status(200).end();
+      }
+      else if (state == "credential_received") {
+        console.log(`webhook - handle issue credential - state ${state}`);
+        res.status(200).end();
+      }
+
       else if (state == "credential_acked") {
+        console.log(`webhook - handle issue credential - state ${state}`);
         let credential_id = '';
         if (message.credential_id) {
           credential_id = message.credential_id;
@@ -76,11 +85,11 @@ let webhooks = Router()
           axios(config)
           .then((response) => {
             console.log(`${ADMIN_URL}/credential/${credential_id}`);
-            //console.log(JSON.stringify(reponse.body));
+            res.status(200).end();
           })
           .catch((error) => {
             console.error(error.response);
-            response.status(500).send(error).end();
+            //response.status(500).send(error).end();
           });
         }
         else {
@@ -90,14 +99,15 @@ let webhooks = Router()
           res.status(200).end();
         }
       } 
+     
       else {
-        console.log("webhook - issue credential - no state");
+        console.log(`webhook - handle issue credential - state ? ${state}`);
         res.status(200).end();
       }
     }
     // no handler
     else {
-      console.log(`/topic handler - no handler  ${topicId}`);
+      console.log(`/topic handler - no handler for this topic  ${topicId}`);
       res.status(200).end();
     }
   });

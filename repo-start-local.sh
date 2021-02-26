@@ -2,6 +2,7 @@
 
 # TODO - file or url genesis 
 # if separate docker container for agent not needed that many configs here
+# change genesis file path
  
 export EXTERNAL_HOST="0.0.0.0"
 export HTTP_PORT="8060" 
