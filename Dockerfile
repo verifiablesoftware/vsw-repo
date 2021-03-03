@@ -1,6 +1,6 @@
 FROM verifiablesoftware/aries-cloudagent-python:latest
 
-ENV PORT=8042
+ENV PORT=8062
 
 ENV HTTP_PORT=8060
 ENV ADMIN_PORT=8061
