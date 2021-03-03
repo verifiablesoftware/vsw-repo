@@ -5,20 +5,47 @@ For details about the verifiable software ecosystem, see
 [vsw](https://github.com/verifiablesoftware/vsw) which contains the `vsw`
 command line tool.
 
-## run vsw repo locally
+## generic
+
+in order to not to get confused with the ports
+
+local ports: 8050-8052
+docker ports: 8040-8042
+aws ports: 8060-8062
+
+
+## Run vsw repo locally
 
 provision the aca-py agent and create wallet
 
 ```
 ./repo-provision-local.sh
 ```
-start the aca-py agent 
+when running this, user will be prompted
+``` 
+Created new wallet
+Wallet type: indy
+Wallet name: Repo.Local
+Created new public DID: G5ZDvU1Y7hTKnQR6xnCtM5
+Verkey: 9DfRgQevqRE2HAC9n4T7whfLBet8yTa6jUWzXZMWrBcp
+
+----
+
+Please select an option:
+ 1. Accept the transaction author agreement and store the acceptance in the wallet
+ 2. Acceptance of the transaction author agreement is on file in my organization
+ X. Skip the transaction author agreement   
+ ```
+ and before accepting, register DID and Verkey to [sovrin buildernet](https://selfserve.sovrin.org/) 
+
+
+After provisioning, start the aca-py agent 
 ```
 ./repo-start-local.sh
 ```
 
 
-## run inside the docker
+## Run inside the docker
 
 build docker image(s) (requires wallet to start the vsw-repo) 
 
@@ -29,7 +56,7 @@ docker build -t vsw-repo .
 
 ## run vsw-repo container with docker
 ```
-docker run -d --name vsw-repo -p 8060:8060 -p 8061:8061 -p 8062:8062  vsw-repo
+docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
 ```
 
 ## shell script
