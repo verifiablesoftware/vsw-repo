@@ -1,11 +1,14 @@
 FROM verifiablesoftware/aries-cloudagent-python:latest
 
-ENV PORT=8062
+ENV PORT=8042
 
 ENV HTTP_PORT=8060
 ENV ADMIN_PORT=8061
 ENV WEBHOOK_PORT=8062
 ENV EXTERNAL_HOST=""
+ENV WALLET_KEY="Repo.Local"
+ENV WALLET_NAME="Repo.Local"
+ENV GENESIS_FILE="/home/indy/resources/genesis.txt"
 
 EXPOSE $PORT
 

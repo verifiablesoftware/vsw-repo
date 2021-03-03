@@ -77,6 +77,7 @@ function get_agent_args() {
     "--auto-accept-requests": "",
     "--auto-store-credential": "",
     "--log-file": "logs/agent.logs",
+    "--public-invites": ""
     //"--wallet-storage-type": "postgres_storage",
     //"--wallet-storage-config": storage_config,
     //"--wallet-storage-creds": postgres_config,

@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 
 const app = express()
 import { Router } from 'express'
-const port = process.env.PORT || 8062
+const port = process.env.WEBHOOK_PORT || 8062
 
 import keys from './config/keys.js'
 

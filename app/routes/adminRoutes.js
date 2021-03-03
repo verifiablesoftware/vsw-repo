@@ -2,7 +2,15 @@
 import express from 'express'
 import { Router } from 'express'
 import axios from "axios";
-const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
+
+const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
+
+const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
+const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
+const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
+
+const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
 
 // healts
 // check did

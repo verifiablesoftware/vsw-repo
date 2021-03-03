@@ -4,7 +4,14 @@ import axios from "axios";
 import fs from "fs";
 import keys from '../config/keys.js'
 
-const ADMIN_URL = process.env.REPO_ADMIN || "http://localhost:8061";
+const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
+
+const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
+const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
+const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
+
+const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
 
 // should not be needed
 let REPO_DID = "";
@@ -72,7 +79,6 @@ let controllerRoutes = Router()
     axios(config)
       .then(function (res) {
         console.log("controller - connections");
-        //console.log(JSON.stringify(res.data.results))
         response.json(res.data.results);
       })
       .catch((error) => {
@@ -80,7 +86,7 @@ let controllerRoutes = Router()
         response.status(500).send(error).end();
       });
   })
-   // sw packages from db?
+  // sw packages from db
   .get("/schemas/:id", async (req, response) => {
     var data = " ";
     var schema_id = req.params.id;
