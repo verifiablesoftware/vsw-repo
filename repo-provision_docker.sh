@@ -4,7 +4,7 @@
 PROVISION=vsw-repo-provision
 
 export SEED=my_seed_100000000000000000007777 
-export ENDPOINT=http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com:8060 
+export ENDPOINT=http://0.0.0.0:8040 
 export WALLET_NAME=Repo.Agent
 export WALLET_KEY=Repo.Agent 
 
@@ -21,6 +21,6 @@ cd ./provision
 
 docker build -f ./Dockerfile.image -t ${PROVISION} .
 
-docker run -e "SEED_VAL=my_seed_100000000000000000007777" -e "ENDPOINT=http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com:8060" -it ${PROVISION}
+docker run -e "SEED_VAL=my_seed_100000000000000000007777" -e "ENDPOINT=http://3.141.51.96:8070" -it ${PROVISION}
 
 cd ..
