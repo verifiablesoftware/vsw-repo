@@ -8,7 +8,7 @@ requests ~= 2.23.0
 pretend >= 1.0.9
 aries-cloudagent-vsw==0.0.1
 python3-indy>=1.11.1<2
-aiohttp~=3.6.2
+aiohttp~=3.7.4
 aiohttp-apispec==2.2.1
 aiohttp-cors~=0.7.0
 apispec~=3.3.0
