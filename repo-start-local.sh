@@ -5,9 +5,9 @@
 # change genesis file path
  
 export EXTERNAL_HOST="0.0.0.0"
-export HTTP_PORT="8050" 
-export ADMIN_PORT="8051"
-export WEBHOOK_PORT="8052" 
+export HTTP_PORT="8060" 
+export ADMIN_PORT="8061"
+export WEBHOOK_PORT="8062" 
 export GENESIS_FILE="/home/jte/git/vsw-repo/app/resources/genesis.txt"
 export WALLET_KEY="Repo.Local "
 export WALLET_NAME="Repo.Local "
