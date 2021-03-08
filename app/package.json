@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-server": "../repo-start-local.sh",
+    "test": " newman run ./test/test.localhost.json"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,11 @@
     "json": "^10.0.0",
     "pg": "^8.5.1",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.3",
+    "mocha": "^8.3.1",
+    "should": "^13.2.3",
+    "supertest": "^6.1.3"
   }
 }

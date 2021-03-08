@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "121f31cd-449e-40aa-8cd9-fe93597394f8",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "vsw-repo root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vsw-repo health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062",
+					"path": "adminRoutes/health"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vsw-repo did",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062",
+					"path": "/controllerRoutes/did"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vsw-repo packages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062",
+					"path": "/controllerRoutes/packages"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vsw-repo connections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062",
+					"path": "/controllerRoutes/connections"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vsw-repo connections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8062/",
+					"host": [
+						"localhost"
+					],
+					"port": "8062",
+					"path": "/schemas/mz3AM33qVp54eYYJRp9tw%3A2%3Asoftware-certificate%3A0.2"
+				}
+			},
+			"response": []
+		}
+	]
+}
