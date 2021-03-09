@@ -103,6 +103,9 @@ function get_agent_args() {
       "--auto-accept-invites": "",
       "--auto-accept-requests": "",
       "--auto-store-credential": "",
+      "--auto-respond-credential-offer": "",
+      "--auto-respond-presentation-request": "",
+      "--auto-verify-presentation": ""
       //"--log-file": "logs/agent.logs",
       //"--wallet-storage-type": "postgres_storage",
       //"--wallet-storage-config": storage_config,
@@ -134,6 +137,9 @@ function get_agent_args() {
       "--auto-accept-invites": "",
       "--auto-accept-requests": "",
       "--auto-store-credential": "",
+      "--auto-respond-credential-offer": "",
+      "--auto-respond-presentation-request": "",
+      "--auto-verify-presentation": ""
       //"--log-file": "logs/agent.logs",
       //"--wallet-storage-type": "postgres_storage",
       //"--wallet-storage-config": storage_config,
