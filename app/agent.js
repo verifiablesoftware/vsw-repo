@@ -71,19 +71,19 @@ function get_agent_args() {
     "--trace-target": "log",
     "--trace-tag": "acapy.events",
     "--trace-label": "Repo.Agent.trace",
-    "--auto-accept-invites": "",
-    "--auto-accept-requests": "",
     "--auto-ping-connection": "",
     "--auto-respond-messages": "",
-    //"--auto-respond-credential-proposal":"", // HAVE TO VERIFY THIS
-    //"--auto-respond-credential-offer":"", // HAVE TO VERIFY THIS
-    //"--auto-respond-credential-request":"", // HAVE TO VERIFY THIS
+    "--auto-accept-invites": "",
+    "--auto-accept-requests": "",
     "--auto-store-credential": "",
-    //"--auto-respond-presentation-request":"", // HAVE TO VERIFY THIS
-    //"--auto-verify-presentation":"", // HAVE TO VERIFY THIS
-    //"--auto-respond-presentation-proposal":"", // HAVE TO VERIFY THIS
+    "--auto-respond-credential-offer":"", // HAVE TO VERIFY THIS
+    "--auto-respond-credential-proposal":"", // HAVE TO VERIFY THIS
+    "--auto-respond-credential-request":"", // HAVE TO VERIFY THIS
+    "--auto-verify-presentation":"", // HAVE TO VERIFY THIS
+    "--auto-respond-presentation-request":"", // HAVE TO VERIFY THIS
+    "--auto-respond-presentation-proposal":"", // HAVE TO VERIFY THIS
     "--log-file": "logs/agent.logs",
-    //"--public-invites": "" // HAVE TO VERIFY THIS
+    "--public-invites": "" // HAVE TO VERIFY THIS
     //"--wallet-storage-type": "postgres_storage", // CURRENTLY USING SQLITE
     //"--wallet-storage-config": storage_config, // CURRENTLY USING SQLITE
     //"--wallet-storage-creds": postgres_config, // CURRENTLY USING SQLITE
