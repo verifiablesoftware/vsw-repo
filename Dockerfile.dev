@@ -18,7 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
 COPY package.json ./
 COPY package-lock.json ./
 COPY ./app/ ./
-COPY ./app/resources/.indy_client ./.indy_client
+COPY ./app/resources/.indy_dev ./.indy_client
 
 RUN touch logs/agent.logs
 RUN npm install && npm cache clean --force
