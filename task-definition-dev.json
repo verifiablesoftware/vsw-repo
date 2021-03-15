@@ -8,10 +8,26 @@
 			"name": "vsw-repo",
 			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev-repository/vsw-repo:latest",
 			"resourceRequirements": null,
-			"essential": true
+			"essential": true,
+			"mountPoints": [
+				{
+					"sourceVolume": "wallet-dev",
+					"containerPath": "/home/indy/.indy_client",
+					"readOnly": false
+				}
+			]
 		}
 	],
-	"volumes": [],
+	"volumes": [
+		{
+			"name": "wallet-dev",
+			"dockerVolumeConfiguration": {
+				"scope": "shared",
+				"autoprovision": true,
+				"driver": "local"
+			}
+		}
+	],
 	"networkMode": "host",
 	"memory": "512",
 	"cpu": "256",
