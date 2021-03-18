@@ -9,9 +9,10 @@ command line tool.
 
 in order to not to get confused with the ports
 
-local ports: 8050-8052
+local ports: 8060-8062
 docker ports: 8040-8042
 aws ports: 8060-8062
+aws dev ports: 8070-8072
 
 
 ## Run vsw repo locally
