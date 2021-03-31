@@ -16,6 +16,7 @@ const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
 
 const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
 const GENESIS_FILE = `${process.env.GENESIS_FILE}`;
+const TAILS_URL = `${process.env.TAILS_URL}`;
 
 var wallet_name = `${process.env.WALLET_NAME}`
 var genesis_file = GENESIS_FILE;
@@ -83,7 +84,8 @@ function get_agent_args() {
     "--auto-respond-presentation-request":"", // HAVE TO VERIFY THIS
     "--auto-respond-presentation-proposal":"", // HAVE TO VERIFY THIS
     "--log-file": "logs/agent.logs",
-    "--public-invites": "" // HAVE TO VERIFY THIS
+    "--public-invites": "", 
+    "--tails-server-base-url":`${TAILS_URL}`
     //"--wallet-storage-type": "postgres_storage", // CURRENTLY USING SQLITE
     //"--wallet-storage-config": storage_config, // CURRENTLY USING SQLITE
     //"--wallet-storage-creds": postgres_config, // CURRENTLY USING SQLITE

@@ -11,6 +11,7 @@ export WEBHOOK_PORT="8062"
 export GENESIS_FILE="/home/jte/git/vsw-repo/app/resources/genesis.txt"
 export WALLET_KEY="Repo.Local "
 export WALLET_NAME="Repo.Local "
+export TAILS_URL="http://127.0.0.1:6543"
 
 cd ./app
 

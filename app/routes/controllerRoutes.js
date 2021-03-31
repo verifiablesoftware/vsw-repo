@@ -68,6 +68,7 @@ let controllerRoutes = Router()
         response.status(500).send(error).end();
       });
   })
+  .get("/credentials")
   .get("/connections", async (req, response) => {
     var data = " ";
     var config = {

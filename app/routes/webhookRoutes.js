@@ -48,10 +48,12 @@ let webhooks = Router()
       }
 
       if (state == "offer_received") {
-        console.log("webhook - handle_issue_credential - After receiving credential offer, send credential request");
         console.log(`webhook - handle issue credential - state ${state}`);
         if (message.credential_exchange_id) {
           credential_exchange_id = message.credential_exchange_id;
+          console.log(`webhook - credential request ${credential_exchange_id}`)
+         
+          /* this is not needed for auto response? 
           axios
             .post(
               `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
@@ -62,7 +64,8 @@ let webhooks = Router()
             })
             .catch((error) => {
               console.error(error.response);
-            });
+            });*/
+            res.status(200).end();
         } 
         else {
           console.log("webhook - handle_issue_credential - missing credential_exchange_id");
@@ -107,11 +110,22 @@ let webhooks = Router()
           res.status(200).end();
         }
       } 
+      else if (state == "proposal_sent"){
+        console.log(`webhook - handle issue credential - ${state}`);
+        res.status(200).end();
+      }
      
       else {
         console.log(`webhook - handle issue credential - state ? ${state}`);
         res.status(200).end();
       }
+    }
+    else if (topicId == "revocation_registry") {
+      let message = req.body;
+      let state = message.state;
+      let cred_def_id = message.cred_def_id;
+      console.log(`/topic handler -  ${topicId} - cred_def_id - ${cred_def_id} state - ${state}`);
+
     }
     // no handler
     else {

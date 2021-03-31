@@ -1,6 +1,7 @@
 import agent from './agent.js'
 import express from 'express'
 import bodyParser from 'body-parser'
+import logger from 'morgan';
 
 const app = express()
 import { Router } from 'express'
@@ -9,6 +10,7 @@ const port = process.env.WEBHOOK_PORT || 8062
 import keys from './config/keys.js'
 
 app.get('env');
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 

@@ -87,7 +87,7 @@ docker run -d --name repo-dev-3 -e "EXTERNAL_HOST=ec2-3-138-121-46.us-east-2.com
 when vsw-repo is running in the AWS cloud EC2
 URL is something like this:
 
-http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com/8060
+http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com:8060
 
 this has to be given to aca-py when starting the agent as parameter
 
