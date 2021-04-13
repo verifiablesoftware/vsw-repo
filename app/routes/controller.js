@@ -54,7 +54,7 @@ router.get("/connections", async (req, response) => {
  *      tags: [remove connection]
  *      parameters:
  *       - in: path
- *         name: conn_id
+ *         name: connection_id
  *         required: true
  *         type: string
  *         minimum: 
