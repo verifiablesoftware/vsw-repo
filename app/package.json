@@ -1,37 +1,22 @@
 {
-  "name": "vsw-repo",
-  "version": "0.1.0",
-  "description": "Verifiable Software repository controller",
-  "main": "index.js",
-  "type": "module",
+  "name": "trial",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "start-server": "../repo-start-local.sh",
-    "test": " newman run ./test/test.localhost.json"
+    "start": "node --trace-warnings ./bin/www",
+    "start-dev": "node --trace-warnings ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/verifiablesoftware/vsw.git",
-    "directory": "vsw-repo"
-  },
-  "author": "Futurewei Technologies",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/verifiablesoftware/vsw/issues"
-  },
-  "homepage": "https://github.com/verifiablesoftware/vsw#readme",
   "dependencies": {
-    "aws-sdk": "^2.795.0",
     "axios": "^0.21.1",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "json": "^10.0.0",
-    "pg": "^8.5.1",
-    "winston": "^3.3.3"
-  },
-  "devDependencies": {
-    "chai": "^4.3.3",
-    "mocha": "^8.3.1",
-    "should": "^13.2.3",
-    "supertest": "^6.1.3"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.7",
+    "openapi-types": "^7.2.3",
+    "pug": "^3.0.2",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   }
 }

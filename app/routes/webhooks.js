@@ -1,24 +1,14 @@
-// all the webhooks
+var express = require('express');
+var router = express.Router();
+const axios = require('axios').default;
 
-import express, { response } from "express";
-import { Router } from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
-import JSON from "json";
-
-const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
-
-const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
-const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
-
 const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
 
-let webhooks = Router()
-  .use(bodyParser.json())
-  // webhooks
-  .post("/topic/:topicid", async (req, res) => {
+/* POST webhooks  */
+
+router.post('/topic/:topicid', async (req, res) => {
     var topicId = req.params.topicid;
     console.log(`/webhooks/topic handler  ${topicId}`);
   
@@ -132,10 +122,6 @@ let webhooks = Router()
       console.log(`/topic handler - no handler for this topic  ${topicId}`);
       res.status(200).end();
     }
-  });
+});
 
-// ------------------------------------------------------------------
-// webhook
-// -----------------------------------------------------------------
-
-export default webhooks;
+module.exports = router;

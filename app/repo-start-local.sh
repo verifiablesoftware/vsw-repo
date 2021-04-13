@@ -13,6 +13,5 @@ export WALLET_KEY="Repo.Local "
 export WALLET_NAME="Repo.Local "
 export TAILS_URL="http://127.0.0.1:6543"
 
-cd ./app
 
-node ./app.js
+npm run start-dev

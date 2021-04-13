@@ -1,13 +1,10 @@
-import { exec } from "child_process";
-import { hostname } from "os";
-import keys from "./config/keys.js";
-import Storage from "./storage.js";
+const { spawn } = require('child_process');
+let exec =  require('child_process').exec, agent;
+const os  = require('os');
+const axios = require('axios').default;
 
-import variables from "./variables.js";
-import axios from "axios";
-import fs from "fs";
 
-const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || hostname.docker.internal;
+const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || os.hostname().docker.internal;
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 
 const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
@@ -21,36 +18,11 @@ const TAILS_URL = `${process.env.TAILS_URL}`;
 var wallet_name = `${process.env.WALLET_NAME}`
 var genesis_file = GENESIS_FILE;
 
-const storage = new Storage();
-var storage_config = keys.storage_config;
-var postgres_config = keys.postgres_config;
-
 /*  starting agent */
 async function start() {
   await start_agent();
 }
 
-/* start the aca-py agent - wait for 10s to let agent startup. */
-async function start_agent() {
-  console.log("Starting agent");
-  console.log(get_agent_args());
-  let agent = exec("aca-py start " + get_agent_args(),
-    function (error, stdout, stderr) {
-      if (error) {
-        console.log(error.stack);
-        console.log("Error code: " + error.code);
-        console.log("Signal received: " + error.signal);
-      }
-    }
-  );
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => resolve(agent), 10000);
-  });
-
-  let result = await promise;
-  console.log("start agent completed");
-  return result;
-}
 
 /* create agent arguments */
 function get_agent_args() {
@@ -98,7 +70,29 @@ function get_agent_args() {
   return str_arg;
 }
 
+/* start the aca-py agent - wait for 10s to let agent startup. */
+async function start_agent() {
+    console.log("Starting agent");
+    console.log(get_agent_args());
+    agent = exec("aca-py start " + get_agent_args(),
+      function (error, stdout, stderr) {
+        if (error) {
+          console.log(error.stack);
+          console.log("Error code: " + error.code);
+          console.log("Signal received: " + error.signal);
+        }
+      }
+    );
+    let promise = new Promise((resolve, reject) => {
+      setTimeout(() => resolve(agent), 1000);
+    });
+  
+    let result = await promise;
+    console.log("start agent completed");
+    return result;
+  }
+  
 
-export default {
-  start_agent: start,
-};
+module.exports = {
+    start_agent
+}
