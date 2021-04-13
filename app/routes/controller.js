@@ -76,10 +76,11 @@ router.post("/remove_connection/:connection_id", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - connections");
+      console.log(`controller - connection remove - ${connection_id}`);
       response.json(res.data.results);
     })
     .catch((error) => {
+      console.log(`controller - connection remove - ${connection_id} fails`);
       console.error(error.response);
       response.status(500).send(error).end();
     });
