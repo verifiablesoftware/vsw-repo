@@ -67,7 +67,7 @@ router.get("/connections", async (req, response) => {
 */
 router.post("/remove_connection/:connection_id", async (req, response) => {
   var data = " ";
-  let connection_id = req.params.connection_id;
+  var connection_id = req.params.connection_id;
   var config = {
     method: "post",
     url: `${ADMIN_URL}/connections/${connection_id}/remove`,
