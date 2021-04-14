@@ -2,6 +2,7 @@ const { spawn } = require('child_process');
 let exec =  require('child_process').exec, agent;
 const os  = require('os');
 const axios = require('axios').default;
+const logger = require('./logger');
 
 
 const DEFAULT_INTERNAL_HOST = `${process.env.DOCKERHOST}` || os.hostname().docker.internal;
@@ -72,8 +73,8 @@ function get_agent_args() {
 
 /* start the aca-py agent - wait for 10s to let agent startup. */
 async function start_agent() {
-    console.log("Starting agent");
-    console.log(get_agent_args());
+    logger.info('Starting aca-py agent.')
+    logger.info(get_agent_args());
     agent = exec("aca-py start " + get_agent_args(),
       function (error, stdout, stderr) {
         if (error) {
@@ -88,7 +89,7 @@ async function start_agent() {
     });
   
     let result = await promise;
-    console.log("start agent completed");
+    logger.info("start aca-py agent completed");
     return result;
   }
   
