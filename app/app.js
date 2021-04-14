@@ -13,6 +13,7 @@ var webhooksRouter = require('./routes/webhooks');
 var adminRouter = require('./routes/admin');
 let controllerRouter = require('./routes/controller');
 
+global.__basedir = __dirname;
 
 const swaggerOptions = {
   swaggerDefinition: {
