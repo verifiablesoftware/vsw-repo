@@ -1,0 +1,8 @@
+00-settings
+01-always-succeed
+02-soft-fail
+This test will fail, but won't stop the execution.
+Soft fail, continue.
+03-hard-fail
+This test will fail, and will fail hard.
+Hard fail - stop.

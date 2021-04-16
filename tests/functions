@@ -1,0 +1,14 @@
+#!/bin/bash
+
+success() { echo "OK" ; exit 0 ; }
+fail() {
+	[[ "${1:-}" == "-soft" ]] && {
+		shift
+		echo "$*"
+		exit 10
+	} || {
+		echo "$*"
+		exit 11
+	}
+}
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+fail "Catastrophic failure error message"
+
+
