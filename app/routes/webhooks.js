@@ -1,26 +1,26 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios').default;
+const logger = require('../logger');
+
 
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
 const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
 
-/* POST webhooks  */
+/* VSW Repo - POST webhooks  */
 
 router.post('/topic/:topicid', async (req, res) => {
     var topicId = req.params.topicid;
-    console.log(`/webhooks/topic handler  ${topicId}`);
+    logger.info(`/webhooks/topic handler  ${topicId}`);
   
     // handle register use case
     if (topicId == "connections") {
       var message = req.body;
       if (message) {
-        console.log(
-          `webhook connection_id ${message.connection_id} connection state - ${message.state}`
-        );
+        logger.info(`webhook connection_id ${message.connection_id} connection state - ${message.state}`);
         if (message.state == "active" || message.state == "response") {
-          console.log("webhook - handle_connections - connected");
+          logger.info("webhook - handle_connections - connected");
         }
       }
       res.status(200).end();
@@ -28,7 +28,6 @@ router.post('/topic/:topicid', async (req, res) => {
 
     // this should handle publish
     else if (topicId == "issue_credential") {
-      //console.log(req);
       var message = req.body;
       var state = message.state;
       let credential_exchange_id = "";
@@ -38,12 +37,12 @@ router.post('/topic/:topicid', async (req, res) => {
       }
 
       if (state == "offer_received") {
-        console.log(`webhook - handle issue credential - state ${state}`);
+        logger.info(`webhook - handle issue credential - state ${state}`);
         if (message.credential_exchange_id) {
           credential_exchange_id = message.credential_exchange_id;
-          console.log(`webhook - credential request ${credential_exchange_id}`)
+          logger.info(`webhook - credential request ${credential_exchange_id}`)
          
-          /* this is not needed for auto response? 
+          /* removed - this is not needed for auto response setting? 
           axios
             .post(
               `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
@@ -58,25 +57,25 @@ router.post('/topic/:topicid', async (req, res) => {
             res.status(200).end();
         } 
         else {
-          console.log("webhook - handle_issue_credential - missing credential_exchange_id");
+          logger.info("webhook - handle_issue_credential - missing credential_exchange_id");
           res.status(200).end();
         }
       }
       else if (state == "request_sent") {
-        console.log(`webhook - handle issue credential - state ${state}`);
+        logger.info(`webhook - handle issue credential - state ${state}`);
         res.status(200).end();
       }
       else if (state == "credential_received") {
-        console.log(`webhook - handle issue credential - state ${state}`);
+        logger.info(`webhook - handle issue credential - state ${state}`);
         res.status(200).end();
       }
 
       else if (state == "credential_acked") {
-        console.log(`webhook - handle issue credential - state ${state}`);
+        logger.info(`webhook - handle issue credential - state ${state}`);
         let credential_id = '';
         if (message.credential_id) {
           credential_id = message.credential_id;
-          console.log("Stored credential " + credential_id + " in wallet");
+          logger.info("Stored credential " + credential_id + " in wallet");
           var data = '';
           var config = {
             method: 'get',
@@ -85,7 +84,7 @@ router.post('/topic/:topicid', async (req, res) => {
           };
           axios(config)
           .then((response) => {
-            console.log(`${ADMIN_URL}/credential/${credential_id}`);
+            logger.info(`${ADMIN_URL}/credential/${credential_id}`);
             res.status(200).end();
           })
           .catch((error) => {
@@ -94,19 +93,17 @@ router.post('/topic/:topicid', async (req, res) => {
           });
         }
         else {
-          console.log(
-            "webhook - handle_issue_credential - missing cred_id"
-          );
+          logger.info("webhook - handle_issue_credential - missing cred_id");
           res.status(200).end();
         }
       } 
       else if (state == "proposal_sent"){
-        console.log(`webhook - handle issue credential - ${state}`);
+        logger.info(`webhook - handle issue credential - ${state}`);
         res.status(200).end();
       }
      
       else {
-        console.log(`webhook - handle issue credential - state ? ${state}`);
+        logger.info(`webhook - handle issue credential - state ? ${state}`);
         res.status(200).end();
       }
     }
@@ -114,12 +111,12 @@ router.post('/topic/:topicid', async (req, res) => {
       let message = req.body;
       let state = message.state;
       let cred_def_id = message.cred_def_id;
-      console.log(`/topic handler -  ${topicId} - cred_def_id - ${cred_def_id} state - ${state}`);
+      logger.info(`webhook - /topic handler -  ${topicId} - cred_def_id - ${cred_def_id} state - ${state}`);
 
     }
     // no handler
     else {
-      console.log(`/topic handler - no handler for this topic  ${topicId}`);
+      logger.info(`webhook - /topic handler - no handler currently for this topic  ${topicId}`);
       res.status(200).end();
     }
 });

@@ -3,17 +3,19 @@ let router = express.Router();
 const axios = require('axios').default;
 const fs = require("fs");
 const keys = require('../config/keys.js');
+const logger = require('../logger');
 
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
 const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
 
-// should not be needed
+/* VSW Repo - Controller end points  */
+
+// placeholders - should not be needed as provision will handle these and these are stored in a wallet
+// 
 let REPO_DID = "";
 let seed = keys.seed;
 let schema_definition;
-
-
 
 /** 
  * @swagger
@@ -37,10 +39,11 @@ router.get("/connections", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - connections");
+      logger.info('controller - list connections');
       response.json(res.data.results);
     })
     .catch((error) => {
+      logger.info('controller - cannot get the list connections');
       console.error(error.response);
       response.status(500).send(error).end();
     });
@@ -76,11 +79,11 @@ router.post("/remove_connection/:connection_id", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log(`controller - connection remove - ${connection_id}`);
+      logger.info(`controller - remove connection - ${connection_id}`);
       response.json(res.data.results);
     })
     .catch((error) => {
-      console.log(`controller - connection remove - ${connection_id} fails`);
+      logger.info(`controller - remove connection fails - ${connection_id}`);
       console.error(error.response);
       response.status(500).send(error).end();
     });
@@ -91,7 +94,7 @@ router.post("/remove_connection/:connection_id", async (req, response) => {
  *  /controller/records/:
  *    get:
  *      summary: get simplified list of records 
- *      tags: [records]
+ *      tags: [credential records]
  *      requestBody:
  *        required: false
  *      responses:
@@ -108,12 +111,12 @@ router.get("/records", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - credential records");
+      logger.info("controller - credential records");
       let records = res.data.results;
       let simplified = [];
       let counter = 0;
       records.forEach(record => {
-        console.log(`${counter++} : ${record.credential_exchange_id}`);
+        logger.info(`controller - record -  ${counter++} : ${record.credential_exchange_id}`); 
         let details = {};
         if (record.credential !== undefined) {
           details = {
@@ -165,7 +168,7 @@ router.get("/records", async (req, response) => {
 router.post("/remove_record/:credential_exchange_id", async (req, response) => {
   let data = " ";
   let cred_ex_id = req.params.credential_exchange_id
-  console.log(`controller - remove_record - ${cred_ex_id}`);
+  logger.info(`controller - remove_record - ${cred_ex_id}`);
   let config = {
     method: "post",
     url: `${ADMIN_URL}/issue-credential/records/${cred_ex_id}/remove`,
@@ -174,11 +177,12 @@ router.post("/remove_record/:credential_exchange_id", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - removeRecord");
+      logger.info(`controller - remove_record done - ${cred_ex_id}`);
       response.json(res.data.results);
     })
     .catch((error) => {
-      console.error(error.response);
+      logger.info(`controller - remove record fails`);
+      logger.error(error.response);
       response.status(500).send(error).end();
     });
 })
@@ -205,12 +209,13 @@ router.get("/packages", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - credentials");
+      logger.info("controller - packages - credentials");
       var attrs = res.data.results;
       response.json(res.data.results);
     })
     .catch((error) => {
-      console.error(error.response);
+      logger.info("controller - packages falis");
+      logger.error(error.response);
       response.status(500).send(error).end();
     });
 })
@@ -237,17 +242,34 @@ router.get("/did", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controllerRoutes - get_public_did - respose received");
-      //console.log(JSON.stringify(res.data.results))
+      logger.infor("controller - get_public_did - respose received");
       response.json(res.data.results);
     })
     .catch((error) => {
-      console.error(error.response);
+      logger.error(error.response);
       response.status(500).send(error).end();
     });
 })
 
-// not needed
+/** 
+ * @swagger
+ *  /controller/schemas/{schema_id}:
+ *    get:
+ *      summary: Get schema
+ *      parameters:
+ *       - in: path
+ *         name: schema_id
+ *         required: true
+ *         type: string
+ *         minimum: 
+ *         description: mz3AM33qVp54eYYJRp9tw:2:software-certificate:0.1
+ *      tags: [schema by id]
+ *      requestBody:
+ *        required: false
+ *      responses:
+ *        200:
+ *          description: Success
+*/
 router.get("/schemas/:id", async (req, response) => {
   var data = " ";
   var schema_id = req.params.id;
@@ -259,16 +281,16 @@ router.get("/schemas/:id", async (req, response) => {
   };
   axios(config)
     .then(function (res) {
-      console.log("controller - schema by ID");
-      //console.log(JSON.stringify(res.data.results))
+      logger.info("controller - schema by ID");
       response.json(res.data.results);
     })
     .catch((error) => {
-      console.error(error.response);
+      logger.error(error.response);
       response.status(500).send(error).end();
     });
   response.status(200);
 })
+
 // not needed 
 router.get("/create_public_did", async (req, response) => {
   var data = " ";

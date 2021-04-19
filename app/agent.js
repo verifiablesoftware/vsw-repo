@@ -78,7 +78,8 @@ async function start_agent() {
     agent = exec("aca-py start " + get_agent_args(),
       function (error, stdout, stderr) {
         if (error) {
-          console.log(error.stack);
+          logger.info('Starting aca-py agent failed.')
+          logger.info(error.stack);
           console.log("Error code: " + error.code);
           console.log("Signal received: " + error.signal);
         }
