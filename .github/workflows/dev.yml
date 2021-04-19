@@ -55,3 +55,10 @@ jobs:
           service: vsw-service-dev
           cluster: vsw-cluster
           wait-for-service-stability: true
+
+      - name: Run test loop
+        id: run-tests
+        run: |
+          cd tests
+          ./run
+
