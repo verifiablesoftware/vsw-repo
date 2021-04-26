@@ -67,7 +67,7 @@ router.get("/health", async (req, response) => {
  * @swagger
  * /admin/repologs:
  *    get:
- *      summary: Get the aca-py agent logs
+ *      summary: Get the vsw-repo logs
  *      tags: [repologs]
  *      requestBody:
  *        required: false
