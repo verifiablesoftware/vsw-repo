@@ -112,7 +112,13 @@ router.post('/topic/:topicid', async (req, res) => {
       let state = message.state;
       let cred_def_id = message.cred_def_id;
       logger.info(`webhook - /topic handler -  ${topicId} - cred_def_id - ${cred_def_id} state - ${state}`);
-
+      res.status(200).end();
+    }
+    else if (topicId == "present_proof") {
+      let message = req.body;
+      let state = message.state;
+      logger.info(`webhook - /topic handler -  ${topicId} - ${state}`);
+      res.status(200).end();
     }
     // no handler
     else {
