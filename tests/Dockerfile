@@ -11,7 +11,8 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository "deb https://repo.sovrin.org/sdk/deb bionic stable"
 RUN apt update
 RUN apt install -y libindy
-RUN apt install curl -ycurl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt install -y curl 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt install -y nodejs
 RUN apt install -y wget
 RUN apt install -y unzip

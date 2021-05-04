@@ -1,6 +1,0 @@
-#!/bin/bash
-
-source $(dirname $0)/functions
-
-fail -soft "Soft fail error message"
-

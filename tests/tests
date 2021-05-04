@@ -17,14 +17,17 @@ for script in /root/tests/[[:digit:]][[:digit:]]-* ; do
 
 	case $r in
 		10)
-			echo WARN - soft fail, continue.
+			echo WARN: soft fail, continue.
 		;;
 		11)
-			echo ERROR - hard fail, stop.
+			echo ERROR: hard fail, stop.
 			exit 1
 		;;
+		124)
+			echo TIMEOUT: stop.
+		;;
 		*)
-			echo Error $r - stop.
+			echo Error ${r}: stop.
 			exit 1
 	esac
 done
