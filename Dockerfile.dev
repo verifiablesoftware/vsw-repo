@@ -28,3 +28,4 @@ RUN touch logs/agent.logs
 RUN npm install && npm cache clean --force
 
 CMD node --trace-warnings ./bin/www
+

@@ -1,0 +1,53 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+# create user 1
+
+USER1="user1"
+PASS1="$(pwgen)"
+
+# setup a new wallet and a wallet key, and
+# extract DID and verkey
+
+header "Setting up wallet for $USER1"
+
+RESP="$(echo $PASS1 | vsw setup -n $USER1 -p)" &
+waitfor 30 $! || fail "wallet setup failed, error $?"
+
+echo Response:
+echo
+echo "$RESP"
+
+DID1="$(echo "$RESP" | grep -e "^Created new public DID:" | cut -d " " -f 5)"
+VER1="$(echo "$RESP" | grep "^Verkey: " | cut -d " " -f 2)"
+
+echo "$USER1 DID    : $DID1"
+echo "$USER1 Verkey : $VER1"
+
+# TODO: check DID and verkey validity
+
+# register with sovrin
+
+header "Registering $USER1 with sovrin"
+
+curl \
+	--header "Content-Type: application/json" \
+	--request POST \
+	--data "{\"network\":\"buildernet\",\"did\":\"$DID1\",\"verkey\":\"$VER1\",\"paymentaddr\":\"\"}" \
+	https://selfserve.sovrin.org/nym
+
+# TODO: curl response check
+
+# run setup again
+
+header "Re-running wallet setup for $USER1"
+
+RESP="$(echo $PASS1 | vsw setup -n $USER1)" &
+waitfor 60 $! || fail "vsw re-setup timed out"
+
+echo Response:
+echo
+echo "$RESP"
+
+

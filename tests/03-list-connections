@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+# list connections
+
+header "Listing connections"
+
+vsw list -c || fail "vsw list -c failed, error $?"
+
