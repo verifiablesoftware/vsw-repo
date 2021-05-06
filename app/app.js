@@ -1,64 +1,65 @@
-import agent from './agent.js'
-import express from 'express'
-import bodyParser from 'body-parser'
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-const app = express()
-import { Router } from 'express'
-const port = process.env.PORT || 8062
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
-import keys from './config/keys.js'
+var indexRouter = require('./routes/index');
 
-app.get('env');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
+var webhooksRouter = require('./routes/webhooks');
+var adminRouter = require('./routes/admin');
+let controllerRouter = require('./routes/controller');
 
-//--------------------------------------------------------------------------
-// postgres routes
-//---------------------------------------------------------------------------
-import dbRouter from './queries.js';
-app.use('/dbRoutes', dbRouter);
+global.__basedir = __dirname;
 
-//--------------------------------------------------------------------------
-// utils routes
-//---------------------------------------------------------------------------
-import adminRouter from './routes/adminRoutes.js'
-app.use('/adminRoutes', adminRouter);
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "VSW Repo Controller API",
+      version: "0.0.1"
+    }
+  },
+  apis: ['./routes/admin.js', './routes/controller.js'],
+};
 
-//----------------------------------------------------------------------------
-// Controller endpoints
-//----------------------------------------------------------------------------
-import controllerRouter from './routes/controllerRoutes.js'
-app.use('/controllerRoutes', controllerRouter);
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
 
-// ----------------------------------------------------------------------------
-// webhook routes - start
-// ----------------------------------------------------------------------------
-import webhooks from './routes/webhookRoutes.js'
-app.use('/webhooks', webhooks);
+var app = express();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-app.get("/", (req, res) => {
-  console.log(`ADMIN_PORT : ${process.env.ADMIN_PORT}`)
-  console.log(`WEBHOOK_PORT : ${process.env.WEBHOOK_PORT}`)
-  console.log(`HTTP_PORT : ${process.env.HTTP_PORT}`)
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-  var settings = {
-    "DOCKERHOST": `${process.env.DOCKERHOST}`,
-    "EXTERAL_HOST": `${process.env.EXTERNAL_HOST}`,
-    "ADMIN_PORT" : `${process.env.ADMIN_PORT}`,
-    "WEBHOOK_PORT" : `${process.env.WEBHOOK_PORT}`,
-    "HTTP_PORT" : `${process.env.HTTP_PORT}`}
-  res.json(settings);
+app.use('/', indexRouter);
+//app.use('/users', usersRouter);
+app.use('/webhooks', webhooksRouter);
+app.use('/admin', adminRouter);
+app.use('/controller', controllerRouter);
+app.use('/apiDoc', swaggerUI.serve, swaggerUI.setup(swaggerDocs, { explorer: true }));
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
 
-//-----------------------------------------------------------------------------
-// start the repo agent
-//-----------------------------------------------------------------------------
-(async () => {
-  await agent.start_agent();
-})();
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.listen(port, () => {
-  console.log(`VSW repo listening on port ${port}!`)
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
+
+module.exports = app;

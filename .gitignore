@@ -1,4 +1,4 @@
-node_modules/**
+app/node_modules/**
 .vscode
 dist
 build
@@ -9,3 +9,4 @@ vsw_repo.egg-info
 .pytest_cache
 **/**/_pycache_/*
 logs/
+Dockerfile.local
