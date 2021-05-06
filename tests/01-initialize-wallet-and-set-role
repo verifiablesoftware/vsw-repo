@@ -15,15 +15,11 @@ header "Setting up wallet for $USER1"
 RESP="$(echo $PASS1 | vsw setup -n $USER1 -p)" &
 waitfor 30 $! || fail "wallet setup failed, error $?"
 
-echo Response:
-echo
-echo "$RESP"
-
 DID1="$(echo "$RESP" | grep -e "^Created new public DID:" | cut -d " " -f 5)"
 VER1="$(echo "$RESP" | grep "^Verkey: " | cut -d " " -f 2)"
 
-echo "$USER1 DID    : $DID1"
-echo "$USER1 Verkey : $VER1"
+[[ "${DID1:-}" != "" ]] || fail "empty DID"
+[[ "${VER1:-}" != "" ]] || fail "empty verkey"
 
 # TODO: check DID and verkey validity
 
