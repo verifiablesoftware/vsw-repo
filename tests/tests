@@ -25,6 +25,7 @@ for script in /root/tests/[[:digit:]][[:digit:]]-* ; do
 		;;
 		124)
 			echo TIMEOUT: stop.
+			exit 1
 		;;
 		*)
 			echo Error ${r}: stop.

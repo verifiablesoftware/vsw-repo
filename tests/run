@@ -1,6 +1,11 @@
 #!/bin/bash
 
-docker build -t test:0.1 .
-docker run -i test:0.1 /bin/bash -i -c /root/tests/tests
+IMG_VERSION=0.1
+VSW_VERSION=0.0.7
+
+docker build --build-arg VSW_VERSION=$VSW_VERSION -t vsw-tests:${IMG_VERSION} . || { echo "Container build failed with error $?." ; exit 1 ; }
+
+#docker run --rm -it vsw-tests:${IMG_VERSION} /bin/bash -i -c /root/tests/tests
+docker run --rm -i vsw-tests:${IMG_VERSION} /root/tests/tests
 
 exit $?
