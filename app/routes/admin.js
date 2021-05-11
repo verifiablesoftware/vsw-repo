@@ -12,6 +12,32 @@ var wallet_name = `${process.env.WALLET_NAME}`
 
 /** 
  * @swagger
+ * /admin/intro:
+ *    get:
+ *      summary: Get all connections
+ *      tags: [intro]
+ *      requestBody:
+ *        required: false
+ *      responses:
+ *        "200":
+ *          description: Success
+ */
+ router.get("/intro", async (req, res) => {
+  logger.info("/intro");
+  var data = " ";
+  var config = {
+    method: "get",
+    url: `${ADMIN_URL}/status`,
+    headers: { "Content-Type": "application/json" },
+    data: data,
+  };
+  const readmePath =  __basedir + '/readme/INTRO.html'
+  res.sendFile(readmePath);
+  
+});
+
+/** 
+ * @swagger
  * /admin/health:
  *    get:
  *      summary: Get all connections

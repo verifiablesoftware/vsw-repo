@@ -1,0 +1,62 @@
+<h1>AWS</h1>
+<p>atep-by-step instructions to get vsw-repo running in AWS
+requires AWS account and ECR and EC2</p>
+<h2>how to</h2>
+<h3>1 -- Build docker image</h3>
+<p>create docker image e.g. in this case vsw-repo</p>
+<pre><code>docker build -t vsw-repo .
+</code></pre>
+<h3>2 --  Change the tag to AWS tag</h3>
+<p>docker image has to be named this way</p>
+<pre><code>docker tag vsw-repo:latest 971700601135.dkr.ecr.us-west-2.amazonaws.com/vsw-repo:latest
+</code></pre>
+<h3>3 --  login to AWS</h3>
+<p>in linux this should work. In win WSL, it did not but this can be used later to generate password in EC2.
+user has to log to right AWS region in order this (push image to ECR) to work.</p>
+<pre><code>docker login -u AWS 971700601135.dkr.ecr.us-east-2.amazonaws.com
+</code></pre>
+<p>in WIN, used this command</p>
+<pre><code>(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin https://971700601135.dkr.ecr.us-east-2.amazonaws.com
+</code></pre>
+<h3>4 -- Push it to registry</h3>
+<p>How to push docker image to AWS private registry after docker login is ok and a suitable registry is created.
+Can be done from console or in visual studio code AWS extension if not done already</p>
+<p>https://<em>aws-region</em>.console.aws.amazon.com/ecr/repositories</p>
+<p>where <em>aws-region</em> is e.g. <em>us-west-2</em></p>
+<pre><code>docker push 971700601135.dkr.ecr.us-west-2.amazonaws.com/server2:latest
+</code></pre>
+<h3>6 -- Login to EC2</h3>
+<p>access the EC2 instance</p>
+<h3>7 -- Login to docker private registry</h3>
+<p>from the EC2 to pull right docker image</p>
+<pre><code>docker login -u AWS 971700601135.dkr.ecr.us-east-2.amazonaws.com
+</code></pre>
+<p>user is propted a password, copy/paste that from command</p>
+<pre><code>aws ecr get-login-password --region us-east-2
+</code></pre>
+<h3>8 -- Pull docker image from ECR to EC2</h3>
+<pre><code>docker pull 971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev
+</code></pre>
+<h3>9 -- run docker image in EC2</h3>
+<p>use e.g. following command</p>
+<pre><code>docker run -d --name vsw-repo-dev -p 8060:8060 -p 8061:8061 -p 8062:8062 971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev
+</code></pre>
+<p>or</p>
+<pre><code>docker run -d --name repo-dev-3 -e &quot;EXTERNAL_HOST=ec2-3-138-121-46.us-east-2.compute.amazonaws.com&quot;  -p 8060:8060 -p 8061:8061 -p 8062:8062 971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev:0.1
+</code></pre>
+<h4>aws web address for service</h4>
+<p>when vsw-repo is running in the AWS cloud EC2
+URL is something like this:</p>
+<p>http://ec2-3-138-121-46.us-east-2.compute.amazonaws.com:8060</p>
+<p>this has to be given to aca-py when starting the agent as parameter</p>
+<p>http://971700601135.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-dev</p>
+<h4>other issues</h4>
+<p>AWS console e.g.
+https://us-east-2.console.aws.amazon.com/console/home?region=us-east-2</p>
+<p>if you want to push docker image to ECR, you have to have logged in to right region.
+region can be checked by</p>
+<pre><code>aws configure
+</code></pre>
+<p>to get the password</p>
+<pre><code> aws ecr get-login-password --region us-east-2
+</code></pre>
