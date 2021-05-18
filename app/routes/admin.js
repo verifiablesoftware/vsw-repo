@@ -31,7 +31,10 @@ var wallet_name = `${process.env.WALLET_NAME}`
     headers: { "Content-Type": "application/json" },
     data: data,
   };
-  const readmePath =  __basedir + '/readme/INTRO.html'
+  let readmePath =  __basedir + '/readme/INTRO.html'
+  if (DEFAULT_EXTERNAL_HOST === "127.0.0.1")
+    readmePath =  __basedir + '/readme/INTRO_local.html'
+  console.log(DEFAULT_EXTERNAL_HOST)
   res.sendFile(readmePath);
   
 });

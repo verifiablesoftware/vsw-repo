@@ -3,46 +3,48 @@
 ## VSW-REPO API
 description of the API available in a swagger
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+)  /apiDoc/ [api](http://www.vswrepo.com:8062/apiDoc/) 
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /apiDoc/ [api](http://www.localhost:8062/apiDoc/)
 
+___
 ___
 
 ### REPO LOG FILE
-Download the VSW-Repo express server log file
+Download the VSW-REPO express server log file
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/repologs [repologs](http://www.vswrepo.com:8062/admin/repologs)
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/repologs [repologs](http://localhost:8062/admin/repologs)
 
 ### ACA-PY LOG FILE
 Download the aries agent log file
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/agentlogs [aca-py logs](http://www.vswrepo.com:8062/admin/agentlogs)
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/agentlogs  [aca-py logs](http://localhost:8062/admin/agentlogs) 
 
 ### ACA-PY WALLET content
 Download the aries aca-py wallet content (not plain text)
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/wallet [aca-py wallet](http://www.vswrepo.com:8062/admin/wallet)
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /admin/wallet [aca-py wallet](http://localhost:8062/admin/wallet)
 
 
 ### Connections 
+
 api for getting the current connections with clients
 
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /controller/connections/ [server connections](http://www.vswrepo.com:8062/controller/connections/) 
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /controller/connections [server connections](http://localhost:8062/controller/connections) 
 
 
 ### Packages
 json list of packages
 
-![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) [SW packages](http://www.vswrepo.com:8062/controller/packages)
+![#eb4947](https://via.placeholder.com/15/eb4947/000000?text=+) /controller/packages [SW packages](http://localhost:8062/controller/packages)
 
 ____
 ____
 ## VSW-REPO server 
 
-
+VSW-REPO server is running in a Docker container.
 
 VSW-REPO server is implemented using a generated a simple [Node.js](https://nodejs.org/en/) [Express](https://expressjs.com/) node server with express generator, 
-see [express generator](https://expressjs.com/en/starter/generator.html) for details. Express is ae Node.js web application framework. In cloud environment VSW-REPO server is running in a Docker container and can be manually or automatically (by github) deployed to AWS.
+see [express generator](https://expressjs.com/en/starter/generator.html) for details. Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
 
 VSW-REPO is also connected to [vsw tails server](https://github.com/bcgov/indy-tails-server) 
 
