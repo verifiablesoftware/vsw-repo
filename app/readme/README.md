@@ -5,15 +5,6 @@ For details about the verifiable software ecosystem, see
 [vsw](https://github.com/verifiablesoftware/vsw) which contains the `vsw`
 command line tool.
 
-## generic
-
-in order to not to get confused with the ports
-
-local ports: 8060-8062
-docker ports: 8040-8042
-aws ports: 8060-8062
-aws dev ports: 8070-8072
-
 
 ## Run vsw repo locally
 
@@ -27,8 +18,8 @@ when running this, user will be prompted
 Created new wallet
 Wallet type: indy
 Wallet name: Repo.Local
-Created new public DID: G5ZDvU1Y7hTKnQR6xnCtM5
-Verkey: 9DfRgQevqRE2HAC9n4T7whfLBet8yTa6jUWzXZMWrBcp
+Created new public DID: G5ZDvU1Y7hTKnQR6xXXXX
+Verkey: 9DfRgQevqRE2HAC9n4T7whfLBet8yTa6jUWzXZXXXXXX
 
 ----
 

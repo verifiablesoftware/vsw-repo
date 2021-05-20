@@ -8,6 +8,36 @@ const logger = require('../logger');
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
 const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
+var wallet_name = `${process.env.WALLET_NAME}`
+
+/** 
+ * @swagger
+ * /admin/intro:
+ *    get:
+ *      summary: Get all connections
+ *      tags: [intro]
+ *      requestBody:
+ *        required: false
+ *      responses:
+ *        "200":
+ *          description: Success
+ */
+ router.get("/intro", async (req, res) => {
+  logger.info("/intro");
+  var data = " ";
+  var config = {
+    method: "get",
+    url: `${ADMIN_URL}/status`,
+    headers: { "Content-Type": "application/json" },
+    data: data,
+  };
+  let readmePath =  __basedir + '/readme/INTRO.html'
+  if (DEFAULT_EXTERNAL_HOST === "127.0.0.1")
+    readmePath =  __basedir + '/readme/INTRO_local.html'
+  console.log(DEFAULT_EXTERNAL_HOST)
+  res.sendFile(readmePath);
+  
+});
 
 /** 
  * @swagger
@@ -79,6 +109,32 @@ router.get("/health", async (req, response) => {
   logger.info("/repologs");
   const logsPath =  __basedir + "/logs/app.logs";
   res.download(logsPath, "app.logs", (err) => {
+    if (err) {
+      res.status(500).send({
+        message: "Could not download the file. " + err,
+      });
+    }
+  });
+});
+
+/** 
+ * @swagger
+ * /admin/wallet:
+ *    get:
+ *      summary: Get the vsw-repo wallet
+ *      tags: [wallet]
+ *      requestBody:
+ *        required: false
+ *      responses:
+ *        "200":
+ *          description: Success
+ */
+ router.get("/wallet", async (req, res) => {
+  logger.info("/wallet");
+  const wallet_string = `/.indy_client/wallet/${wallet_name}/sqlite.db-wal`
+  const homeDir = require('os').homedir();
+  const walletPath = homeDir + wallet_string.split(" ").join("");
+  res.download(walletPath, "wallet.data", (err) => {
     if (err) {
       res.status(500).send({
         message: "Could not download the file. " + err,
