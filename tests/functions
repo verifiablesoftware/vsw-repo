@@ -16,6 +16,14 @@ fail() {
 		exit 10
 	} || {
 		echo "FAIL: $*"
+		echo ""
+		echo "Dumping logs:"
+		for file in /root/logs/*.log ; do
+			echo ""
+			echo "${file}:"
+			echo "" 
+			cat ${file}
+		done
 		exit 11
 	}
 }
@@ -72,3 +80,7 @@ vswClientExit() { vsw exit ; }
 
 trap vswClientExit ERR
 
+declare -a DID
+declare -a VER
+declare -a pass
+[[ -f "/root/.indy_client/pw" ]] && source "/root/.indy_client/pw"

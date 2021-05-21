@@ -3,6 +3,12 @@ FROM ubuntu:18.04
 WORKDIR /root
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PORT=7062
+ENV HTTP_PORT=7060
+ENV ADMIN_PORT=7061
+ENV WEBHOOK_PORT=7062
+ENV EXTERNAL_HOST="3.141.51.96"
+
 ARG VSW_VERSION
 
 RUN apt update
@@ -22,6 +28,7 @@ RUN apt install -y nodejs
 RUN apt install -y wget
 RUN apt install -y unzip
 RUN apt install -y jq
+RUN apt install -y net-tools
 
 RUN mkdir -p /usr/local/lib/python3.6/dist-packages/logs
 

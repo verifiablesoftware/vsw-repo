@@ -6,6 +6,7 @@ set -euo pipefail
 
 for script in /root/tests/[[:digit:]][[:digit:]]-* ; do
 
+	echo ""
 	echo "---"
 	echo $(basename $script)
 
