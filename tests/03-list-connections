@@ -10,3 +10,5 @@ header "Listing connections"
 
 vsw list -c || fail "vsw list -c failed, error $?"
 
+echo PASS
+

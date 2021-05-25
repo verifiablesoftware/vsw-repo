@@ -78,7 +78,7 @@ waitfor() {
 
 vswClientExit() { vsw exit ; }
 
-trap vswClientExit ERR
+#trap vswClientExit ERR
 
 declare -a DID
 declare -a VER

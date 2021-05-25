@@ -41,12 +41,13 @@ for i in $(seq 1 1) ; do
 	STATUS="$(echo $RESP | jq .statusCode)"
 	[[ $STATUS == 200 ]] && echo "Registration successful." || { echo $RESP ; fail "registration failed, status $STATUS" ; }
 
-	#
-	#
-	#
-
 done
 
 header "shortened dump of our user database"
 
 cut -b 1-15 /root/.indy_client/pw | sed -e s/$/.../g
+
+vsw exit
+
+echo PASS
+

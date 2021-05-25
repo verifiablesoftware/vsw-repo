@@ -4,8 +4,8 @@
 # IMG_VERSION - internal image version for the testing env
 # VSW_VERSION - specific version of the client to use for tests
 
-IMG_VERSION=0.2.1
-VSW_VERSION=0.0.7
+IMG_VERSION=0.2.2
+VSW_VERSION=0.0.10
 
 [[ "$1" != "" ]] && CMD="$@" || CMD="/root/tests/tests"
 
@@ -14,6 +14,7 @@ docker build --build-arg VSW_VERSION=$VSW_VERSION -t vsw-tests:${IMG_VERSION} . 
 #	-v $PWD/wallets:/root/.indy_client \
 
 docker run \
+	--network host \
 	--rm \
 	-i \
 	vsw-tests:${IMG_VERSION} \
