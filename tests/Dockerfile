@@ -15,6 +15,7 @@ RUN apt update
 RUN apt install -y python3-pip twine
 RUN pip3 install --upgrade pip
 RUN pip3 install --upgrade setuptools
+RUN pip3 install python-daemon
 RUN pip3 install vsw==${VSW_VERSION}
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CE7709D068DB5E88
 RUN apt update
