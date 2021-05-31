@@ -24,13 +24,6 @@ var wallet_name = `${process.env.WALLET_NAME}`
  */
  router.get("/intro", async (req, res) => {
   logger.info("/intro");
-  var data = " ";
-  var config = {
-    method: "get",
-    url: `${ADMIN_URL}/status`,
-    headers: { "Content-Type": "application/json" },
-    data: data,
-  };
   let readmePath =  __basedir + '/readme/INTRO.html'
   if (DEFAULT_EXTERNAL_HOST === "127.0.0.1")
     readmePath =  __basedir + '/readme/INTRO_local.html'
