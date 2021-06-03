@@ -59,6 +59,11 @@ After provisioning, start the aca-py agent
 ```
 ./repo-start-local.sh
 ```
+this script starts node server with [nodemon](https://nodemon.io/)
+
+or for Visual Studio Code debugging [VS Code](https://code.visualstudio.com/)
+, there is ```Run vsw-repo locally start``` launch.json that launches local vsw-repo debugging.
+
 
 <a name=#runindocker></a>
 ## Run inside the docker

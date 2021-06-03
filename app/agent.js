@@ -33,8 +33,8 @@ function get_agent_args() {
     "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
     "--label": "Repo.Agent",
     "--preserve-exchange-records": "",
-    //"--admin-insecure-mode": "",        // no security 
-    "--admin-api-key": `${ADMIN_API_KEY}`,
+    "--admin-insecure-mode": "",        // no security 
+    //"--admin-api-key": `${ADMIN_API_KEY}`, // with api key
     "--inbound-transport": `http 0.0.0.0 ${HTTP_PORT}`,
     "--outbound-transport": "http ",
     "--admin": `0.0.0.0 ${ADMIN_PORT}`,
