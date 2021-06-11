@@ -1,14 +1,45 @@
-<h1>Verifiable Software VSW Repo</h1>
-<p>This project consists of the code for running a verifiable software vsw repo.
-For details about the verifiable software ecosystem, see
-<a href="https://github.com/verifiablesoftware/vsw">vsw</a> which contains the <code>vsw</code>
-command line tool.</p>
-<h2>Run vsw repo locally</h2>
-<p>provision the aca-py agent and create wallet</p>
-<pre><code>./repo-provision-local.sh
-</code></pre>
-<p>when running this, user will be prompted</p>
-<pre><code>Created new wallet
+# Verifiable Software - VSW Repo Server
+
+This project consists of the code for running a verifiable software vsw repo. 
+
+## Table of contents
+
+1. [ About the project ](#About)
+2. [ Getting started ](#Getting)
+3. [ Run vsw repo locally ](#locally)
+4. [ Run vsw repo inside docker](#runindocker)
+5. [ Run docker in AWS ](#aws)
+6. [ Verifiable Software ](#VSW)
+
+<a a name=#About></a>
+## About the project
+
+VSW Repo is server part of the project. Client part can be be found in a separate git repo. For details about the verifiable software ecosystem, see [vsw](https://github.com/verifiablesoftware/vsw) which contains the `vsw` command line tool for client useage. This VSW Repo is intended to to be used as VSW server. Internal structure of the Node.js based repo server can been seen in the image below.
+
+![architecture](vsw-repo-arch.png)
+
+<a a name=#Getting></a>
+## Getting started
+
+Clone this vsw repo to youur local machine with 
+```
+git clone https://github.com/verifiablesoftware/vsw-repo
+```
+
+There are a set of shell scripts provided with the code repository. Some explanation of the scripts can be found below.
+
+<a a name=#locally></a>
+## Run vsw repo locally
+
+provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for Aca-py.
+
+```
+./repo-provision-local.sh
+```
+
+when running this, user will be prompted
+``` 
+Created new wallet
 Wallet type: indy
 Wallet name: Repo.Local
 Created new public DID: G5ZDvU1Y7hTKnQR6xXXXX
@@ -20,86 +51,64 @@ Please select an option:
  1. Accept the transaction author agreement and store the acceptance in the wallet
  2. Acceptance of the transaction author agreement is on file in my organization
  X. Skip the transaction author agreement   
-</code></pre>
-<p>and before accepting, register DID and Verkey to <a href="https://selfserve.sovrin.org/">sovrin buildernet</a></p>
-<p>After provisioning, start the aca-py agent</p>
-<pre><code>./repo-start-local.sh
-</code></pre>
-<h2>Run inside the docker</h2>
-<p>build docker image(s) (requires wallet to start the vsw-repo)</p>
-<p>for vsw-repo</p>
-<pre><code>docker build -t vsw-repo .
-</code></pre>
-<h2>run vsw-repo container with docker</h2>
-<pre><code>docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
-</code></pre>
-<h2>shell script</h2>
-<p>run docker from the shell script</p>
-<pre><code>chmod +x start.sh
-./start.sh
-</code></pre>
-<h1>AWS</h1>
-<p>details about AWS can be found <a href="/AWS_README.md">AWS</a>
-when vsw-repo is running in the AWS cloud EC2 URL is something like this:</p>
-<p>http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com/8060</p>
-<p>this has to be given to docker image when starting the vsw-repo docker image</p>
-<h2>publish</h2>
-<p>a separate AWS_README.md is available for how this image can be build, pushed to private registry and
-run in AWS EC2.</p>
-<p>minimum steps to get vsw-repo ready for publish</p>
-<ul>
-<li>
-<p>start aca-py
-either url or genesis file is ok.
-seed, no seed there might be a difference there?</p>
-<p>aca-py start can happen</p>
-<ol>
-<li>
-<p>from node.js as exec()</p>
-</li>
-<li>
-<p>build separate container and start that
-tried also that but not straightforward
-tried three versions
-1) build from source
-requres config.
-2) used ready made image
-verifiablesoftware/aries-cloudagent-python:latest
-used in node.js
-3) used in dockerfile pip install aries-cloudagent
-issue with libindy.so -&gt; does not run</p>
-<ul>
-<li>independent container easier to modify</li>
-</ul>
-<ul>
-<li>requires set up of various start parameters again. done once for node.js version</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<pre><code>other:
-seed saving
-public DID saving
-schema saving - id
-restart with same seed -&gt; DID registered -&gt; schema 
-aca-py provision usage should be studied        
-</code></pre>
-<ul>
-<li>
-<p>register DID (the same seed the agent was started)
-sovrin ledger and other relevant ledgers have different way to do this but seems to be mandatory before the schema can be created</p>
-</li>
-<li>
-<p>create schema for publish
-this reguires registered DID</p>
-</li>
-<li>
-<p>create invitation</p>
-</li>
-</ul>
-<h2>Verifiable Software</h2>
-<p>For informal discussions, we use slack : vswhq.slack.com</p>
-<p>Anyone is welcome to join the slack channel using this invitation link:
+ ```
+ and before accepting, register DID and Verkey to [sovrin buildernet](https://selfserve.sovrin.org/) 
+
+
+After provisioning, start the aca-py agent 
+```
+./repo-start-local.sh
+```
+this script starts node server with [nodemon](https://nodemon.io/)
+
+or for Visual Studio Code debugging [VS Code](https://code.visualstudio.com/)
+, there is ```Run vsw-repo locally start``` launch.json that launches local vsw-repo debugging.
+
+
+<a name=#runindocker></a>
+## Run inside the docker
+
+build docker image(s) (requires wallet to start the vsw-repo) 
+
+for vsw-repo
+
+```
+./repo-local-build.sh
+```
+
+or
+
+```
+docker build -f Dockerfile.dev -t vsw-repo .
+```
+
+## run vsw-repo container with docker
+and for example use the ports 8040-8042 for repo, repo api and repo controller
+```
+docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
+```
+
+<a name=#AWS></a>
+## AWS
+
+details about AWS can be found [AWS](/AWS_README.md)
+when vsw-repo is running in the AWS cloud EC2 URL is something like this:
+
+http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com:8060
+
+this has to be given to docker image when starting the vsw-repo docker image
+
+## publish to AWS
+
+a separate AWS_README.md is available for how this image can be build, pushed to private registry and 
+run in AWS EC2.
+
+<a name=#VSW></a>
+## Verifiable Software
+For informal discussions, we use slack : vswhq.slack.com
+
+Anyone is welcome to join the slack channel using this invitation link: 
 https://join.slack.com/t/vswhq/shared_invite/zt-kxvaycqc-v5dSDLfpUVevtrZsHsOr9Q
-Slack invitation link is timed. The above link is going to expired on Feb 12, 2021. We will try to watch and update the link timely. In case we missed it, or it isn't working for you, please file a github issue to alert us. Welcome to the vsw project.</p>
+Slack invitation link is timed. The above link is going to expired on Feb 12, 2021. We will try to watch and update the link timely. In case we missed it, or it isn't working for you, please file a github issue to alert us. Welcome to the vsw project.
+
+

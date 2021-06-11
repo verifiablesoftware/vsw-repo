@@ -7,8 +7,9 @@ const logger = require('../logger');
 
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
-const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
-var wallet_name = `${process.env.WALLET_NAME}`
+const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`;
+var wallet_name = `${process.env.WALLET_NAME}`;
+const ADMIN_API_KEY = `${process.env.ADMIN_API_KEY}`;
 
 /** 
  * @swagger
@@ -24,13 +25,6 @@ var wallet_name = `${process.env.WALLET_NAME}`
  */
  router.get("/intro", async (req, res) => {
   logger.info("/intro");
-  var data = " ";
-  var config = {
-    method: "get",
-    url: `${ADMIN_URL}/status`,
-    headers: { "Content-Type": "application/json" },
-    data: data,
-  };
   let readmePath =  __basedir + '/readme/INTRO.html'
   if (DEFAULT_EXTERNAL_HOST === "127.0.0.1")
     readmePath =  __basedir + '/readme/INTRO_local.html'
@@ -57,7 +51,10 @@ router.get("/health", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/status`,
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json", 
+      'X-API-Key':`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)

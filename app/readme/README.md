@@ -1,18 +1,42 @@
-# Verifiable Software VSW Repo
+# Verifiable Software - VSW Repo Server
 
 This project consists of the code for running a verifiable software vsw repo. 
-For details about the verifiable software ecosystem, see
-[vsw](https://github.com/verifiablesoftware/vsw) which contains the `vsw`
-command line tool.
 
+## Table of contents
 
+1. [ About the project ](#About)
+2. [ Getting started ](#Getting)
+3. [ Run vsw repo locally ](#locally)
+4. [ Run vsw repo inside docker](#runindocker)
+5. [ Run docker in AWS ](#aws)
+6. [ Verifiable Software ](#VSW)
+
+<a a name=#About></a>
+## About the project
+
+VSW Repo is server part of the project. Client part can be be found in a separate git repo. For details about the verifiable software ecosystem, see [vsw](https://github.com/verifiablesoftware/vsw) which contains the `vsw` command line tool for client useage. This VSW Repo is intended to to be used as VSW server. Internal structure of the Node.js based repo server can been seen in the image below.
+
+![architecture](vsw-repo-arch.png)
+
+<a a name=#Getting></a>
+## Getting started
+
+Clone this vsw repo to youur local machine with 
+```
+git clone https://github.com/verifiablesoftware/vsw-repo
+```
+
+There are a set of shell scripts provided with the code repository. Some explanation of the scripts can be found below.
+
+<a a name=#locally></a>
 ## Run vsw repo locally
 
-provision the aca-py agent and create wallet
+provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for Aca-py.
 
 ```
 ./repo-provision-local.sh
 ```
+
 when running this, user will be prompted
 ``` 
 Created new wallet
@@ -35,87 +59,51 @@ After provisioning, start the aca-py agent
 ```
 ./repo-start-local.sh
 ```
+this script starts node server with [nodemon](https://nodemon.io/)
+
+or for Visual Studio Code debugging [VS Code](https://code.visualstudio.com/)
+, there is ```Run vsw-repo locally start``` launch.json that launches local vsw-repo debugging.
 
 
+<a name=#runindocker></a>
 ## Run inside the docker
 
 build docker image(s) (requires wallet to start the vsw-repo) 
 
 for vsw-repo
+
 ```
-docker build -t vsw-repo .
+./repo-local-build.sh
+```
+
+or
+
+```
+docker build -f Dockerfile.dev -t vsw-repo .
 ```
 
 ## run vsw-repo container with docker
+and for example use the ports 8040-8042 for repo, repo api and repo controller
 ```
 docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
 ```
 
-## shell script
-
-run docker from the shell script
-
-```
-chmod +x start.sh
-./start.sh
-```
-
-# AWS
+<a name=#AWS></a>
+## AWS
 
 details about AWS can be found [AWS](/AWS_README.md)
 when vsw-repo is running in the AWS cloud EC2 URL is something like this:
 
-http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com/8060
+http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com:8060
 
 this has to be given to docker image when starting the vsw-repo docker image
 
-## publish
+## publish to AWS
 
 a separate AWS_README.md is available for how this image can be build, pushed to private registry and 
 run in AWS EC2.
 
-
-minimum steps to get vsw-repo ready for publish
-
-- start aca-py
-	either url or genesis file is ok. 
-		seed, no seed there might be a difference there?
-	
-	aca-py start can happen 
-	1) from node.js as exec() 
-	2) build separate container and start that
-		tried also that but not straightforward
-			tried three versions
-			1) build from source 
-				requres config.
-			2) used ready made image 
-				 verifiablesoftware/aries-cloudagent-python:latest
-				 used in node.js
-			3) used in dockerfile pip install aries-cloudagent
-				issue with libindy.so -> does not run
-			
-		+ independent container easier to modify
-		- requires set up of various start parameters again. done once for node.js version
-		
-
-	other:
-	seed saving
-	public DID saving
-	schema saving - id
-	restart with same seed -> DID registered -> schema 
-	aca-py provision usage should be studied 		
-	
-	
-- register DID (the same seed the agent was started)
-	sovrin ledger and other relevant ledgers have different way to do this but seems to be mandatory before the schema can be created
-	
-- create schema for publish 
-	this reguires registered DID
-
-- create invitation
-
-
-
+<a name=#VSW></a>
 ## Verifiable Software
 For informal discussions, we use slack : vswhq.slack.com
 

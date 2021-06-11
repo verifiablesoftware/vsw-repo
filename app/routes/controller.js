@@ -7,7 +7,8 @@ const logger = require('../logger');
 
 const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.DOCKERHOST}`;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
-const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`
+const ADMIN_URL = `http://${DEFAULT_EXTERNAL_HOST}:${ADMIN_PORT}`;
+const ADMIN_API_KEY = `${process.env.ADMIN_API_KEY}`;
 
 /* VSW Repo - Controller end points  */
 
@@ -35,7 +36,9 @@ router.get("/connections", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/connections`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -75,7 +78,9 @@ router.post("/remove_connection/:connection_id", async (req, response) => {
   var config = {
     method: "post",
     url: `${ADMIN_URL}/connections/${connection_id}/remove`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -107,7 +112,9 @@ router.get("/records", async (req, response) => {
   let config = {
     method: "get",
     url: `${ADMIN_URL}/issue-credential/records`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -173,7 +180,9 @@ router.post("/remove_record/:credential_exchange_id", async (req, response) => {
   let config = {
     method: "post",
     url: `${ADMIN_URL}/issue-credential/records/${cred_ex_id}/remove`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -205,7 +214,9 @@ router.get("/packages", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/credentials`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -238,7 +249,9 @@ router.get("/did", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/wallet/did`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -277,7 +290,9 @@ router.get("/schemas/:id", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/schemas/${schema_id}`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -298,7 +313,9 @@ router.get("/create_public_did", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/wallet/did`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -326,7 +343,9 @@ router.get("/invitation", async (req, response) => {
   var config = {
     method: "get",
     url: `${ADMIN_URL}/wallet/did`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: "",
   };
   // get DID
@@ -347,7 +366,10 @@ router.get("/invitation", async (req, response) => {
       var inv_config = {
         method: "post",
         url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-API-Key":`${ADMIN_API_KEY}`
+        },
         data: "",
       };
       axios(inv_config)
@@ -370,13 +392,17 @@ router.get("/invitation", async (req, response) => {
       response.status(500).send(error).end();
     });
 })
-// not needed currently
+
+// not needed - schema is already created
+// left here for reference
 router.get("/create_invitation", async (req, response) => {
   var data = " ";
   var config = {
     method: "post",
     url: `${ADMIN_URL}/connections/create-invitation?multi_use=true`,
-    headers: {},
+    headers: {
+      "X-API-Key":`${ADMIN_API_KEY}`
+    },
     data: data,
   };
   axios(config)
@@ -400,6 +426,7 @@ router.get("/create_invitation", async (req, response) => {
 })
 
 // not needed - schema is already created
+// left here for reference
 router.get("/create_schema", async (req, response) => {
   schema_definition = load_schema_definition();
   let schema_body = schema_definition.schema_body;
@@ -407,7 +434,7 @@ router.get("/create_schema", async (req, response) => {
   axios
     .post(
       `http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/schemas`,
-      schema_body
+      schema_body,  {headers: {"X-API-Key":`${ADMIN_API_KEY}`}},
     )
     .then((res) => {
       var schema_id = res.data.schema_id;
@@ -421,7 +448,7 @@ router.get("/create_schema", async (req, response) => {
       axios
         .post(
           `http://${DEFAULT_INTERNAL_HOST}:${ADMIN_PORT}/credential-definitions`,
-          credential_definition_body
+          credential_definition_body, {headers: {"X-API-Key":`${ADMIN_API_KEY}`}},
         )
         .then((result) => {
           var credential_definition_id = result.data.credential_definition_id;

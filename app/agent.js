@@ -11,6 +11,7 @@ const DEFAULT_EXTERNAL_HOST = `${process.env.EXTERNAL_HOST}` || `${process.env.D
 const HTTP_PORT = `${process.env.HTTP_PORT}` || 8060;
 const ADMIN_PORT = `${process.env.ADMIN_PORT}` || 8061;
 const WEBHOOK_PORT = `${process.env.WEBHOOK_PORT}` || 8062;
+const ADMIN_API_KEY = `${process.env.ADMIN_API_KEY}`;
 
 const LEDGER_URL = process.env.LEDGER_URL || `http://${process.env.DOCKERHOST}:9000`;
 const GENESIS_FILE = `${process.env.GENESIS_FILE}`;
@@ -32,7 +33,8 @@ function get_agent_args() {
     "--endpoint": `http://${DEFAULT_EXTERNAL_HOST}:${HTTP_PORT}`,
     "--label": "Repo.Agent",
     "--preserve-exchange-records": "",
-    "--admin-insecure-mode": "",
+    //"--admin-insecure-mode": "",        // no security 
+    "--admin-api-key": `${ADMIN_API_KEY}`, // with api key
     "--inbound-transport": `http 0.0.0.0 ${HTTP_PORT}`,
     "--outbound-transport": "http ",
     "--admin": `0.0.0.0 ${ADMIN_PORT}`,
@@ -50,12 +52,12 @@ function get_agent_args() {
     "--auto-accept-invites": "",
     "--auto-accept-requests": "",
     "--auto-store-credential": "",
-    "--auto-respond-credential-offer":"", // HAVE TO VERIFY THIS
-    "--auto-respond-credential-proposal":"", // HAVE TO VERIFY THIS
-    "--auto-respond-credential-request":"", // HAVE TO VERIFY THIS
-    "--auto-verify-presentation":"", // HAVE TO VERIFY THIS
-    "--auto-respond-presentation-request":"", // HAVE TO VERIFY THIS
-    "--auto-respond-presentation-proposal":"", // HAVE TO VERIFY THIS
+    "--auto-respond-credential-offer":"",
+    "--auto-respond-credential-proposal":"", 
+    "--auto-respond-credential-request":"", 
+    "--auto-verify-presentation":"", 
+    "--auto-respond-presentation-request":"", 
+    "--auto-respond-presentation-proposal":"", 
     "--log-file": "logs/agent.logs",
     "--public-invites": "", 
     "--tails-server-base-url":`${TAILS_URL}`

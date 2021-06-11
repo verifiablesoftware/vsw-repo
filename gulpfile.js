@@ -1,3 +1,5 @@
+// only used for automatic .md to .html conversion
+// removed due security risk in included package
 var gulp = require('gulp');
 var markdown = require('gulp-markdown-it');
 

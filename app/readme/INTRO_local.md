@@ -48,7 +48,7 @@ see [express generator](https://expressjs.com/en/starter/generator.html) for det
 
 VSW-REPO is also connected to [vsw tails server](https://github.com/bcgov/indy-tails-server) 
 
-More details of the VSW-REPO server implementation can be read from [README](./README.md) and how to deploy (if needed to AWS) from [AWS_README](./AWS_README.md).
+More details of the VSW-REPO server implementation can be read from [README](https://github.com/verifiablesoftware/vsw-repo/tree/master/app/readme/README.html) and how to deploy (if needed to AWS) from [AWS_README](https://github.com/verifiablesoftware/vsw-repo/tree/master/app/readme/AWS_README.html).
 
 
 ___

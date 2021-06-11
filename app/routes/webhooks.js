@@ -42,19 +42,19 @@ router.post('/topic/:topicid', async (req, res) => {
           credential_exchange_id = message.credential_exchange_id;
           logger.info(`webhook - credential request ${credential_exchange_id}`)
          
-          /* removed - this is not needed for auto response setting? 
-          axios
-            .post(
-              `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
-            )
-            .then((response) => {
-              console.log(`webhook - send credential request /issue-credential/records/${credential_exchange_id}/send-request - response received ${response.status}`)
-              res.status(200).end();
-            })
-            .catch((error) => {
-              console.error(error.response);
-            });*/
-            res.status(200).end();
+          // removed - this is not needed for auto response setting? 
+          // axios
+          //  .post(
+          //    `${ADMIN_URL}/issue-credential/records/${credential_exchange_id}/send-request`
+          //  )
+          //  .then((response) => {
+          //    console.log(`webhook - send credential request /issue-credential/records/${credential_exchange_id}/send-request - response received ${response.status}`)
+          //    res.status(200).end();
+          //  })
+          //  .catch((error) => {
+          //    console.error(error.response);
+          //  });*/
+          res.status(200).end();
         } 
         else {
           logger.info("webhook - handle_issue_credential - missing credential_exchange_id");
@@ -65,6 +65,7 @@ router.post('/topic/:topicid', async (req, res) => {
         logger.info(`webhook - handle issue credential - state ${state}`);
         res.status(200).end();
       }
+      
       else if (state == "credential_received") {
         logger.info(`webhook - handle issue credential - state ${state}`);
         res.status(200).end();
@@ -80,6 +81,9 @@ router.post('/topic/:topicid', async (req, res) => {
           var config = {
             method: 'get',
             url:`${ADMIN_URL}/credential/${credential_id}`,
+            headers: {
+              "X-API-Key":`${ADMIN_API_KEY}`
+            },
             data: data
           };
           axios(config)

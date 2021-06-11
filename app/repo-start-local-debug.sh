@@ -15,4 +15,4 @@ export WALLET_NAME="Repo.Local "
 export TAILS_URL="http://127.0.0.1:6543"
 
 
-npm run start-dev
+npm run start
