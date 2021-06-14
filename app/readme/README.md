@@ -31,7 +31,7 @@ There are a set of shell scripts provided with the code repository. Some explana
 <a a name=#locally></a>
 ## Run vsw repo locally
 
-provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for Aca-py.
+provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for aca-py.
 
 ```
 ./repo-provision-local.sh
@@ -55,11 +55,19 @@ Please select an option:
  and before accepting, register DID and Verkey to [sovrin buildernet](https://selfserve.sovrin.org/) 
 
 
-After provisioning, start the aca-py agent 
+Note: provisioning *repo-provision-local.sh* variables must match the variables defined in the *repo-start-local.sh*
+After provisioning, go to /app directory and use 
+
+```
+npm install 
+```
+
+and start the aca-py agent by using script: 
+
 ```
 ./repo-start-local.sh
 ```
-this script starts node server with [nodemon](https://nodemon.io/)
+this script starts node server with [nodemon](https://nodemon.io/), see package.json and start-dev script
 
 or for Visual Studio Code debugging [VS Code](https://code.visualstudio.com/)
 , there is ```Run vsw-repo locally start``` launch.json that launches local vsw-repo debugging.

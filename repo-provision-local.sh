@@ -1,8 +1,17 @@
+#!/bin/bash
+# 
+# endpoint, seed, wallet name, wallet key and genesis file should be variables
+# 
+ENDPOINT="http://127.0.0.1:8060"
+GENESIS_FILE="/home/jte/git/vsw-repo/app/resources/genesis.txt" 
+WALLET_KEY="Repo.Local"
+WALLET_NAME="Repo.Local"
+SEED="my_seed_000000000000000000008876"
 
 aca-py provision \
---endpoint http://127.0.0.1:8060 \
---genesis-file "/home/jte/git/vsw-repo/app/resources/genesis.txt" \
+--endpoint $ENDPOINT \
+--genesis-file $GENESIS_FILE \
 --wallet-type indy \
---wallet-name Repo.Local \
---wallet-key Repo.Local \
---seed my_seed_000000000000000000008876
+--wallet-name $WALLET_NAME \
+--wallet-key $WALLET_KEY \
+--seed $SEED
