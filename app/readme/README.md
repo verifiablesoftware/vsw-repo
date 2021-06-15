@@ -37,7 +37,7 @@ provision the aca-py agent and create wallet. The wallet has to be created first
 ./repo-provision-local.sh
 ```
 
-when running this, user will be prompted
+when running this, user will be prompted (if the wallet is not existing already)
 ``` 
 Created new wallet
 Wallet type: indy
@@ -91,25 +91,20 @@ docker build -f Dockerfile.dev -t vsw-repo .
 ```
 
 ## run vsw-repo container with docker
-and for example use the ports 8040-8042 for repo, repo api and repo controller
+and for example use the ports 8040-8042 for repo, repo api and repo controller. Please, check the port mappings. 
 ```
 docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
 ```
 
 <a name=#AWS></a>
-## AWS
+## Run vsw-repo in AWS
 
-details about AWS can be found [AWS](/AWS_README.md)
+details about AWS can be found [AWS](./AWS_README.md) and it is meant for development and debuggign phase only. DevOps pipeline takes care building the docker images and deploying the image to AWS. 
 when vsw-repo is running in the AWS cloud EC2 URL is something like this:
 
 http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com:8060
 
-this has to be given to docker image when starting the vsw-repo docker image
-
-## publish to AWS
-
-a separate AWS_README.md is available for how this image can be build, pushed to private registry and 
-run in AWS EC2.
+this has to be given to docker image when starting the vsw-repo docker image in AWS. 
 
 <a name=#VSW></a>
 ## Verifiable Software

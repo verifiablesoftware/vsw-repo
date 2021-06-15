@@ -1,7 +1,7 @@
 
 # AWS
 
-atep-by-step instructions to get vsw-repo running in AWS
+a step-by-step instructions to get vsw-repo running in AWS
 requires AWS account and ECR and EC2
 
 
