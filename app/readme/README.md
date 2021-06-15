@@ -31,13 +31,13 @@ There are a set of shell scripts provided with the code repository. Some explana
 <a a name=#locally></a>
 ## Run vsw repo locally
 
-provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for Aca-py.
+provision the aca-py agent and create wallet. The wallet has to be created first any case by using provision parameters for aca-py.
 
 ```
 ./repo-provision-local.sh
 ```
 
-when running this, user will be prompted
+when running this, user will be prompted (if the wallet is not existing already)
 ``` 
 Created new wallet
 Wallet type: indy
@@ -55,11 +55,19 @@ Please select an option:
  and before accepting, register DID and Verkey to [sovrin buildernet](https://selfserve.sovrin.org/) 
 
 
-After provisioning, start the aca-py agent 
+Note: provisioning *repo-provision-local.sh* variables must match the variables defined in the *repo-start-local.sh*
+After provisioning, go to /app directory and use 
+
+```
+npm install 
+```
+
+and start the aca-py agent by using script: 
+
 ```
 ./repo-start-local.sh
 ```
-this script starts node server with [nodemon](https://nodemon.io/)
+this script starts node server with [nodemon](https://nodemon.io/), see package.json and start-dev script
 
 or for Visual Studio Code debugging [VS Code](https://code.visualstudio.com/)
 , there is ```Run vsw-repo locally start``` launch.json that launches local vsw-repo debugging.
@@ -83,25 +91,20 @@ docker build -f Dockerfile.dev -t vsw-repo .
 ```
 
 ## run vsw-repo container with docker
-and for example use the ports 8040-8042 for repo, repo api and repo controller
+and for example use the ports 8040-8042 for repo, repo api and repo controller. Please, check the port mappings. 
 ```
 docker run -d --name vsw-repo -p 8060:8040 -p 8061:8041 -p 8062:8042  vsw-repo
 ```
 
 <a name=#AWS></a>
-## AWS
+## Run vsw-repo in AWS
 
-details about AWS can be found [AWS](/AWS_README.md)
+details about AWS can be found [AWS](./AWS_README.md) and it is meant for development and debuggign phase only. DevOps pipeline takes care building the docker images and deploying the image to AWS. 
 when vsw-repo is running in the AWS cloud EC2 URL is something like this:
 
 http://ec2-3-XXX-XXX-46.us-east-2.compute.amazonaws.com:8060
 
-this has to be given to docker image when starting the vsw-repo docker image
-
-## publish to AWS
-
-a separate AWS_README.md is available for how this image can be build, pushed to private registry and 
-run in AWS EC2.
+this has to be given to docker image when starting the vsw-repo docker image in AWS. 
 
 <a name=#VSW></a>
 ## Verifiable Software
