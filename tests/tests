@@ -2,8 +2,11 @@
 
 set -euo pipefail
 
+export TERM=xterm-color
+
 bold=$(tput bold)
 normal=$(tput sgr0)
+
 
 echo "Running tests."
 
@@ -13,7 +16,7 @@ for script in /root/tests/[[:digit:]][[:digit:]]-* ; do
 	echo "---"
 	echo "${bold}$(basename $script)${normal}"
 	echo ""
-	
+
 	r=0
 
 	/bin/bash $script || r=$?

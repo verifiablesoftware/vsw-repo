@@ -16,7 +16,7 @@ docker build --build-arg VSW_VERSION=$VSW_VERSION -t vsw-tests:${IMG_VERSION} . 
 docker run \
 	--network host \
 	--rm \
-	-it \
+	-i \
 	vsw-tests:${IMG_VERSION} \
 	$CMD
 
