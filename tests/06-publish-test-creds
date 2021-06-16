@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test6: publish test creds
+echo "Issuing test credentials..."
+#get rid of double quotes
+
+set -x
+
+#I need to replace the softwareDid with $SDID
+
+jq 'del(."softwareDid")' $(dirname $0)/P3.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/P3.json
+
+jq --arg sdid $SDID '. + {"softwareDid": $sdid}' $(dirname $0)/P3.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/P3.json
+
+jq 'del(."softwareDid")' $(dirname $0)/P4.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/P4.json
+
+jq --arg sdid $SDID '. + {"softwareDid": $sdid}' $(dirname $0)/P4.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/P4.json
+
+vsw publish -c $(dirname $0)/P3.json -s testCertificate || fail "vsw publish -c P3.json -s testCertificate fails, error $?"
+vsw publish -c $(dirname $0)/P4.json -s testCertificate || fail "vsw publish -c P4.json -s testCertificate fails, error $?"
+vsw list -cs
+
+echo "Closing tester wallet2..."
+vsw exit
+

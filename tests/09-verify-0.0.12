@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test9: verify vsw 0.0.12
+#replace issuer_did with $DDID
+
+jq 'del(.requested_attributes[]."restrictions"[]["issuer_did"])' $(dirname $0)/V2.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V2.json
+
+jq --arg ddid $DDID '."requested_attributes"[]."restrictions"[] += {"issuer_did": $ddid}' $(dirname $0)/V2.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V2.json
+
+vsw verify -p $(dirname $0)/V2.json

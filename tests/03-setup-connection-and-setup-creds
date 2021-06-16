@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test3: setup connection, setup cred defs
+
+echo "Making connection with Repo..."
+vsw setup connection
+vsw list -c
+vsw list -w
+echo "Creating cred defs..."
+vsw setup creddef -s softwareCertificate
+vsw setup creddef -s testCertificate
+vsw list -cd
+#Do I need to remember CDs?
+

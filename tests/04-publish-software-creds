@@ -1,0 +1,40 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test4: publish software creds
+echo "Issuing 2 software credentials..."
+
+vsw publish -c $(dirname $0)/P1.json -s softwareCertificate
+#I need the softwareDid and rec_reg_is and cred_rev_id
+
+# NOTE: jq has a problem with vsw output; we need to filter out
+# linefeeds from it in order to process it with jq, hence the tr
+
+#SDID=$(vsw list -cs|jq '.results[]["attrs"].softwareDid')
+
+SDID=$(vsw list -cs | tr '\r\n' ' ' | jq '.results[]["attrs"].softwareDid')
+SDID=$(sed -e 's/^"//' -e 's/"$//' <<<"$SDID")
+echo "SDID = $SDID"
+REV_REG_ID=$(vsw list -cs  | tr '\r\n' ' ' |  jq '.results[0].rev_reg_id')
+CRED_REV_ID=$(vsw list -cs  | tr '\r\n' ' ' | jq '.results[0].cred_rev_id')
+REV_REG_ID=$(sed -e 's/^"//' -e 's/"$//' <<<"$REV_REG_ID")
+CRED_REV_ID=$(sed -e 's/^"//' -e 's/"$//' <<<"$CRED_REV_ID")
+
+echo "REV_REG_ID = $REV_REG_ID"
+echo "CRED_REV_ID = $CRED_REV_ID"
+
+#I don't need to remember the second
+vsw publish -c $(dirname $0)/P2.json -s softwareCertificate
+
+vsw list -cs
+
+# NOTE: when scripts are split like this, variables won't survive from one test
+# to another without saving them for later. SDID is one such variable.
+
+save SDID
+save REV_REG_ID
+save CRED_REV_ID
+
+echo "Closing wallet1 (developer)..."
+vsw exit
