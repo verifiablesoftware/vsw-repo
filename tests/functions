@@ -16,14 +16,6 @@ fail() {
 		exit 10
 	} || {
 		echo "FAIL: $*"
-		echo ""
-		echo "Dumping logs:"
-		for file in /root/logs/*.log ; do
-			echo ""
-			echo "${file}:"
-			echo "" 
-			cat ${file}
-		done
 		exit 11
 	}
 }
@@ -74,6 +66,12 @@ waitfor() {
 	return 1
 }
 
+save() {
+	eval echo "$1=\$$1" >> $(dirname $0)/vars
+	eval echo "Saved $1=\$$1"
+#	cat $(dirname $0)/vars
+}
+
 # trap script failure to exit vsw client
 
 vswClientExit() { vsw exit ; }
@@ -83,4 +81,16 @@ vswClientExit() { vsw exit ; }
 declare -a DID
 declare -a VER
 declare -a pass
+
 [[ -f "/root/.indy_client/pw" ]] && source "/root/.indy_client/pw"
+[[ -f "$(dirname $0)/vars" ]] && {
+	source "$(dirname $0)/vars"
+	echo
+	echo "Executing with variables:"
+	echo
+	cat "$(dirname $0)/vars" | sed -e 's/^/  /g'
+	echo
+}
+
+bold=$(tput bold)
+normal=$(tput sgr0)

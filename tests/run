@@ -4,8 +4,8 @@
 # IMG_VERSION - internal image version for the testing env
 # VSW_VERSION - specific version of the client to use for tests
 
-IMG_VERSION=0.2.11
-VSW_VERSION=0.0.11
+IMG_VERSION=0.2.12
+[[ -z "${VSW_VERSION:-}" ]] && VSW_VERSION=0.0.23
 
 [[ "$1" != "" ]] && CMD="$@" || CMD="/root/tests/tests"
 

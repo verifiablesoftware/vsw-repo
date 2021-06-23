@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test7: create the third wallet for the verifier
+echo "Creating newwallet: wallet3 (verifier)..."
+vsw setup newwallet wallet3 -k 12345
+echo "Opening wallet3..."
+vsw setup wallet wallet3 -k 12345
+
+VDID=$(vsw list -w|jq '.results[].did')
+VDID=$(sed -e 's/^"//' -e 's/"$//' <<<"$VDID")
+echo "VDID = $VDID"
+
+echo "Making connection..."
+vsw setup connection
+vsw list -c
+vsw list -w

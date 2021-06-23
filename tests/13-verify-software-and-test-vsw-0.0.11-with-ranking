@@ -1,0 +1,28 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test13: verify software and test vsw 0.0.11, and ranking >= 3
+
+jq 'del(.requested_attributes[0]."restrictions"[]["issuer_did"])' $(dirname $0)/V6.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq --arg ddid $DDID '."requested_attributes"[0]."restrictions"[] += {"issuer_did": $ddid}' $(dirname $0)/V6.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq 'del(.requested_attributes[]."restrictions"[]["softwareDid"])' $(dirname $0)/V6.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq --arg sdid $SDID '."requested_attributes"[]."restrictions"[] += {"softwareDid": $sdid}' $(dirname $0)/V6.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq 'del(.requested_attributes[1]."restrictions"[]["testerDid"])' $(dirname $0)/V6.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq --arg tdid $TDID '."requested_attributes"[1]."restrictions"[] += {"testerDid": $tdid}' $(dirname $0)/V6.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq 'del(."requested_predicates"."1_ranking_GE_uuid"."restrictions"[]["issuer_did"])' $(dirname $0)/V6.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq --arg tdid $TDID '."requested_predicates"."1_ranking_GE_uuid"."restrictions"[] += {"issuer_did": $tdid}' $(dirname $0)/V6.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq 'del(."requested_predicates"."1_ranking_GE_uuid"."restrictions"[]["softwareDid"])' $(dirname $0)/V6.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+jq --arg sdid $SDID '."requested_predicates"."1_ranking_GE_uuid"."restrictions"[] += {"softwareDid": $sdid}' $(dirname $0)/V6.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V6.json
+
+vsw verify -p $(dirname $0)/V6.json
+

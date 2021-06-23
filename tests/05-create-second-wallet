@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test5: create second wallet for the tester
+echo "Creating newwallet: wallet2..."
+vsw setup newwallet wallet2 -k 12345
+echo "Opening wallet2..."
+vsw setup wallet wallet2 -k 12345
+
+TDID=$(vsw list -w|jq '.results[].did')
+TDID=$(sed -e 's/^"//' -e 's/"$//' <<<"$TDID")
+echo "TDID = $TDID"
+
+echo "Making connection..."
+vsw setup connection
+vsw list -c
+vsw list -w
+echo "Making creddef..."
+vsw setup creddef -s testCertificate
+vsw list -cd
+

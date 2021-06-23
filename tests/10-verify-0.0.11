@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source $(dirname $0)/functions
+
+#test10: verify test vsw 0.0.11
+#replace softwareDid with $SDID
+
+jq 'del(.requested_attributes[]."restrictions"[]["softwareDid"])' $(dirname $0)/V3.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V3.json
+
+jq --arg sdid $SDID '."requested_attributes"[]."restrictions"[] += {"softwareDid": $sdid}' $(dirname $0)/V3.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V3.json
+
+#replace testerDid with $TDID
+jq 'del(.requested_attributes[]."restrictions"[]["testerDid"])' $(dirname $0)/V3.json > tmp.$$.json && mv tmp.$$.json $(dirname $0)/V3.json
+
+jq --arg tdid $TDID '."requested_attributes"[]."restrictions"[] += {"testerDid": $tdid}' $(dirname $0)/V3.json> tmp.$$.json && mv tmp.$$.json $(dirname $0)/V3.json
+
+vsw verify -p $(dirname $0)/V3.json
+
