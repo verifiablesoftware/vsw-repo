@@ -6,7 +6,7 @@
 	"containerDefinitions": [
 		{
 			"name": "vsw-repo",
-			"image": "865098096924.dkr.ecr.us-east-2.amazonaws.com/vsw-repo-repository/vsw-repo:latest",
+			"image": "286853815328.dkr.ecr.us-east-1.amazonaws.com/vsw-repo-dev/vsw-repo:latest",
 			"resourceRequirements": null,
 			"essential": true,
 			"mountPoints": [
@@ -31,7 +31,7 @@
 	"networkMode": "host",
 	"memory": "512",
 	"cpu": "256",
-	"executionRoleArn": "arn:aws:iam::865098096924:role/ecsTaskExecutionRole",
+	"executionRoleArn": "arn:aws:iam::286853815328:role/ecsTaskExecutionRole",
 	"family": "vsw-repo-task-definition",
 	"taskRoleArn": "",
 	"placementConstraints": [],
